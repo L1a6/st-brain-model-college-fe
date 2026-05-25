@@ -14,17 +14,17 @@ export const viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://borjigin.emerj.net/"),
+  metadataBase: new URL("http://localhost:3000"),
   title: {
-    default: "School Base",
-    template: "%s | School Base",
+    default: "St. Brian's Model College",
+    template: "%s | St. Brian's Model College",
   },
   description:
-    "The modern way schools run in Nigeria. Manage attendance, results, timetables, fees, and NFC all in one place. Connect students, teachers, parents, and administrators.",
-  applicationName: "School Base",
+    "St. Brian's Model College portal for dashboards, academics, attendance, notices, and school operations.",
+  applicationName: "St. Brian's Model College",
   manifest: "/manifest.json",
   keywords: [
-    "School Base",
+    "St. Brian's Model College",
     "school portal",
     "education management",
     "attendance",
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "School Base",
+    title: "St. Brian's Model College",
   },
   openGraph: {
     title: "School Base",
     description:
       "The modern way schools run in Nigeria. Manage attendance, results, timetables, fees, and NFC all in one place. Connect students, teachers, parents, and administrators.",
     url: "https://borjigin.emerj.net/",
-    siteName: "School Base",
+    siteName: "St. Brian's Model College",
     locale: "en_US",
     type: "website",
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         url: "/icons/android-chrome-512x512.png",
         width: 512,
         height: 512,
-        alt: "School Base logo",
+        alt: "St. Brian's Model College logo",
       },
     ],
   },

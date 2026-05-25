@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import SchoolLogo from "./school-logo"
 
 type MockRoleLoginFormProps = {
-  role: "student" | "teacher" | "admin" | "super-admin"
+  role: "student" | "teacher" | "admin" | "super-admin" | "parent"
   title: string
   description: string
 }

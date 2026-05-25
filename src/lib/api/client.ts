@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios"
 import { getUserFriendlyMessage } from "../errors"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3008"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3008/api/v1"
 const AUTH_BYPASS_ENABLED = false
 const MOCK_SESSION_KEY = "osp_mock_auth_session"
 
@@ -73,7 +73,7 @@ const saveMockUser = (user: MockUser): void => {
 }
 
 const getMockUser = (): MockUser => {
-  const defaultUser = buildMockUser("ADMIN", "admin@schoolbase.local")
+  const defaultUser = buildMockUser("ADMIN", "admin@st-brians-model-college.local")
 
   if (typeof window === "undefined") {
     return defaultUser
@@ -174,7 +174,7 @@ const buildMockApiResponse = (path: string, config: AxiosRequestConfig): unknown
       normalizedPath === "/api/auth/superadmin/login")
   ) {
     const payload = (config.data || {}) as { email?: string }
-    const email = payload.email?.trim() || "admin@schoolbase.local"
+    const email = payload.email?.trim() || "admin@st-brians-model-college.local"
     const primaryRole =
       normalizedPath === "/api/auth/superadmin/login"
         ? "SUPER_ADMIN"

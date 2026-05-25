@@ -27,7 +27,7 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
     }),
-    "/auth/sessions/revoke"
+    "/auth/logout"
   )
 
   const data = await backendResponse.json()

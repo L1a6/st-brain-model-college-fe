@@ -8,7 +8,7 @@ async function methodHandler(
   const resolvedParams = await params
   const slugPath = "/" + resolvedParams.slug.join("/")
   const reqUrl = new URL(req.url)
-  const pathWithQuery = slugPath + reqUrl.search
+  const pathWithQuery = slugPath.replace(/^\/api\//, "/") + reqUrl.search
 
   const backendRes = await proxyAuthRequest(req, pathWithQuery)
 

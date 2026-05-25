@@ -17,6 +17,11 @@ const loginLinks = [
     description: "Open the admin login page and enter any values.",
   },
   {
+    href: "/parent/login",
+    title: "Parent Login",
+    description: "Open the parent login page and enter any values.",
+  },
+  {
     href: "/super-admin/login",
     title: "Super Admin Login",
     description: "Open the super-admin login page and enter any values.",
