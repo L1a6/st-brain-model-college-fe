@@ -1,0 +1,28 @@
+name: Frontend Staging — Build
+
+on:
+  push:
+    branches: [ "staging" ]
+
+jobs:
+  build:
+    name: Build (staging)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_API_BASE: ${{ secrets.NEXT_PUBLIC_API_BASE }}
+        run: pnpm build
+
+      # Optional: add deployment step (Vercel/Netlify) using secrets or deploy action
