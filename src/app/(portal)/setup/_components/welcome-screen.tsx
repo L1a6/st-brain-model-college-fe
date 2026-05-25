@@ -11,7 +11,7 @@ export function WelcomeScreen({ onStart }: { onStart: () => void }) {
   return (
     <div className="p-2 md:p-12">
       <h1 className="animate-onrender mb-3 text-center text-3xl font-semibold text-gray-900">
-        Welcome to SchoolBase
+        Welcome to St. Brian&apos;s Model College
       </h1>
       <p className="mb-8 text-center text-gray-600">
         Follow the steps to complete the set up process for your school&apos;s new portal.

@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { apiFetch } from "@/lib/api/client"
+import { loginUsingEmail } from "@/lib/api/auth"
 import SchoolLogo from "./school-logo"
 
 type MockRoleLoginFormProps = {
@@ -20,12 +22,30 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setIsLoading(true)
 
-    const nextRoute = new URLSearchParams(window.location.search).get("next")
-    router.push(nextRoute?.startsWith("/") ? nextRoute : `/${role}`)
+    try {
+      if (role === "super-admin") {
+        await apiFetch(
+          "/api/auth/superadmin/login",
+          {
+            method: "POST",
+            data: { email, password },
+          },
+          true
+        )
+      } else {
+        await loginUsingEmail({ email, password })
+      }
+
+      const nextRoute = new URLSearchParams(window.location.search).get("next")
+      router.push(nextRoute?.startsWith("/") ? nextRoute : `/${role}`)
+    } catch (error) {
+      console.error("Login failed:", error)
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -80,7 +100,7 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
           </Button>
 
           <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600">
-            This is a local mock login. Any values are accepted.
+            Use the original password for the account. The bcrypt hash from the database will not work here.
             <div className="mt-3">
               <Link href={`/${role}`} className="font-medium text-accent hover:underline">
                 Go to dashboard without logging in

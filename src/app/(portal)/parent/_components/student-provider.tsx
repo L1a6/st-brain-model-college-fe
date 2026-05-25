@@ -17,13 +17,14 @@ const StudentContext = createContext<StudentContextParams | null>(null)
 
 export const StudentProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: students, isLoading, error } = useGetParentStudents()
+  const studentList = Array.isArray(students) ? students : []
 
-  const isEmpty = Array.isArray(students) && students.length === 0
+  const isEmpty = studentList.length === 0
   const is404 = error?.message?.includes("not found")
   const shouldShow = isEmpty || is404
 
   const [_selectedID, setSelectedID] = useState<string>()
-  const selectedID = _selectedID ?? (students && students[0]?.id)
+  const selectedID = _selectedID ?? studentList[0]?.id
 
   // Modal visibility
   const [showModal, setShowModal] = useState(!!shouldShow)
@@ -34,8 +35,8 @@ export const StudentProvider = ({ children }: { children: React.ReactNode }) => 
 
   const data = {
     studentID: selectedID,
-    selectedStudent: students?.find((s) => s.id === selectedID),
-    students: students || [],
+    selectedStudent: studentList.find((s) => s.id === selectedID),
+    students: studentList,
     setSelectedStudentID: handleSelectStudent,
     isLoading,
   }

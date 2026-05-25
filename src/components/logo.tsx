@@ -1,27 +1,27 @@
-import { LogoSvg } from "../../public/svgs/logo-svg"
+import Image from "next/image"
 
 interface LogoProps {
   size?: number
-  iconColor?: string
   textColor?: string
   className?: string
 }
 
 const Logo: React.FC<LogoProps> = ({
   size = 28,
-  iconColor = "#DA3743",
-  textColor = "#DA3743",
+  textColor = "#0A0A0A",
   className = "",
 }) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <LogoSvg width={size} height={size} color={iconColor} className="shrink-0" />
+      <div className="relative shrink-0 overflow-hidden rounded-md" style={{ width: size, height: size }}>
+        <Image src="/logo123.jpg" alt="St. Brian's Model College logo" fill className="object-cover" />
+      </div>
 
       <span
-        className="font-bold tracking-wider uppercase"
+        className="font-bold tracking-wider"
         style={{ color: textColor, fontSize: size * 0.5 }}
       >
-        schoolbase
+        St. Brian's Model College
       </span>
     </div>
   )
@@ -29,26 +29,3 @@ const Logo: React.FC<LogoProps> = ({
 
 export default Logo
 
-// import React from "react"
-// import { LogoSvg } from "../../public/svgs/logo-svg"
-
-// interface LogoProps {
-//   size?: number
-//   iconColor?: string
-//   textColor?: string
-//   className?: string
-// }
-
-// const Logo: React.FC<LogoProps> = () => {
-//   return (
-//     <div className="flex items-center">
-//       <LogoSvg className="h-7 w-7" />
-
-//       <span className="text-accent text-sm font-bold tracking-wider uppercase md:text-base">
-//         schoolbase
-//       </span>
-//     </div>
-//   )
-// }
-
-// export default Logo

@@ -32,16 +32,18 @@ export async function POST(req: Request) {
 
   const data = await backendResponse.json()
 
-  if (!data?.data) {
+  if (!backendResponse.ok) {
     return NextResponse.json(
-      { message: "An unexpected error occurred during logout. Please try again later" },
-      { status: 500 }
+      data ?? { message: "An unexpected error occurred during logout. Please try again later" },
+      { status: backendResponse.status }
     )
   }
-  // Create response with original backend data
-  const response = NextResponse.json(data, {
-    status: 200,
-  })
+
+  // Create response with original backend data if present, otherwise a success message.
+  const response = NextResponse.json(
+    data ?? { message: "Logout successful" },
+    { status: 200 }
+  )
 
   response.cookies.delete("access_token")
   response.cookies.delete("refresh_token")

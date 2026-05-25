@@ -17,7 +17,7 @@ const SocialLinks = () => {
       </Link>
       <Link
         href="#"
-        // href="https://www.instagram.com/schoolbase.ng?igsh=MXRxczAxcWszcWNsMQ=="
+        // Social link intentionally omitted for now.
         target="_blank"
         rel="noopener noreferrer"
       >

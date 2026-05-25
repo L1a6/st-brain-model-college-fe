@@ -45,7 +45,38 @@ export const ParentStudents = {
     //     res(studentsData)
     //   }, 500)
     // })
-    return apiFetch<Student[]>("/parents/my-students", { method: "GET" }, true)
+    return apiFetch<unknown>("/parents/my-students", { method: "GET" }, true).then(
+      (response) => {
+        if (Array.isArray(response)) {
+          return response as Student[]
+        }
+
+        if (response && typeof response === "object") {
+          const maybeData = response as {
+            data?: unknown
+            students?: unknown
+          }
+
+          if (Array.isArray(maybeData.data)) {
+            return maybeData.data as Student[]
+          }
+
+          if (
+            maybeData.data &&
+            typeof maybeData.data === "object" &&
+            Array.isArray((maybeData.data as { data?: unknown }).data)
+          ) {
+            return (maybeData.data as { data: Student[] }).data
+          }
+
+          if (Array.isArray(maybeData.students)) {
+            return maybeData.students as Student[]
+          }
+        }
+
+        return []
+      }
+    )
   },
 
   getOne: (studentID: string) =>

@@ -99,9 +99,15 @@ const InvitedUserSignIn: React.FC<InvitedUserSignInProps> = ({ userType }) => {
     <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-y-auto px-4 sm:px-8 lg:px-12 xl:px-20">
       <Link href="/">
         <div className="-gap-1.5 mb-8 flex flex-col items-center justify-center">
-          <Image src="/assets/logo.svg" alt="School Base Logo" width={50} height={50} />
-          <span className="text-accent text-sm font-bold tracking-wider uppercase">
-            school base
+          <Image
+            src="/logo123.jpg"
+            alt="St. Brian's Model College logo"
+            width={64}
+            height={64}
+            className="rounded-md object-cover"
+          />
+          <span className="text-sm font-bold tracking-wider text-neutral-900">
+            St. Brian&apos;s Model College
           </span>
         </div>
       </Link>

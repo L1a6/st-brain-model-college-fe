@@ -20,7 +20,7 @@ export function LogoutDialog({
   open,
   onOpenChange,
   onConfirm,
-  logoutFrom = "SchoolBase",
+  logoutFrom = "St. Brian's Model College",
 }: LogoutDialogProps) {
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [error, setError] = useState<string | null>(null)

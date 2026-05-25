@@ -159,13 +159,14 @@ export default function SchoolSetupWizard() {
           <div className="mb-2 flex items-center justify-center">
             <div className="flex items-center gap-2">
               <Image
-                src="/assets/logo.svg"
-                alt="School Base Logo"
+                src="/logo123.jpg"
+                alt="St. Brian's Model College logo"
                 width={50}
                 height={50}
+                className="rounded-md object-cover"
               />
-              <span className="text-accent hidden text-2xl font-bold md:block">
-                SCHOOLBASE
+              <span className="hidden text-2xl font-bold text-neutral-900 md:block">
+                ST. BRIAN&apos;S MODEL COLLEGE
               </span>
             </div>
           </div>

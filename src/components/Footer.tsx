@@ -27,7 +27,7 @@ const Footer = () => {
           <section className="flex w-full max-w-100 flex-col gap-5 lg:justify-center">
             <Link href="/">
               <div className="flex items-center gap-4">
-                <Logo iconColor="white" textColor="white" size={40} />
+                <Logo textColor="white" size={40} />
               </div>
             </Link>
             <p className="text-lg leading-8 text-white/80 lg:text-xl">
