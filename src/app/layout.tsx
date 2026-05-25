@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "St. Brian's Model College",
   },
   openGraph: {
-    title: "School Base",
+    title: "St. Brian's Model College",
     description:
       "The modern way schools run in Nigeria. Manage attendance, results, timetables, fees, and NFC all in one place. Connect students, teachers, parents, and administrators.",
     url: "https://borjigin.emerj.net/",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/icons/android-chrome-512x512.png",
+        url: "/logo123.jpg",
         width: 512,
         height: 512,
         alt: "St. Brian's Model College logo",

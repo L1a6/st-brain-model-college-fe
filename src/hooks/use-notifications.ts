@@ -13,6 +13,7 @@ import {
   GetNotificationsResponse,
   // Notification,
 } from "@/lib/notifications"
+import { useAuthStore } from "@/store/auth-store"
 import { toast } from "sonner"
 import { AxiosError } from "axios"
 
@@ -29,6 +30,8 @@ export const NOTIFICATION_KEYS = {
  * @param read - Optional filter for read/unread notifications
  */
 export const useNotifications = (read?: boolean) => {
+  const isAuthenticated = useAuthStore((state) => !!state.user)
+
   return useInfiniteQuery<GetNotificationsResponse, Error>({
     queryKey: NOTIFICATION_KEYS.infinite(read),
     queryFn: async ({ pageParam = 1 }) => {
@@ -38,6 +41,7 @@ export const useNotifications = (read?: boolean) => {
       })
     },
     initialPageParam: 1,
+    enabled: isAuthenticated,
     getNextPageParam: (lastPage) => {
       return lastPage.pagination.has_next ? lastPage.pagination.page + 1 : undefined
     },
@@ -50,11 +54,13 @@ export const useNotifications = (read?: boolean) => {
  * @param notificationId - The notification ID
  */
 export const useNotification = (notificationId: string) => {
+  const isAuthenticated = useAuthStore((state) => !!state.user)
+
   return useQuery({
     queryKey: NOTIFICATION_KEYS.single(notificationId),
     queryFn: () => NotificationsAPI.getNotificationById(notificationId),
     select: (data) => data.data,
-    enabled: !!notificationId,
+    enabled: !!notificationId && isAuthenticated,
     staleTime: 1000 * 30, // 30 seconds
   })
 }
@@ -63,6 +69,8 @@ export const useNotification = (notificationId: string) => {
  * Hook to get unread notification count
  */
 export const useUnreadNotificationCount = () => {
+  const isAuthenticated = useAuthStore((state) => !!state.user)
+
   return useQuery({
     queryKey: NOTIFICATION_KEYS.unreadCount,
     queryFn: async () => {
@@ -73,6 +81,7 @@ export const useUnreadNotificationCount = () => {
       })
       return response.pagination.total
     },
+    enabled: isAuthenticated,
     refetchInterval: 1000 * 60, // Refetch every minute
     refetchOnWindowFocus: true,
     retry: (failureCount, error) => {

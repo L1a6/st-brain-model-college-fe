@@ -49,15 +49,21 @@ type ResponsePack<T> = {
 
 export const NotificationsAPI = {
   // Get paginated user notifications
-  getUserNotifications: (params?: GetNotificationsParams) =>
-    apiFetch<GetNotificationsResponse>(
+  getUserNotifications: (params?: GetNotificationsParams) => {
+    const { read, ...restParams } = params ?? {}
+
+    return apiFetch<GetNotificationsResponse>(
       "/notifications/user",
       {
         method: "GET",
-        params,
+        params: {
+          ...restParams,
+          ...(read === undefined ? {} : { is_read: read }),
+        },
       },
       true
-    ),
+    )
+  },
 
   // Get single notification by ID
   getNotificationById: (notificationId: string) =>

@@ -6,9 +6,9 @@ import { SuperAdminSidebar } from "@/components/dashboard/super-admin-sidebar"
 import { UserProvider } from "@/providers/user-provider"
 
 export const metadata: Metadata = {
-  title: "Super Admin Dashboard | School Base",
+  title: "Super Admin Dashboard | St. Brian's Model College",
   description:
-    "Oversee multiple schools, onboard teams, and manage platform-wide settings within School Base.",
+    "Oversee multiple schools, onboard teams, and manage platform-wide settings within St. Brian's Model College.",
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

@@ -6,9 +6,9 @@ import { GeneralQueryProvider } from "@/providers/general-query-provider"
 import { UserProvider } from "@/providers/user-provider"
 
 export const metadata: Metadata = {
-  title: "Admin Dashboard | School Base",
+  title: "Admin Dashboard | St. Brian's Model College",
   description:
-    "Oversee school operations, approvals, and insights across the School Base platform.",
+    "Oversee school operations, approvals, and insights across the St. Brian's Model College portal.",
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -17,7 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <UserProvider>
         <SidebarProvider>
           <AdminSidebar />
-          <main className="mt-[50px] h-full w-full bg-white">
+          <main className="mt-[50px] h-full w-full bg-[#FAFAFA]">
             <DashboardHeader />
             {children}
           </main>

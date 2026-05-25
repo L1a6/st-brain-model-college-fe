@@ -7,9 +7,9 @@ import { UserProvider } from "@/providers/user-provider"
 import { StudentProvider } from "./_components/student-provider"
 
 export const metadata: Metadata = {
-  title: "Parent Dashboard | School Base",
+  title: "Parent Dashboard | St. Brian's Model College",
   description:
-    "Track student progress, attendance, payments, and communication in School Base.",
+    "Track student progress, attendance, payments, and communication in St. Brian's Model College.",
 }
 
 export default function ParentLayout({ children }: { children: React.ReactNode }) {

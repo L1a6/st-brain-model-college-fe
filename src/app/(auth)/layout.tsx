@@ -7,9 +7,9 @@ export const viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Authentication | School Base",
+  title: "Authentication | St. Brian's Model College",
   description:
-    "Sign in or create your School Base account to manage your school experience.",
+    "Sign in or create your St. Brian's Model College account to manage your school experience.",
 }
 
 export default function AuthLayout({

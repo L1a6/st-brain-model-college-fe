@@ -6,7 +6,7 @@ import { GeneralQueryProvider } from "@/providers/general-query-provider"
 import { UserProvider } from "@/providers/user-provider"
 
 export const metadata: Metadata = {
-  title: "Student Dashboard | School Base",
+  title: "Student Dashboard | St. Brian's Model College",
   description:
     "View classes, attendance, results, and updates from your school in one place.",
 }

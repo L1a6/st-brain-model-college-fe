@@ -7,7 +7,7 @@ import DashboardHeader from "@/components/dashboard/dashboard-header"
 import { UserProvider } from "@/providers/user-provider"
 
 export const metadata: Metadata = {
-  title: "Teacher Dashboard | School Base",
+  title: "Teacher Dashboard | St. Brian's Model College",
   description:
     "Manage classes, attendance, results, and communication with students and parents.",
 }
