@@ -19,7 +19,7 @@ const navLinks = [
       { label: "Co-curricular", href: "/#academics" },
     ],
   },
-  { label: "Admissions", href: "/admissions" },
+  { label: "Enroll", href: "/enroll" },
   { label: "Contact", href: "/contact" },
 ]
 
@@ -119,6 +119,9 @@ export default function Navbar() {
             <Link href="/login" className="btn-crimson text-xs px-5 py-2.5">
               Login to Portal
             </Link>
+            <Link href="/enroll" className="btn-outline-white text-xs px-5 py-2.5">
+              Enroll
+            </Link>
           </div>
 
           <button
@@ -189,6 +192,9 @@ export default function Navbar() {
         <div className="p-5 border-t border-canvas-border space-y-3">
           <Link href="/login" className="btn-crimson w-full justify-center text-sm">
             Login to Portal
+          </Link>
+          <Link href="/enroll" className="btn-outline-white w-full justify-center text-sm">
+            Enroll
           </Link>
           <p className="text-2xs text-center text-ink-4">
             © {new Date().getFullYear()} St. Brian's Model College

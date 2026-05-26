@@ -34,9 +34,9 @@ export default function CTASection() {
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </Link>
 
-              <Link href="/admissions" className="border border-white/40 text-white font-semibold text-sm px-8 py-4 flex items-center gap-2 hover:bg-white/10 transition-all backdrop-blur-sm">
+              <Link href="/enroll" className="border border-white/40 text-white font-semibold text-sm px-8 py-4 flex items-center gap-2 hover:bg-white/10 transition-all backdrop-blur-sm">
                 <UserPlus size={16} />
-                Apply for Admission
+                Enroll
               </Link>
             </div>
 

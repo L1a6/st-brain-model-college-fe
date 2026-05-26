@@ -12,6 +12,7 @@ import {
   Menu,
   Calendar,
   School,
+  NotebookPen,
 } from "lucide-react"
 import { PiMoneyWavyBold } from "react-icons/pi"
 import { FaRegUser } from "react-icons/fa6"
@@ -75,6 +76,7 @@ const mainItems = [
   { title: "Teachers", url: "/admin/teachers", icon: Users },
   { title: "Students", url: "/admin/students", icon: GraduationCap },
   { title: "Parents", url: "/admin/parents", icon: FaRegUser },
+  { title: "Enrollments", url: "/admin/enrollments", icon: NotebookPen },
   {
     title: "Class Management",
     url: "/admin/class-management",

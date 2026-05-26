@@ -46,7 +46,7 @@ export default function Hero() {
               Login to Portal
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link href="/admissions" className="btn-outline-white">Apply for Admission</Link>
+            <Link href="/enroll" className="btn-outline-white">Enroll</Link>
           </div>
 
           <div className="mt-16 grid grid-cols-3 gap-3 max-w-lg animate-fade-up delay-400" style={{ animationFillMode: "both" }}>

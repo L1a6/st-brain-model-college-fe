@@ -6,7 +6,7 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Academics", href: "#academics" },
-  { label: "Admissions", href: "/admissions" },
+  { label: "Enroll", href: "/enroll" },
   { label: "Events", href: "/events" },
   { label: "Contact", href: "/contact" },
 ]
@@ -91,8 +91,8 @@ export default function Footer() {
               <p className="text-xs text-white/60 leading-relaxed">
                 Admissions for <span className="text-crimson font-semibold">2025/2026</span> session are now open.
               </p>
-              <Link href="/admissions" className="text-xs text-crimson hover:text-crimson-light transition-colors mt-1 inline-flex items-center gap-1">
-                Apply now <ArrowUpRight size={11} />
+              <Link href="/enroll" className="text-xs text-crimson hover:text-crimson-light transition-colors mt-1 inline-flex items-center gap-1">
+                Enroll now <ArrowUpRight size={11} />
               </Link>
             </div>
           </div>

@@ -33,7 +33,7 @@ export default function CTASection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a href="#admissions" className="bg-white text-crimson font-semibold text-sm px-8 py-4 rounded-2xl">Apply now</a>
+              <a href="/enroll" className="bg-white text-crimson font-semibold text-sm px-8 py-4 rounded-2xl">Enroll</a>
               <a href="#events" className="border border-white/35 text-white font-semibold text-sm px-8 py-4 rounded-2xl hover:bg-white/10 transition-colors">Book a visit</a>
             </div>
           </div>

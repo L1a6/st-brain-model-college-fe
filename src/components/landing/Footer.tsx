@@ -17,7 +17,7 @@ export default function Footer() {
             <h5 className="text-xs font-semibold uppercase tracking-[0.22em] text-white/55 mb-4">Explore</h5>
             <ul className="space-y-3 text-sm">
               <li><Link href="#about" className="footer-link">About</Link></li>
-              <li><Link href="#admissions" className="footer-link">Admissions</Link></li>
+              <li><Link href="/enroll" className="footer-link">Enroll</Link></li>
               <li><Link href="#events" className="footer-link">Events</Link></li>
             </ul>
           </div>

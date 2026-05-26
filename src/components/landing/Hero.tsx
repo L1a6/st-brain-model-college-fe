@@ -8,14 +8,14 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-navy text-white min-h-[60vh] sm:min-h-[68vh] lg:min-h-[92vh]">
       <div className="absolute inset-0 pointer-events-none">
         <Image
-          src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1800&q=90&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1800&q=90&auto=format&fit=crop"
           alt="students in a school setting"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-35"
+          className="object-cover object-center opacity-40"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(11,18,32,0.46)_0%,rgba(11,18,32,0.28)_48%,rgba(11,18,32,0.16)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(11,18,32,0.28)_0%,rgba(11,18,32,0.16)_48%,rgba(11,18,32,0.08)_100%)]" />
       </div>
 
       <div className="relative z-10 container min-h-[60vh] sm:min-h-[68vh] lg:min-h-[92vh] flex items-end py-12 sm:py-16 lg:py-28">
@@ -35,7 +35,7 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-row flex-nowrap gap-2 sm:gap-4">
-              <a href="#admissions" className="btn-crimson">Apply now</a>
+              <a href="/enroll" className="btn-crimson">Enroll</a>
               <a href="/login" className="inline-flex items-center justify-center rounded-2xl bg-[#d9e8fb] px-5 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-white sm:px-7">Log in to portal</a>
             </div>
           </div>
