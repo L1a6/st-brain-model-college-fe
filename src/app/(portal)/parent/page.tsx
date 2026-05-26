@@ -12,9 +12,28 @@ import { StudentSelector } from "./_components/student-selector"
 export default function ParentDashboard() {
   const user = useAuthStore((state) => state.user)
   const userTitle = user?.title ? `${user.title}.` : ""
-  const { selectedStudent: student } = useParentStudents()
+  const { selectedStudent: student, isLoading } = useParentStudents()
   const { data: dummyExtra } = useGetExtraDummy()
   const studentName = student && `${student.first_name} ${student.last_name}.`
+
+  if (!isLoading && !student) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <h1 className="mb-2 text-2xl font-semibold">
+          Welcome, {userTitle} {user?.first_name}
+        </h1>
+        <p className="mb-6 text-gray-600">Here is your child&apos;s academic report</p>
+
+        <div className="rounded-xl bg-white p-6 shadow">
+          <h2 className="mb-2 text-lg font-semibold text-gray-900">No Child Linked Yet</h2>
+          <p className="text-sm text-gray-600">
+            No student is linked to your parent account yet. Please contact your school admin to
+            link your child profile.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

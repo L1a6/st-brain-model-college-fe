@@ -69,7 +69,7 @@ export const StudentsAPI = {
     apiFetch<ResponsePack<StudentGrowthReport>>(
       "/students/student-growth-report",
       {
-        params: { academic_year },
+        params: academic_year ? { academic_year } : undefined,
       },
       true
     ),

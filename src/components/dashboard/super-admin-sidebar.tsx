@@ -95,20 +95,23 @@ export function SuperAdminSidebar() {
   }
 
   return (
-    <Sidebar>
-      <SidebarHeader>
-        <div className="flex h-7 items-center justify-between px-2 py-4">
+    <Sidebar className="bg-white dark:bg-[#111111]">
+      <SidebarHeader className="border-b border-black/[0.06] dark:border-white/[0.06]">
+        <div className="flex h-16 items-center justify-between px-4">
           <div className={isCollapsed ? "hidden" : ""}>
-            <Logo />
+            <Logo size={32} className="flex-col items-start gap-1" />
+            <div className="mt-1 font-mono text-[9px] tracking-widest uppercase text-neutral-400">
+              Super admin portal
+            </div>
           </div>
           <SidebarTrigger />
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-white dark:bg-[#111111]">
         <SidebarGroup>
           <SidebarGroupLabel className="sr-only">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-1 px-3">
               {items.map((item) => {
                 const hasSubItems = "subItems" in item && item.subItems
                 const isActive = item.exactMatch
@@ -132,10 +135,10 @@ export function SuperAdminSidebar() {
                               isActive={isActive}
                               className={`flex-1 ${
                                 isActive
-                                  ? "bg-[#DA3743]/10 text-[#DA3743]"
+                                  ? "border-l-2 border-[#DA3743] bg-[#DA3743]/8 text-[#DA3743]"
                                   : hasActiveChild
                                     ? ""
-                                    : "text-gray-700 hover:bg-[#DA3743]/10 hover:text-[#DA3743]"
+                                    : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
                               }`}
                             >
                               <Link
@@ -165,8 +168,8 @@ export function SuperAdminSidebar() {
                                     isActive={isSubActive}
                                     className={`my-1.5 ${
                                       isSubActive
-                                        ? "bg-[#DA3743]/10 text-[#DA3743]"
-                                        : "text-gray-600 hover:bg-[#DA3743]/10 hover:text-[#DA3743]"
+                                        ? "bg-[#DA3743]/8 text-[#DA3743]"
+                                        : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
                                     }`}
                                   >
                                     <Link href={subItem.url} onClick={handleLinkClick}>
@@ -190,8 +193,8 @@ export function SuperAdminSidebar() {
                       isActive={isActive}
                       className={
                         isActive
-                          ? "bg-[#DA3743]/10 text-[#DA3743]"
-                          : "text-primary hover:bg-[#DA3743]/10 hover:text-[#DA3743]"
+                          ? "border-l-2 border-[#DA3743] bg-[#DA3743]/8 text-[#DA3743]"
+                          : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
                       }
                     >
                       <Link
@@ -211,8 +214,8 @@ export function SuperAdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="cursor-pointer">
-        <div className="flex items-center gap-2 text-sm">
+      <SidebarFooter className="cursor-pointer border-t border-black/[0.06] dark:border-white/[0.06]">
+        <div className="flex items-center gap-2 text-sm text-neutral-500">
           <LifeBuoy className="h-4 w-4" />
           <span>Support</span>
         </div>

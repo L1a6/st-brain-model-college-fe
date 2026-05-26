@@ -29,27 +29,23 @@ export function SidebarFooterUser({ isCollapsed = false }: SidebarFooterUserProp
     await sendLogoutRequest()
   }
 
+  const initials = `${user?.first_name?.[0] || "S"}${user?.last_name?.[0] || "B"}`.toUpperCase()
+
   return (
     <>
-      <div className="border-t border-gray-200 p-4">
+      <div className="border-t border-black/[0.06] p-4 dark:border-white/[0.06]">
         <div className="flex items-center justify-between">
           <Link href={`/${role}/profile`} className="flex flex-1 items-center gap-3">
-            <div className="relative h-10 w-10">
-              <Image
-                src={"/assets/images/dashboard/avatar.svg"}
-                alt="avatar"
-                width={32}
-                height={32}
-                className="w-full object-cover"
-              />
-              <div className="absolute right-0 bottom-0 h-3 w-3 rounded-full border-2 border-white bg-green-500" />
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-600 dark:bg-white/10 dark:text-neutral-200">
+              {initials}
+              <div className="absolute right-0 bottom-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-emerald-500 dark:border-[#111111]" />
             </div>
             {!isCollapsed && (
               <div className="flex flex-col">
-                <span className="text-sm font-semibold text-gray-900">
+                <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                   {userTitle} {user?.first_name}
                 </span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-neutral-500 dark:text-neutral-400">
                   {titleCase(user?.role?.[0] || "")}
                 </span>
               </div>
@@ -58,7 +54,7 @@ export function SidebarFooterUser({ isCollapsed = false }: SidebarFooterUserProp
           {!isCollapsed && (
             <button
               onClick={() => setShowLogoutDialog(true)}
-              className="ml-2 cursor-pointer rounded-md p-1.5 text-[#DA3743] transition-colors hover:bg-red-50"
+              className="ml-2 cursor-pointer rounded-md p-1.5 text-[#DA3743] transition-colors hover:bg-[#DA3743]/8"
               aria-label="Logout"
             >
               <LogOut className="h-5 w-5" />

@@ -1,127 +1,200 @@
 "use client"
 
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
+import { ChevronDown, Menu, X } from "lucide-react"
+import clsx from "clsx"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import Logo from "./logo"
 
-const Navbar = () => {
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  {
+    label: "Academics",
+    href: "/#academics",
+    children: [
+      { label: "Junior Secondary", href: "/#academics" },
+      { label: "Senior Secondary", href: "/#academics" },
+      { label: "Co-curricular", href: "/#academics" },
+    ],
+  },
+  { label: "Admissions", href: "/admissions" },
+  { label: "Contact", href: "/contact" },
+]
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [dropdown, setDropdown] = useState<string | null>(null)
   const pathname = usePathname()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const navItems = [
-    { label: "Home", path: "/" },
-    { label: "Features", path: "/features" },
-    { label: "Modules", path: "/modules" },
-    { label: "About", path: "/about" },
-  ]
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handler)
+    return () => window.removeEventListener("scroll", handler)
+  }, [])
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false)
-  }
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
-    <nav className="fixed top-0 right-0 left-0 z-50 border-b border-gray-100 bg-[#fffbfc] py-4 lg:py-6">
-      <div className="relative container flex items-center justify-between">
-        <Link href="/">
-          <Logo />
-        </Link>
-
-        {/* Desktop Navigation - Centered */}
-        <section className="absolute left-1/2 hidden -translate-x-1/2 gap-6 text-lg font-medium lg:flex lg:gap-10">
-          {navItems.map((item) => {
-            const isActive = pathname === item.path
-            return (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`px-3 py-2 transition-colors duration-200 ${isActive ? "text-accent" : "text-[#535353]"} hover:text-accent/70`}
+    <>
+      <header
+        className={clsx(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          scrolled ? "nav-glass py-3" : "bg-transparent py-5"
+        )}
+      >
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-6">
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <div className="relative w-10 h-10 shrink-0">
+              <Image
+                src="/logo123.jpg"
+                alt="St. Brian's Model College"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div className="hidden sm:block">
+              <p
+                className={clsx(
+                  "font-display text-sm font-bold leading-tight transition-colors",
+                  scrolled ? "text-navy" : "text-white"
+                )}
               >
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            )
-          })}
-        </section>
-
-        {/* Desktop Button */}
-        <div className="hidden lg:block">
-          <Link href="/contact-us">
-            <Button variant="outline" className="">
-              Consult Us
-            </Button>
+                St. Brian's
+              </p>
+              <p
+                className={clsx(
+                  "text-2xs uppercase tracking-[0.16em] font-medium transition-colors",
+                  scrolled ? "text-crimson" : "text-white/70"
+                )}
+              >
+                Model College
+              </p>
+            </div>
           </Link>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <div
+                key={link.href}
+                className="relative"
+                onMouseEnter={() => link.children && setDropdown(link.label)}
+                onMouseLeave={() => setDropdown(null)}
+              >
+                <Link
+                  href={link.href}
+                  className={clsx(
+                    "nav-link flex items-center gap-1",
+                    scrolled ? "" : "text-white/90 hover:text-white",
+                    pathname === link.href && "active"
+                  )}
+                >
+                  {link.label}
+                  {link.children && <ChevronDown size={13} className="opacity-60" />}
+                </Link>
+
+                {link.children && dropdown === link.label && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-canvas-border py-2 z-50">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-5 py-2.5 text-sm text-ink-2 hover:bg-canvas hover:text-crimson transition-colors"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          <div className="hidden lg:flex items-center gap-3">
+            <Link href="/portal/student/login" className="btn-crimson text-xs px-5 py-2.5">
+              Login to Portal
+            </Link>
+          </div>
+
+          <button
+            onClick={() => setOpen(true)}
+            className={clsx(
+              "lg:hidden p-2 transition-colors",
+              scrolled ? "text-ink" : "text-white"
+            )}
+            aria-label="Open menu"
+          >
+            <Menu size={22} />
+          </button>
+        </div>
+      </header>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-60 bg-navy/60 backdrop-blur-sm lg:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      <aside
+        className={clsx(
+          "fixed top-0 right-0 bottom-0 z-70 w-80 max-w-[90vw] bg-white flex flex-col",
+          "transition-transform duration-300 ease-out lg:hidden",
+          open ? "translate-x-0" : "translate-x-full"
+        )}
+      >
+        <div className="flex items-center justify-between px-6 py-5 border-b border-canvas-border">
+          <div className="flex items-center gap-3">
+            <div className="relative w-9 h-9 shrink-0">
+              <Image src="/logo123.jpg" alt="St. Brian's" fill className="object-contain" />
+            </div>
+            <div>
+              <p className="font-display text-sm font-bold text-navy leading-tight">St. Brian's</p>
+              <p className="text-2xs text-crimson uppercase tracking-widest">Model College</p>
+            </div>
+          </div>
+          <button
+            onClick={() => setOpen(false)}
+            className="p-1.5 text-ink-3 hover:text-ink"
+            aria-label="Close menu"
+          >
+            <X size={20} />
+          </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMobileMenu}
-          className="p-2 text-[#2D2D2D] transition-colors hover:text-[#535353] lg:hidden"
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? <X className="size-6" /> : <Menu className="size-6" />}
-        </button>
-
-        {/* Mobile Menu Overlay */}
-        {isMobileMenuOpen && (
-          <>
-            <div
-              className="fixed inset-0 z-40 bg-black/20 lg:hidden"
-              onClick={closeMobileMenu}
-            />
-            <div
-              className={`fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-[#fffbfc] shadow-xl transition-transform duration-300 ease-out lg:hidden ${
-                isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-              }`}
+        <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
+          {navLinks.map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={clsx(
+                "flex items-center gap-3 px-4 py-3 text-base font-medium rounded-md transition-all",
+                "animate-fade-up",
+                pathname === link.href
+                  ? "bg-crimson-soft text-crimson"
+                  : "text-ink-2 hover:bg-canvas hover:text-crimson"
+              )}
+              style={{ animationDelay: `${i * 60}ms` }}
             >
-              <div className="flex h-full flex-col">
-                <div className="flex items-center justify-end px-4 py-6">
-                  <button
-                    onClick={closeMobileMenu}
-                    className="p-2 text-[#2D2D2D] transition-colors hover:text-[#535353]"
-                    aria-label="Close menu"
-                  >
-                    <X className="size-6" />
-                  </button>
-                </div>
-                <div className="flex flex-1 flex-col overflow-y-auto px-4 py-6">
-                  {navItems.map((item) => {
-                    const isActive = pathname === item.path
-                    return (
-                      <Link
-                        key={item.path}
-                        href={item.path}
-                        onClick={closeMobileMenu}
-                        className={`px-4 py-3 text-lg font-medium transition-colors ${isActive ? "text-[#2D2D2D]" : "text-[#535353]"} hover:bg-gray-50 hover:text-[#2D2D2D]`}
-                      >
-                        {item.label}
-                      </Link>
-                    )
-                  })}
-                  <div className="mt-2 px-4">
-                    <Link href="/contact-us">
-                      <Button
-                        variant="outline"
-                        className="w-full"
-                        onClick={closeMobileMenu}
-                      >
-                        Consult Us
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </nav>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="p-5 border-t border-canvas-border space-y-3">
+          <Link href="/portal/student/login" className="btn-crimson w-full justify-center text-sm">
+            Login to Portal
+          </Link>
+          <p className="text-2xs text-center text-ink-4">
+            © {new Date().getFullYear()} St. Brian's Model College
+          </p>
+        </div>
+      </aside>
+    </>
   )
 }
-
-export default Navbar

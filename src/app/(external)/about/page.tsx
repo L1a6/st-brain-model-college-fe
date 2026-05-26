@@ -1,16 +1,13 @@
-import React from "react"
-import AboutHero from "./_components/about-hero"
-import AboutPerks from "./_components/about-perks"
-import AboutValues from "./_components/about-values"
+import About from "../_components/about"
+import CTASection from "../_components/cta-section"
+import ScrollReveal from "@/components/ScrollReveal"
 
-const page = () => {
+export default function AboutPage() {
   return (
     <div className="min-h-screen">
-      <AboutHero />
-      <AboutPerks />
-      <AboutValues />
+      <About />
+      <CTASection />
+      <ScrollReveal />
     </div>
   )
 }
-
-export default page

@@ -158,9 +158,12 @@ export function useStudentsCount() {
 // --------------------------
 
 export function useStudentGrowthReport(academic_year?: string) {
+  const normalizedAcademicYear = academic_year?.trim()
+
   return useQuery({
-    queryKey: ["student_growth_report", academic_year],
-    queryFn: () => StudentsAPI.getStudentGrowthReport(academic_year),
+    queryKey: ["student_growth_report", normalizedAcademicYear],
+    queryFn: () => StudentsAPI.getStudentGrowthReport(normalizedAcademicYear),
+    enabled: Boolean(normalizedAcademicYear),
     select: (data) => data.data,
   })
 }
