@@ -70,4 +70,12 @@ export const QuizAPI = {
       },
       true
     ),
+  /**
+   * Create a new quiz (for teachers)
+   */
+  createQuiz: (payload: any) =>
+    apiFetch<ResponsePack<any>>('/quizzes', {
+      method: 'POST',
+      data: payload,
+    }, true),
 }
