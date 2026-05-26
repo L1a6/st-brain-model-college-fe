@@ -97,14 +97,15 @@ export function StudentSidebar() {
                   </SidebarMenuItem>
                 )
               })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        {/* Bottom Items */}
-        <div className="mt-auto px-3 pb-2">
-          <SidebarMenu className="space-y-1">
-            {bottomItems.map((item) => {
+              import {
+                LayoutGrid,
+                GraduationCap,
+                CalendarDays,
+                FileBadge,
+                SettingsIcon,
+                CreditCard,
+                BookOpen,
+              } from "lucide-react"
               const isActive =
                 pathname === item.url || pathname.startsWith(item.url + "/")
               return (
@@ -116,14 +117,15 @@ export function StudentSidebar() {
                         ? "bg-[#DA3743] text-white hover:bg-[#DA3743] hover:text-white"
                         : "text-gray-700 hover:bg-gray-100"
                     }`}
-                  >
-                    <Link
-                      href={item.url || "#"}
-                      className="flex items-center gap-3"
-                      onClick={handleLinkClick}
-                    >
-                      <item.icon className="h-5 w-5" />
-                      <span className="text-sm font-medium">{item.title}</span>
+                    // Menu items
+                    const items = [
+                      { title: "Dashboard", url: "/student", icon: LayoutGrid, exactMatch: true },
+                      { title: "Results", url: "/student/results", icon: FileBadge },
+                      { title: "Timetable", url: "/student/timetable", icon: CalendarDays },
+                      { title: "Attendance", url: "/student/attendance", icon: GraduationCap },
+                      { title: "Quizzes", url: "/student/dashboard/quizzes", icon: BookOpen },
+                      { title: "Payments", url: "/student/dashboard/payments", icon: CreditCard },
+                    ]
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
