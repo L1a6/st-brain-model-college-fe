@@ -96,15 +96,6 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
           <Button type="submit" disabled={isLoading} className="w-full">
             Login
           </Button>
-
-          <div className="border-t border-canvas-border pt-4 text-sm text-ink-3">
-            Use the original password for the account. The bcrypt hash from the database will not work here.
-            <div className="mt-3">
-              <Link href={`/${role}`} className="font-medium text-crimson hover:underline">
-                Go to dashboard without logging in
-              </Link>
-            </div>
-          </div>
         </form>
       </div>
     </section>

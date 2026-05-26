@@ -2,7 +2,9 @@ import { NextResponse } from "next/server"
 import { cookies as getCookies } from "next/headers"
 import { splitCookiesString } from "set-cookie-parser"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3008"
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ??
+  "https://st-brains-model-college-be.onrender.com/api/v1"
 
 /* Helpers */
 const ensureApiBaseUrl = (): string => {
