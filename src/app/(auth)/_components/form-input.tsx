@@ -292,7 +292,7 @@ const LoginForm = () => {
             <div className="rounded-2xl border border-gray-200 bg-gray-50 p-4">
               <p className="text-sm font-medium text-gray-900">Quick access</p>
               <p className="mt-1 text-sm text-gray-600">
-                Open a role login page or skip auth and open a dashboard directly.
+                Open a role login page and sign in with your account details.
               </p>
               <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 <Link
@@ -320,10 +320,10 @@ const LoginForm = () => {
                   Super Admin Login
                 </Link>
                 <Link
-                  href="/student"
+                  href="/login"
                   className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50"
                 >
-                  Student Dashboard
+                  Student Login
                 </Link>
               </div>
             </div>

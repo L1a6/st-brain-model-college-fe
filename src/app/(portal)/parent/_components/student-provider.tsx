@@ -30,7 +30,7 @@ export const StudentProvider = ({ children }: { children: React.ReactNode }) => 
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    setShowModal(shouldShow)
+    setShowModal(Boolean(shouldShow))
   }, [shouldShow])
 
   function handleSelectStudent(studentID: string) {

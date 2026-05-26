@@ -5,7 +5,7 @@ const AdminLoginPage = () => {
     <MockRoleLoginForm
       role="admin"
       title="Admin Login"
-      description="Use this mock login to open the admin dashboard."
+      description="Use this mock login to continue to the admin portal."
     />
   )
 }

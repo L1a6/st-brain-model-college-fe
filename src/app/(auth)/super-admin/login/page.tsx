@@ -5,7 +5,7 @@ const SuperAdminLogin = () => {
     <MockRoleLoginForm
       role="super-admin"
       title="Super Admin Login"
-      description="Use this mock login to open the super-admin dashboard."
+      description="Use this mock login to continue to the super-admin portal."
     />
   )
 }

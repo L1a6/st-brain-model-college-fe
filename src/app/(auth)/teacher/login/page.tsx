@@ -5,7 +5,7 @@ const TeacherLoginPage = () => {
     <MockRoleLoginForm
       role="teacher"
       title="Teacher Login"
-      description="Use this mock login to open the teacher dashboard."
+      description="Use this mock login to continue to the teacher portal."
     />
   )
 }
