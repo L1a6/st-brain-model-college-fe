@@ -42,7 +42,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4 animate-fade-up delay-300" style={{ animationFillMode: "both" }}>
-            <Link href="/portal/student/login" className="btn-crimson group">
+            <Link href="/login" className="btn-crimson group">
               Login to Portal
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>

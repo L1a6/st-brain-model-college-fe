@@ -49,7 +49,7 @@ export default function ForWho() {
           <p className="text-sm text-ink-3 max-w-lg">
             All roles are securely separated with role-based access control. Students see only their data; teachers manage only their classes.
           </p>
-          <a href="/portal/student/login" className="btn-outline-crimson shrink-0">
+          <a href="/login" className="btn-outline-crimson shrink-0">
             Access Portal <ArrowRight size={15} />
           </a>
         </div>

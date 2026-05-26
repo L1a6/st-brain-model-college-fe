@@ -1,7 +1,18 @@
 import type { Metadata } from "next"
+import { Manrope, Sora } from "next/font/google"
 import "./globals.css"
 import { GeneralQueryProvider } from "@/providers/general-query-provider"
 import { Toaster } from "sonner"
+
+const manrope = Manrope({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+})
+
+const sora = Sora({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+})
 
 export const viewport = {
   themeColor: "#0f172a",
@@ -74,7 +85,7 @@ export default function RootLayout({
   return (
     <GeneralQueryProvider>
       <html lang="en">
-        <body className="font-outfit antialiased">
+        <body className={`${manrope.variable} ${sora.variable} font-outfit antialiased`}>
           {children}
           <Toaster position="bottom-right" richColors />
         </body>

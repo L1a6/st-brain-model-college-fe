@@ -28,7 +28,7 @@ export default function CTASection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link href="/portal/student/login" className="bg-white text-crimson font-semibold text-sm px-8 py-4 flex items-center gap-2 hover:bg-white/90 transition-all active:scale-[0.98] group">
+              <Link href="/login" className="bg-white text-crimson font-semibold text-sm px-8 py-4 flex items-center gap-2 hover:bg-white/90 transition-all active:scale-[0.98] group">
                 <LogIn size={16} />
                 Login to Portal
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
@@ -42,7 +42,7 @@ export default function CTASection() {
 
             <div className="mt-12 pt-8 border-t border-white/20 flex flex-wrap gap-6">
               {[
-                { label: "Student Portal", href: "/portal/student/login", note: "Results, Payments, Quizzes" },
+                { label: "Student Portal", href: "/login", note: "Results, Payments, Quizzes" },
                 { label: "Teacher Portal", href: "/staff/teacher/login", note: "Classes, Results upload" },
                 { label: "Admin Portal", href: "/staff/management/login", note: "Full school management" },
               ].map((portal) => (

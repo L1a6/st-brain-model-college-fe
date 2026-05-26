@@ -36,7 +36,7 @@ export default function Hero() {
 
             <div className="flex flex-row flex-nowrap gap-2 sm:gap-4">
               <a href="#admissions" className="btn-crimson">Apply now</a>
-              <a href="/student/login" className="inline-flex items-center justify-center rounded-2xl bg-[#d9e8fb] px-5 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-white sm:px-7">Log in to portal</a>
+              <a href="/login" className="inline-flex items-center justify-center rounded-2xl bg-[#d9e8fb] px-5 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-white sm:px-7">Log in to portal</a>
             </div>
           </div>
         </ScrollReveal>

@@ -116,7 +116,7 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/portal/student/login" className="btn-crimson text-xs px-5 py-2.5">
+            <Link href="/login" className="btn-crimson text-xs px-5 py-2.5">
               Login to Portal
             </Link>
           </div>
@@ -187,7 +187,7 @@ export default function Navbar() {
         </nav>
 
         <div className="p-5 border-t border-canvas-border space-y-3">
-          <Link href="/portal/student/login" className="btn-crimson w-full justify-center text-sm">
+          <Link href="/login" className="btn-crimson w-full justify-center text-sm">
             Login to Portal
           </Link>
           <p className="text-2xs text-center text-ink-4">

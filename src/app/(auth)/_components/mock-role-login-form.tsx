@@ -68,7 +68,6 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
                 type="text"
                 name="email"
                 id="email"
-                placeholder="anything works"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 disabled={isLoading}
@@ -83,10 +82,9 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
             </label>
             <div className="mt-2">
               <Input
-                type="text"
+                type="password"
                 name="password"
                 id="password"
-                placeholder="anything works"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 disabled={isLoading}

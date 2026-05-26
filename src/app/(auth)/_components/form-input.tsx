@@ -65,8 +65,7 @@ const LoginForm = () => {
 
   // ?next=/path
   const nextRoute =
-    typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("next")
+    typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("next") : null
 
   const router = useRouter()
 
@@ -137,7 +136,7 @@ const LoginForm = () => {
     setIsLoading(true)
     setErrors({})
 
-    const route = nextRoute?.startsWith("/") ? nextRoute : resolveLocalDashboardRoute(formData.email)
+    const route = nextRoute && nextRoute.startsWith("/") ? nextRoute : resolveLocalDashboardRoute(formData.email)
     router.push(route)
     setAttemptCount(0)
   }
@@ -297,7 +296,7 @@ const LoginForm = () => {
               </p>
               <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
                 <Link
-                  href="/student/login"
+                  href="/login"
                   className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:border-gray-300 hover:bg-gray-50"
                 >
                   Student Login

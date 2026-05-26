@@ -12,7 +12,7 @@ const quickLinks = [
 ]
 
 const portalLinks = [
-  { label: "Student Portal", href: "/portal/student/login", note: "For enrolled students" },
+  { label: "Student Portal", href: "/login", note: "For enrolled students" },
   { label: "Teacher Portal", href: "/staff/teacher/login", note: "For teaching staff" },
   { label: "Management Portal", href: "/staff/management/login", note: "For administration" },
 ]
@@ -76,13 +76,13 @@ export default function Footer() {
             <ul className="space-y-4">
               {portalLinks.map((portal) => (
                 <li key={portal.href}>
-                  <Link href={portal.href} className="group">
-                    <p className="text-sm text-white/80 group-hover:text-white flex items-center gap-1 transition-colors">
-                      {portal.label}
-                      <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </p>
-                    <p className="text-2xs text-white/30 mt-0.5">{portal.note}</p>
-                  </Link>
+                    <Link href="/login" className="group">
+                      <p className="text-sm text-white/80 group-hover:text-white flex items-center gap-1 transition-colors">
+                        {portal.label}
+                        <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </p>
+                      <p className="text-2xs text-white/30 mt-0.5">{portal.note}</p>
+                    </Link>
                 </li>
               ))}
             </ul>
