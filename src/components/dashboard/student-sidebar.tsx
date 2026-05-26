@@ -8,6 +8,7 @@ import {
   CalendarDays,
   FileBadge,
   SettingsIcon,
+  CreditCard,
 } from "lucide-react"
 
 import {
@@ -32,6 +33,7 @@ const items = [
   { title: "Results", url: "/student/results", icon: FileBadge },
   { title: "Timetable", url: "/student/timetable", icon: CalendarDays },
   { title: "Attendance", url: "/student/attendance", icon: GraduationCap },
+  { title: "Payments", url: "/student/dashboard/payments", icon: CreditCard },
 ]
 
 const bottomItems = [
