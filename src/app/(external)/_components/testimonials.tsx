@@ -9,7 +9,7 @@ const testimonials = [
     type: "Parent",
     title: '"The results portal changed how I stay connected with my daughter\'s education."',
     content: "Before St. Brain's introduced the online portal, I was completely in the dark about my daughter's academic performance until report cards. Now I can check her results, her fee status, and even receive school announcements — all from my phone. It has made parenting a school child so much easier.",
-    img: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80&auto=format&fit=crop&face=true",
+    img: "/assets/images/parent.png",
     accent: "bg-navy",
   },
   {
@@ -19,7 +19,7 @@ const testimonials = [
     type: "Teacher",
     title: '"Uploading and managing results has never been this seamless."',
     content: "In my 14 years of teaching, I've seen many school systems come and go. St. Brain's portal is genuinely the most intuitive I've used. I can enter scores for my entire SS3A Mathematics class in under 5 minutes, and students see their results instantly. That kind of efficiency is rare.",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop&face=true",
+    img: "/assets/images/auth/user-icon.png",
     accent: "bg-crimson",
   },
   {
@@ -29,7 +29,7 @@ const testimonials = [
     type: "Student",
     title: '"Being able to track my results and practice with quizzes is amazing!"',
     content: "I use the student portal almost every day. I love how I can see my CA and exam scores as soon as sir uploads them. The quiz section especially helps me revise — it feels like real exam practice. My grades have improved so much since I started using it consistently.",
-    img: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=400&q=80&auto=format&fit=crop&face=true",
+    img: "/assets/images/auth/school-logo.png",
     accent: "bg-gold",
   },
   {
@@ -39,7 +39,7 @@ const testimonials = [
     type: "Parent",
     title: '"St. Brain\'s gave my son confidence and structure I didn\'t expect."',
     content: "My son Kolade struggled in his previous school. Since joining St. Brain's Model College, the turnaround has been remarkable. The teachers here actually care. The portal keeps me informed, and the school's culture of discipline has truly transformed him.",
-    img: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=400&q=80&auto=format&fit=crop&face=true",
+    img: "/assets/images/dashboard/avatar.svg",
     accent: "bg-navy",
   },
 ]

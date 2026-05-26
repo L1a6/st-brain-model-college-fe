@@ -19,7 +19,7 @@ export default function About() {
           <div className="relative grid grid-cols-2 gap-5 reveal">
             <div className="flex flex-col gap-5">
               <div className="relative overflow-hidden aspect-[4/5]">
-                <Image src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=85&auto=format&fit=crop" alt="Students in class" fill sizes="(max-width:1024px) 40vw, 20vw" className="object-cover" loading="lazy" />
+                <Image src="/images/home/for-who/image1.png" alt="Students in class" fill sizes="(max-width:1024px) 40vw, 20vw" className="object-cover" loading="lazy" />
               </div>
               <div className="bg-crimson p-6 flex flex-col gap-2">
                 <p className="font-display text-4xl text-white font-bold">35+</p>
@@ -33,7 +33,7 @@ export default function About() {
                 <p className="text-white/60 text-xs uppercase tracking-widest">WAEC pass rate 2024</p>
               </div>
               <div className="relative overflow-hidden aspect-[4/5]">
-                <Image src="https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=600&q=85&auto=format&fit=crop" alt="School campus" fill sizes="(max-width:1024px) 40vw, 20vw" className="object-cover" loading="lazy" />
+                <Image src="/images/home/for-who/image2.png" alt="School campus" fill sizes="(max-width:1024px) 40vw, 20vw" className="object-cover" loading="lazy" />
               </div>
             </div>
 

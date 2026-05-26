@@ -57,6 +57,7 @@ export const teacherFormConfig: NewPersonFormConfig = {
       label: "Email Address",
       type: "email",
       placeholder: "Enter email address",
+      required: true,
     },
     {
       name: "employmentId",

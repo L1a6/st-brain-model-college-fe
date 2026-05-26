@@ -12,7 +12,7 @@ const events = [
     excerpt: "Students from JSS1 to SS3 present innovative projects in robotics, environmental science, and software development.",
     location: "School Assembly Hall",
     time: "9:00 AM — 3:00 PM",
-    img: "https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?w=600&q=80&auto=format&fit=crop",
+    img: "/images/features/image1.png",
     tagColor: "bg-navy-soft text-navy-mid",
   },
   {
@@ -24,7 +24,7 @@ const events = [
     excerpt: "The annual inter-house games bringing together all four houses in a week-long celebration of athleticism and school spirit.",
     location: "School Sports Complex",
     time: "8:00 AM",
-    img: "https://images.unsplash.com/photo-1519766304817-4f37bda74a26?w=600&q=80&auto=format&fit=crop",
+    img: "/images/features/image2.png",
     tagColor: "bg-navy-soft text-navy-mid",
   },
   {
@@ -36,7 +36,7 @@ const events = [
     excerpt: "A vibrant showcase of Nigeria's diverse cultures — food, fashion, music, and dance performed by students from every class.",
     location: "Main Quadrangle",
     time: "10:00 AM",
-    img: "https://images.unsplash.com/photo-1614251455009-7af9c86b4c0f?w=600&q=80&auto=format&fit=crop",
+    img: "/images/features/image3.png",
     tagColor: "bg-navy-soft text-navy-mid",
   },
 ]

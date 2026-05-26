@@ -12,9 +12,9 @@ export default function Hero() {
   return (
     <section className="relative w-full min-h-screen flex flex-col overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920&q=90&auto=format&fit=crop"
-          alt="St. Brain's Model College campus"
+          <Image
+            src="/images/home/about/image1.png"
+            alt="School campus"
           fill
           priority
           sizes="100vw"

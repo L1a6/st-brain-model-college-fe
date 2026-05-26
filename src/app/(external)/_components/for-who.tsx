@@ -2,10 +2,10 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
 const personas = [
-  { id: 1, title: "Students", tagline: "Learn, grow & thrive", desc: "Access your timetable, check results, track fee payments, and engage with quizzes — all from one student portal.", img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=85&auto=format&fit=crop", alt: "Students studying together", offset: false },
-  { id: 2, title: "Teachers", tagline: "Teach, inspire & record", desc: "Upload results, create assessments, manage your assigned classes and track each student's progress in real time.", img: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&q=85&auto=format&fit=crop", alt: "Teacher in class", offset: true },
-  { id: 3, title: "Parents", tagline: "Stay informed, stay close", desc: "Monitor your child's academic performance, fee status, attendance, and school announcements without stepping in.", img: "https://images.unsplash.com/photo-1616587226960-4a03badbe8bf?w=600&q=85&auto=format&fit=crop", alt: "Parent and child", offset: false },
-  { id: 4, title: "Management", tagline: "Oversee, decide & lead", desc: "Full administrative oversight — student records, payment ledgers, teacher assignments, results locking, and school settings.", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=85&auto=format&fit=crop", alt: "School administrator", offset: true },
+  { id: 1, title: "Students", tagline: "Learn, grow & thrive", desc: "Access your timetable, check results, track fee payments, and engage with quizzes — all from one student portal.", img: "/images/home/for-who/image1.png", alt: "Students studying together", offset: false },
+  { id: 2, title: "Teachers", tagline: "Teach, inspire & record", desc: "Upload results, create assessments, manage your assigned classes and track each student's progress in real time.", img: "/images/home/for-who/image2.png", alt: "Teacher in class", offset: true },
+  { id: 3, title: "Parents", tagline: "Stay informed, stay close", desc: "Monitor your child's academic performance, fee status, attendance, and school announcements without stepping in.", img: "/images/home/for-who/image3.png", alt: "Parent and child", offset: false },
+  { id: 4, title: "Management", tagline: "Oversee, decide & lead", desc: "Full administrative oversight — student records, payment ledgers, teacher assignments, results locking, and school settings.", img: "/images/home/for-who/image4.png", alt: "School administrator", offset: true },
 ]
 
 export default function ForWho() {

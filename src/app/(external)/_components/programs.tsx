@@ -7,7 +7,7 @@ const programs = [
     title: "Junior Secondary School",
     range: "JSS 1 — JSS 3",
     desc: "A strong foundational curriculum covering core subjects including Mathematics, English, Basic Science, Social Studies, CRS/IRS, Creative Arts, and more.",
-    img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80&auto=format&fit=crop",
+    img: "/images/home/for-who/image3.png",
     subjects: ["Mathematics", "English Language", "Basic Science", "Social Studies", "French"],
   },
   {
@@ -15,7 +15,7 @@ const programs = [
     title: "Senior Secondary School",
     range: "SS 1 — SS 3",
     desc: "Specialised tracks in Science, Arts, and Commercial — all preparing students for WAEC, NECO, and JAMB with distinction.",
-    img: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=80&auto=format&fit=crop",
+    img: "/images/features/image4.png",
     subjects: ["Physics", "Chemistry", "Biology", "Economics", "Literature"],
   },
   {
@@ -23,7 +23,7 @@ const programs = [
     title: "Sports & Co-Curricular",
     range: "All levels",
     desc: "Football, athletics, debate, cultural dance, science olympiad, coding club — we develop the student beyond the classroom.",
-    img: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?w=600&q=80&auto=format&fit=crop",
+    img: "/images/features/image5.png",
     subjects: ["Football", "Athletics", "Debate Club", "Science Olympiad", "Coding Club"],
   },
 ]
