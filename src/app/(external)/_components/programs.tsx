@@ -7,7 +7,7 @@ const programs = [
     title: "Junior Secondary School",
     range: "JSS 1 — JSS 3",
     desc: "A strong foundational curriculum covering core subjects including Mathematics, English, Basic Science, Social Studies, CRS/IRS, Creative Arts, and more.",
-    img: "/images/home/for-who/image3.png",
+    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=90&auto=format&fit=crop",
     subjects: ["Mathematics", "English Language", "Basic Science", "Social Studies", "French"],
   },
   {
@@ -30,9 +30,9 @@ const programs = [
 
 export default function Programs() {
   return (
-    <section id="academics" className="bg-canvas-white py-20 lg:py-28 overflow-hidden">
+      <section id="academics" className="bg-canvas-white py-12 lg:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 reveal">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 reveal">
           <div className="max-w-xl">
             <span className="section-eyebrow mb-5">Academics</span>
             <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight">
@@ -61,7 +61,7 @@ export default function Programs() {
 
                   <div className="p-7 flex flex-col gap-4 flex-1">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 bg-crimson-soft flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 bg-crimson-soft flex items-center justify-center shrink-0">
                         <Icon size={16} className="text-crimson" />
                       </div>
                       <p className="font-display text-lg font-semibold text-navy">{program.title}</p>

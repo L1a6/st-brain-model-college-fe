@@ -8,21 +8,21 @@ import { QuizAPI } from '@/lib/quiz'
 import type { Quiz, QuizSubmission } from '@/types/quiz'
 
 const SUBJECT_IMAGES: Record<string, string> = {
-  mathematics: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80',
-  english: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80',
-  physics: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80',
-  chemistry: 'https://images.unsplash.com/photo-1532634993-15f421e42ec0?auto=format&fit=crop&w=900&q=80',
-  biology: 'https://images.unsplash.com/photo-1530210124550-912dc1381cb8?auto=format&fit=crop&w=900&q=80',
-  economics: 'https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=900&q=80',
-  history: 'https://images.unsplash.com/photo-1507842217343-583f20270319?auto=format&fit=crop&w=900&q=80',
-  literature: 'https://images.unsplash.com/photo-1507842217343-583f20270319?auto=format&fit=crop&w=900&q=80',
-  'computer-science': 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80',
-  geography: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=900&q=80',
+  mathematics: 'https://images.unsplash.com/photo-1596496050827-8299e0220de1?auto=format&fit=crop&w=900&q=80',
+  english: 'https://images.unsplash.com/photo-1455885666463-9efc59087de6?auto=format&fit=crop&w=900&q=80',
+  physics: 'https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?auto=format&fit=crop&w=900&q=80',
+  chemistry: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=900&q=80',
+  biology: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&w=900&q=80',
+  economics: 'https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=900&q=80',
+  history: 'https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=900&q=80',
+  literature: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80',
+  'computer-science': 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80',
+  geography: 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=900&q=80',
 }
 
 function getSubjectImage(subject: string): string {
   const key = subject.toLowerCase().replace(/\s+/g, '-')
-  return SUBJECT_IMAGES[key] || 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80'
+  return SUBJECT_IMAGES[key] || 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=900&q=80'
 }
 
 function TrendBadge({ label, value }: { label: string; value: string }) {
@@ -159,7 +159,7 @@ export default function StudentQuizzesPage() {
                 <h2 className="text-2xl font-bold">{activeQuiz.title}</h2>
                 <p className="text-sm opacity-90 mt-2">{activeQuiz.subject} · {activeQuiz.questions.length} questions</p>
               </div>
-              <div className="text-right flex-shrink-0">
+              <div className="text-right shrink-0">
                 <div className="text-3xl font-bold text-amber-400">
                   {minutes}:{seconds}
                 </div>
@@ -292,7 +292,7 @@ export default function StudentQuizzesPage() {
         <div className="bg-white rounded-2xl border border-canvas-border overflow-hidden shadow-lg">
           {/* Hero Image */}
           <div
-            className="min-h-[240px] flex items-end p-6 text-white"
+            className="min-h-60 flex items-end p-6 text-white"
             style={{
               backgroundImage: `linear-gradient(180deg, rgba(11,18,32,0.18), rgba(11,18,32,0.8)), url(${getSubjectImage(activeQuiz.subject)})`,
               backgroundSize: 'cover',
@@ -417,7 +417,7 @@ export default function StudentQuizzesPage() {
               <div key={quiz.id} className="bg-white rounded-2xl border border-canvas-border overflow-hidden hover:shadow-md transition-shadow">
                 {/* Quiz Image */}
                 <div
-                  className="relative min-h-[160px] flex justify-between items-start p-4 text-white"
+                  className="relative min-h-40 flex justify-between items-start p-4 text-white"
                   style={{
                     backgroundImage: `linear-gradient(180deg, rgba(11,18,32,0.06), rgba(11,18,32,0.6)), url(${getSubjectImage(quiz.subject)})`,
                     backgroundSize: 'cover',

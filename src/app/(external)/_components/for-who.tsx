@@ -10,9 +10,9 @@ const personas = [
 
 export default function ForWho() {
   return (
-    <section className="bg-canvas-white py-20 lg:py-28 overflow-hidden">
+      <section className="bg-canvas-white py-12 lg:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="max-w-2xl mb-16 lg:mb-20 reveal">
+        <div className="max-w-2xl mb-10 lg:mb-12 reveal">
           <span className="section-eyebrow mb-5">Who We Serve</span>
           <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight mb-5">
             A portal built for<br />
@@ -45,7 +45,7 @@ export default function ForWho() {
           ))}
         </div>
 
-        <div className="mt-16 pt-8 border-t border-canvas-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 reveal">
+        <div className="mt-12 pt-6 border-t border-canvas-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 reveal">
           <p className="text-sm text-ink-3 max-w-lg">
             All roles are securely separated with role-based access control. Students see only their data; teachers manage only their classes.
           </p>

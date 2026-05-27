@@ -19,7 +19,7 @@ const testimonials = [
     type: "Teacher",
     title: '"Uploading and managing results has never been this seamless."',
     content: "In my 14 years of teaching, I've seen many school systems come and go. St. Brain's portal is genuinely the most intuitive I've used. I can enter scores for my entire SS3A Mathematics class in under 5 minutes, and students see their results instantly. That kind of efficiency is rare.",
-    img: "/assets/images/auth/user-icon.png",
+    img: "/images/home/for-who/image1.png",
     accent: "bg-crimson",
   },
   {
@@ -52,13 +52,13 @@ const typeColors: Record<string, string> = {
 
 export default function Testimonials() {
   return (
-    <section className="bg-canvas-white py-20 lg:py-28 overflow-hidden">
+    <section className="bg-canvas-white py-12 lg:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="max-w-2xl mb-16 reveal">
+        <div className="max-w-2xl mb-10 lg:mb-12 reveal">
           <span className="section-eyebrow mb-5">Testimonials</span>
           <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight mb-4">
-            What our community<br />
-            <span className="text-crimson italic">says about us.</span>
+            Voices that echo our values,<br />
+            <span className="text-crimson italic">from class to campus.</span>
           </h2>
           <p className="text-ink-3 text-lg leading-relaxed">
             Real words from the students, teachers, and parents who live the St. Brain's experience every day.

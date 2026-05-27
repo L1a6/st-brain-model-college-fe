@@ -13,7 +13,7 @@ const pillars = [
 
 export default function About() {
   return (
-    <section id="about" className="bg-canvas py-20 lg:py-28 overflow-hidden">
+    <section id="about" className="bg-canvas py-16 lg:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div className="relative grid grid-cols-2 gap-5 reveal">
