@@ -201,11 +201,29 @@ const buildMockApiResponse = (path: string, config: AxiosRequestConfig): unknown
     saveMockUser(user)
 
     if (normalizedPath === "/api/auth/superadmin/login") {
-      return { message: "Login successful" }
+      return {
+        message: "Login successful",
+        user: {
+          id: user.id,
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          role: user.role,
+        },
+        session_id: "sess-mock-001",
+      }
     }
 
     return {
       message: "Login successful",
+      user: {
+        id: user.id,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        role: user.role,
+      },
+      session_id: "sess-mock-001",
       data: {
         user: {
           id: user.id,
