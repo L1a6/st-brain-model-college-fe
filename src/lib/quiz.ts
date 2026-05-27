@@ -78,4 +78,37 @@ export const QuizAPI = {
       method: 'POST',
       data: payload,
     }, true),
+  /**
+   * Get quizzes created by a teacher
+   */
+  getTeacherQuizzes: (teacherId: string, params?: { page?: number; limit?: number }) =>
+    apiFetch<ResponsePack<{ items: any[]; meta?: any }>>(
+      '/quizzes',
+      {
+        method: 'GET',
+        params: { teacher_id: teacherId, ...(params || {}) },
+      },
+      true
+    ),
+
+  /**
+   * Update a quiz
+   */
+  updateQuiz: (quizId: string, payload: any) =>
+    apiFetch<ResponsePack<any>>(`/quizzes/${quizId}`, {
+      method: 'PUT',
+      data: payload,
+    }, true),
+
+  /**
+   * Delete a quiz
+   */
+  deleteQuiz: (quizId: string) =>
+    apiFetch<ResponsePack<null>>(`/quizzes/${quizId}`, { method: 'DELETE' }, true),
+
+  /**
+   * Get submissions for a quiz
+   */
+  getQuizSubmissions: (quizId: string) =>
+    apiFetch<ResponsePack<{ submissions: any[] }>>(`/quiz-submissions`, { method: 'GET', params: { quiz_id: quizId } }, true),
 }
