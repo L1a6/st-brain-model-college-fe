@@ -38,7 +38,7 @@ export default function StudentPaymentsPage() {
     )
   }
 
-  const feeBreakdown = feeDetails?.data?.fee_breakdown || []
+  const feeBreakdown = feeDetails?.data?.data?.fee_breakdown || []
   const totalExpected = feeBreakdown.reduce((sum, f) => sum + f.amount, 0)
   const totalPaid = feeBreakdown.reduce((sum, f) => sum + f.amount_paid, 0)
   const totalRemaining = totalExpected - totalPaid
