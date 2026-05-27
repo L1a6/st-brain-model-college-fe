@@ -29,7 +29,7 @@ export default function TeacherQuizzesPage() {
   const { data: terms } = useGetTerms()
   // Sonner toast
 
-  const classes = classesData?.data || []
+  const classes = classesData || []
 
   const [view, setView] = useState<'list' | 'create'>('list')
   const [selectedClass, setSelectedClass] = useState<string>('')
