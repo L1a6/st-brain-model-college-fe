@@ -36,7 +36,7 @@ export default function PaymentDetailPage() {
     if (!category || !feeDetails) return null
 
     const categoryInfo = PAYMENT_CATEGORIES[category]
-    const feeBreakdown = feeDetails.data?.fee_breakdown || []
+    const feeBreakdown = feeDetails.data?.data?.fee_breakdown || []
     const feeItem = feeBreakdown.find(f => f.component_name.toLowerCase() === category.replace(/_/g, ' '))
 
     if (!feeItem) return null
@@ -45,7 +45,7 @@ export default function PaymentDetailPage() {
     const paid = feeItem.amount_paid || 0
     const remaining = Math.max(amount - paid, 0)
     const isPaid = remaining <= 0 && amount > 0
-    const paymentHistory = feeDetails.data?.payment_history?.filter(p => 
+    const paymentHistory = feeDetails.data?.data?.payment_history?.filter(p => 
       p.fee_component.toLowerCase().includes(category.replace(/_/g, ' '))
     ) || []
 
@@ -98,7 +98,7 @@ export default function PaymentDetailPage() {
         </div>
         <Link
           href="/student/dashboard/payments"
-          className="px-4 py-2 bg-canvas border border-canvas-border rounded-lg text-navy font-semibold text-sm hover:bg-gold-muted transition-colors flex-shrink-0"
+          className="px-4 py-2 bg-canvas border border-canvas-border rounded-lg text-navy font-semibold text-sm hover:bg-gold-muted transition-colors shrink-0"
         >
           ← Back
         </Link>
@@ -112,7 +112,7 @@ export default function PaymentDetailPage() {
             alt={details.info.label}
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy/40 to-navy/80" />
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-navy/40 to-navy/80" />
           <div className="absolute left-6 top-6">
             <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
               details.isPaid ? 'bg-emerald-500 text-white' : details.paid > 0 ? 'bg-amber-500 text-white' : 'bg-slate-500 text-white'
@@ -197,7 +197,7 @@ export default function PaymentDetailPage() {
                     {new Date(payment.payment_date).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' })} · {payment.transaction_reference}
                   </p>
                 </div>
-                <div className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold flex-shrink-0">
+                <div className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-semibold shrink-0">
                   Paid
                 </div>
               </div>

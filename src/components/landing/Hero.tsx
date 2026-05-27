@@ -8,8 +8,8 @@ export default function Hero() {
     <section className="relative overflow-hidden bg-navy text-white min-h-[60vh] sm:min-h-[68vh] lg:min-h-[92vh]">
       <div className="absolute inset-0 pointer-events-none">
         <Image
-          src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1800&q=90&auto=format&fit=crop"
-          alt="students in a school setting"
+          src="/images/home/about/image1.png"
+          alt="students learning together"
           fill
           priority
           sizes="100vw"

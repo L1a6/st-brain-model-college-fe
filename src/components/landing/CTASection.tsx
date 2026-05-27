@@ -7,8 +7,8 @@ export default function CTASection() {
     <section className="relative overflow-hidden py-20 lg:py-24">
       <div className="absolute inset-0">
         <Image
-          src="/images/home/about/image1.png"
-          alt="classroom interior"
+          src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1800&q=90&auto=format&fit=crop"
+          alt="students in a school setting"
           fill
           sizes="100vw"
           className="object-cover object-center"
