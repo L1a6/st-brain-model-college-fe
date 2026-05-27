@@ -49,7 +49,7 @@ export default function TeacherQuizzesPage() {
 
   const { data: teacherQuizzesData, isLoading: isLoadingQuizzes } = useQuery({
     queryKey: ['teacher-quizzes', teacher?.teacher_id],
-    queryFn: () => (teacher?.teacher_id ? QuizAPI.getTeacherQuizzes(teacher.teacher_id) : Promise.resolve({ data: { items: [] } })),
+    queryFn: () => QuizAPI.getTeacherQuizzes(teacher!.teacher_id),
     enabled: !!teacher?.teacher_id,
   })
 
