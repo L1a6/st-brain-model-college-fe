@@ -58,7 +58,7 @@ const getQuizItems = (value: unknown): any[] => {
 }
 
 const TeacherQuizzesPage = () => {
-  const { user } = useAuthUser()
+  const { data: user } = useAuthUser()
   const queryClient = useQueryClient()
   const teacherId = (user as { teacher_id?: string; id?: string } | null)?.teacher_id ?? (user as { id?: string } | null)?.id ?? ""
 
