@@ -24,6 +24,7 @@ const emptyQ = (): QForm => ({ text: '', type: 'multiple_choice', options: ['', 
 
 export default function TeacherQuizzesPage() {
   const { data: teacher } = useAuthUser()
+  const teacherId = teacher?.teacher_id ?? ''
   const { data: classesData } = useGetTeacherAssignedClasses()
   const { data: activeSession } = useActiveAcademicSessionFromList()
   const { data: terms } = useGetTerms()
@@ -48,9 +49,9 @@ export default function TeacherQuizzesPage() {
   const students = (studentsQuery.data as any)?.data || []
 
   const { data: teacherQuizzesData, isLoading: isLoadingQuizzes } = useQuery({
-    queryKey: ['teacher-quizzes', teacher?.teacher_id],
-    queryFn: () => QuizAPI.getTeacherQuizzes(teacher!.teacher_id),
-    enabled: !!teacher?.teacher_id,
+    queryKey: ['teacher-quizzes', teacherId],
+    queryFn: () => QuizAPI.getTeacherQuizzes(teacherId),
+    enabled: !!teacherId,
   })
 
   const teacherQuizzes = (teacherQuizzesData as any)?.data?.items || []
@@ -116,7 +117,7 @@ export default function TeacherQuizzesPage() {
         toast.success('Quiz created and published.')
       }
 
-      qc.invalidateQueries({ queryKey: ['teacher-quizzes', teacher?.teacher_id] })
+      qc.invalidateQueries({ queryKey: ['teacher-quizzes', teacherId] })
       setView('list')
       resetForm()
     } catch (err: any) {
@@ -240,7 +241,7 @@ export default function TeacherQuizzesPage() {
                         try {
                           await QuizAPI.deleteQuiz(q.id)
                           toast.success('Quiz deleted')
-                          qc.invalidateQueries({ queryKey: ['teacher-quizzes', teacher?.teacher_id] })
+                          qc.invalidateQueries({ queryKey: ['teacher-quizzes', teacherId] })
                         } catch (err) {
                           toast.error('Failed to delete quiz')
                         }
