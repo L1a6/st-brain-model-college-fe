@@ -27,7 +27,10 @@ const readStoredAuthSession = (): StoredAuthSession | null => {
   try {
     const parsed = JSON.parse(rawValue) as Partial<StoredAuthSession>
     if (typeof parsed.userId === "string" && typeof parsed.sessionId === "string") {
-      return parsed
+      return {
+        userId: parsed.userId,
+        sessionId: parsed.sessionId,
+      }
     }
   } catch {
     return null
