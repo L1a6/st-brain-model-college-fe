@@ -9,15 +9,13 @@ import { useStudentAuth } from "@/hooks/use-auth-user"
 import { PAYMENT_CATEGORIES, type PaymentCategory } from "@/types/portal"
 
 const CATEGORY_IMAGES: Record<PaymentCategory, string> = {
-  school_fees: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1400&q=80",
-  textbooks: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1400&q=80",
-  uniform: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702f?auto=format&fit=crop&w=1400&q=80",
-  graduation: "https://images.unsplash.com/photo-1509099836639-18ba2b8e0d3b?auto=format&fit=crop&w=1400&q=80",
-  bus_fee: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1400&q=80",
-  exam_fee: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1400&q=80",
+  school_fees: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1600&q=80",
+  textbooks: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1600&q=80",
+  uniform: "https://images.unsplash.com/photo-1523580846011-d3a5bc25702f?auto=format&fit=crop&w=1600&q=80",
+  graduation: "https://images.unsplash.com/photo-1509099836639-18ba2b8e0d3b?auto=format&fit=crop&w=1600&q=80",
+  bus_fee: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1600&q=80",
+  exam_fee: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1600&q=80",
 }
-
-const PAYMENT_IMAGE_FALLBACK = "/assets/Hero-img%20(2).png"
 
 export default function StudentPaymentsPage() {
   const { studentId } = useStudentAuth()
@@ -129,9 +127,6 @@ export default function StudentPaymentsPage() {
                 <img
                   src={CATEGORY_IMAGES[item.category]}
                   alt={item.info.label}
-                  onError={(event) => {
-                    event.currentTarget.src = PAYMENT_IMAGE_FALLBACK
-                  }}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/82" />
