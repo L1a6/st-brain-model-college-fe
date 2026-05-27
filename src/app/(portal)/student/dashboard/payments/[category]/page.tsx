@@ -17,6 +17,8 @@ const CATEGORY_IMAGES: Record<PaymentCategory, string> = {
   exam_fee: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1400&q=80',
 }
 
+const PAYMENT_IMAGE_FALLBACK = '/assets/Hero-img%20(2).png'
+
 function getPaymentDate(payment: any): string {
   const rawDate = payment.payment_date || payment.date || payment.created_at || payment.createdAt
   return rawDate ? new Date(rawDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Pending'
@@ -115,7 +117,14 @@ export default function PaymentDetailPage() {
 
       <div className="mb-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)]">
         <div className="relative min-h-72 md:min-h-[360px]">
-          <img src={CATEGORY_IMAGES[category]} alt={details.info.label} className="absolute inset-0 h-full w-full object-cover" />
+          <img
+            src={CATEGORY_IMAGES[category]}
+            alt={details.info.label}
+            onError={(event) => {
+              event.currentTarget.src = PAYMENT_IMAGE_FALLBACK
+            }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/86" />
           <div className="absolute left-5 top-5 flex flex-wrap gap-2">
             <span className={`rounded-full px-3 py-1 text-xs font-semibold ${details.isPaid ? 'bg-emerald-500 text-white' : details.paid > 0 ? 'bg-amber-500 text-white' : 'bg-slate-500 text-white'}`}>
@@ -131,19 +140,19 @@ export default function PaymentDetailPage() {
           </div>
         </div>
 
-        <div className="p-6 md:p-8">
-          <div className="grid gap-3 md:grid-cols-3 mb-6">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+        <div className="p-4 md:p-6">
+          <div className="mb-5 grid gap-3 md:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3.5">
               <p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Paid</p>
-              <p className="text-2xl font-bold text-[#0A1F44]">₦{details.paid.toLocaleString()}</p>
+              <p className="text-xl font-bold text-[#0A1F44]">₦{details.paid.toLocaleString()}</p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3.5">
               <p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Remaining</p>
-              <p className="text-2xl font-bold text-[#0A1F44]">₦{details.remaining.toLocaleString()}</p>
+              <p className="text-xl font-bold text-[#0A1F44]">₦{details.remaining.toLocaleString()}</p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3.5">
               <p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Progress</p>
-              <p className="text-2xl font-bold text-[#0A1F44]">{details.pct}%</p>
+              <p className="text-xl font-bold text-[#0A1F44]">{details.pct}%</p>
             </div>
           </div>
 
@@ -162,13 +171,13 @@ export default function PaymentDetailPage() {
 
           <div className="flex flex-wrap gap-3">
             {!details.isPaid && (
-              <button className="rounded-2xl bg-[#0A1F44] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A59]">
+              <button className="rounded-2xl bg-[#0A1F44] px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0E2A59]">
                 Pay ₦{details.remaining.toLocaleString()}
               </button>
             )}
             <Link
               href="/student/dashboard/payments"
-              className="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-[#0A1F44] transition-colors hover:bg-[#0A1F44]/5"
+              className="rounded-2xl border border-slate-200 bg-white px-6 py-2.5 text-sm font-semibold text-[#0A1F44] transition-colors hover:bg-[#0A1F44]/5"
             >
               Back to overview
             </Link>

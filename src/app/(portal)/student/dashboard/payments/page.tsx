@@ -17,6 +17,8 @@ const CATEGORY_IMAGES: Record<PaymentCategory, string> = {
   exam_fee: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1400&q=80",
 }
 
+const PAYMENT_IMAGE_FALLBACK = "/assets/Hero-img%20(2).png"
+
 export default function StudentPaymentsPage() {
   const { studentId } = useStudentAuth()
   const [term, setTerm] = useState("First Term")
@@ -127,6 +129,9 @@ export default function StudentPaymentsPage() {
                 <img
                   src={CATEGORY_IMAGES[item.category]}
                   alt={item.info.label}
+                  onError={(event) => {
+                    event.currentTarget.src = PAYMENT_IMAGE_FALLBACK
+                  }}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/82" />
@@ -144,15 +149,15 @@ export default function StudentPaymentsPage() {
                 </div>
               </div>
 
-              <div className="p-6 md:p-7">
+              <div className="p-4 md:p-5">
                 <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                   <div className="max-w-2xl">
-                    <h3 className="mb-2 font-display text-2xl font-semibold text-[#0A1F44]">{item.info.label}</h3>
-                    <p className="text-sm leading-relaxed text-slate-600">{item.info.description}</p>
+                    <h3 className="mb-2 font-display text-xl font-semibold text-[#0A1F44] md:text-2xl">{item.info.label}</h3>
+                    <p className="text-sm leading-relaxed text-slate-600 line-clamp-2">{item.info.description}</p>
                   </div>
-                  <div className="shrink-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-right">
+                  <div className="shrink-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2 text-right">
                     <p className="mb-1 text-xs uppercase tracking-[0.2em] text-slate-500">Paid</p>
-                    <p className="text-xl font-bold text-[#0A1F44]">₦{item.paid.toLocaleString()}</p>
+                    <p className="text-lg font-bold text-[#0A1F44]">₦{item.paid.toLocaleString()}</p>
                   </div>
                 </div>
 
@@ -164,12 +169,12 @@ export default function StudentPaymentsPage() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={detailHref}
-                    className="flex-1 min-w-[180px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0A1F44] transition-colors hover:border-[#0A1F44]/30 hover:bg-[#0A1F44]/5"
+                    className="flex-1 min-w-[180px] rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#0A1F44] transition-colors hover:border-[#0A1F44]/30 hover:bg-[#0A1F44]/5"
                   >
                     View details
                   </Link>
                   <button
-                    className={`flex-1 min-w-[220px] rounded-2xl px-4 py-3 text-sm font-semibold text-white transition-colors ${item.isPaid ? "cursor-default bg-emerald-500" : "bg-[#0A1F44] hover:bg-[#0E2A59]"}`}
+                    className={`flex-1 min-w-[220px] rounded-2xl px-4 py-2.5 text-sm font-semibold text-white transition-colors ${item.isPaid ? "cursor-default bg-emerald-500" : "bg-[#0A1F44] hover:bg-[#0E2A59]"}`}
                     disabled={item.isPaid}
                   >
                     {item.isPaid ? "Payment completed" : `Pay ₦${item.remaining.toLocaleString()}`}
