@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useStudentAuth } from '@/hooks/use-auth-user'
 import { useQuery } from '@tanstack/react-query'
@@ -39,107 +39,165 @@ export default function StudentPaymentsPage() {
   }
 
   const feeBreakdown = feeDetails?.data?.data?.fee_breakdown || []
-  const totalExpected = feeBreakdown.reduce((sum, f) => sum + f.amount, 0)
-  const totalPaid = feeBreakdown.reduce((sum, f) => sum + f.amount_paid, 0)
-  const totalRemaining = totalExpected - totalPaid
+
+  const paymentCards = useMemo(() => {
+    const feeMap = new Map(
+      feeBreakdown.map((feeItem) => {
+        const rawCategory = feeItem.component_name.toLowerCase().replace(/\s+/g, '_') as PaymentCategory
+        const category = rawCategory in PAYMENT_CATEGORIES ? rawCategory : 'school_fees'
+
+        return [
+          category,
+          {
+            amount: feeItem.amount || 0,
+            paid: feeItem.amount_paid || 0,
+            sourceLabel: feeItem.component_name,
+          },
+        ] as const
+      })
+    )
+
+    return (Object.entries(PAYMENT_CATEGORIES) as Array<[PaymentCategory, (typeof PAYMENT_CATEGORIES)[PaymentCategory]]>).map(
+      ([category, info]) => {
+        const feeItem = feeMap.get(category)
+        const amount = feeItem?.amount || 0
+        const paid = feeItem?.paid || 0
+        const remaining = Math.max(amount - paid, 0)
+        const pct = amount > 0 ? Math.round((paid / amount) * 100) : 0
+        const isPaid = pct >= 100 && amount > 0
+        const isPartial = pct > 0 && pct < 100
+
+        return {
+          category,
+          info,
+          amount,
+          paid,
+          remaining,
+          pct,
+          isPaid,
+          isPartial,
+          hasRecord: !!feeItem,
+        }
+      }
+    )
+  }, [feeBreakdown])
+
+  const totalExpected = paymentCards.reduce((sum, item) => sum + item.amount, 0)
+  const totalPaid = paymentCards.reduce((sum, item) => sum + item.paid, 0)
+  const totalRemaining = Math.max(totalExpected - totalPaid, 0)
+  const paidCount = paymentCards.filter((item) => item.isPaid).length
+  const partialCount = paymentCards.filter((item) => item.isPartial).length
+  const pendingCount = paymentCards.length - paidCount - partialCount
 
   return (
-    <div className="min-h-screen bg-white p-6">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-navy mb-2">Payments</h1>
-        <p className="text-ink-3">Manage all your school fees and payment history</p>
-      </div>
+    <div className="min-h-screen bg-white p-6 md:p-8 lg:p-10">
+      <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-[#0A1F44] via-[#12396D] to-[#0E234D] text-white shadow-[0_24px_70px_rgba(10,31,68,0.18)] mb-8">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_28%)]" />
+        <div className="relative grid gap-8 lg:grid-cols-[1.3fr_0.8fr] p-6 md:p-8 lg:p-10">
+          <div>
+            <p className="text-xs md:text-sm uppercase tracking-[0.32em] text-white/70 mb-4">Student Payments</p>
+            <h1 className="font-display text-3xl md:text-5xl font-light leading-tight mb-4">
+              Manage every fee category
+              <span className="block text-white/80 italic">from school fees to exam fees.</span>
+            </h1>
+            <p className="max-w-2xl text-sm md:text-base text-white/80 leading-relaxed">
+              View each payment category with its own image, status, and progress so you always know what is due, what has been paid, and what is left.
+            </p>
+          </div>
 
-      {/* Summary Card */}
-      <div className="bg-linear-to-r from-navy to-navy-mid rounded-2xl p-6 text-white mb-8 shadow-lg">
-        <div className="grid grid-cols-3 gap-6">
-          <div>
-            <p className="text-white/80 text-sm mb-1">Total Due</p>
-            <p className="text-2xl font-bold">₦{totalExpected.toLocaleString()}</p>
-          </div>
-          <div>
-            <p className="text-white/80 text-sm mb-1">Paid</p>
-            <p className="text-2xl font-bold text-emerald-300">✓ ₦{totalPaid.toLocaleString()}</p>
-          </div>
-          <div>
-            <p className="text-white/80 text-sm mb-1">Remaining</p>
-            <p className="text-2xl font-bold text-crimson-light">₦{totalRemaining.toLocaleString()}</p>
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Total due</p>
+              <p className="text-2xl font-bold">₦{totalExpected.toLocaleString()}</p>
+            </div>
+            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Paid</p>
+              <p className="text-2xl font-bold text-emerald-300">₦{totalPaid.toLocaleString()}</p>
+            </div>
+            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Remaining</p>
+              <p className="text-2xl font-bold text-amber-300">₦{totalRemaining.toLocaleString()}</p>
+            </div>
+            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
+              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Categories</p>
+              <p className="text-2xl font-bold">{paymentCards.length}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Fee Categories */}
+      <div className="flex flex-wrap gap-3 mb-6">
+        <div className="rounded-full bg-[#0A1F44]/8 px-4 py-2 text-sm font-semibold text-[#0A1F44]">{paidCount} paid</div>
+        <div className="rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700">{partialCount} partial</div>
+        <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">{pendingCount} pending</div>
+      </div>
+
       <div className="grid gap-6">
-        {feeBreakdown.map((feeItem) => {
-          const category = (feeItem.component_name.toLowerCase().replace(/\s+/g, '_') as PaymentCategory) || 'school_fees'
-          const categoryInfo = PAYMENT_CATEGORIES[category] || { label: feeItem.component_name, description: '' }
-          const paid = feeItem.amount_paid || 0
-          const amount = feeItem.amount || 0
-          const remaining = Math.max(amount - paid, 0)
-          const pct = amount > 0 ? Math.round((paid / amount) * 100) : 0
-          const isPaid = pct >= 100
+        {paymentCards.map((item) => {
+          const statusLabel = item.isPaid ? 'Paid' : item.isPartial ? 'Partial' : 'Pending'
+          const statusClass = item.isPaid ? 'bg-emerald-500 text-white' : item.isPartial ? 'bg-amber-500 text-white' : 'bg-slate-500 text-white'
+          const detailHref = `/student/dashboard/payments/${item.category}`
 
           return (
-            <section key={feeItem.component_name} className="bg-white rounded-2xl overflow-hidden border border-canvas-border shadow-sm hover:shadow-md transition-shadow">
-              <div className="relative min-h-[180px]">
+            <section key={item.category} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(10,31,68,0.12)]">
+              <div className="relative min-h-52 md:min-h-60">
                 <img
-                  src={CATEGORY_IMAGES[category]}
-                  alt={categoryInfo.label}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  src={CATEGORY_IMAGES[item.category]}
+                  alt={item.info.label}
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-navy/40 to-navy/70" />
-                <div className="absolute left-6 top-6">
-                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                    isPaid ? 'bg-emerald-500 text-white' : pct > 0 ? 'bg-amber-500 text-white' : 'bg-slate-500 text-white'
-                  }`}>
-                    {isPaid ? 'Paid' : pct > 0 ? 'Partial' : 'Pending'}
-                  </div>
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/82" />
+                <div className="absolute left-5 top-5 flex flex-wrap items-center gap-2">
+                  <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${statusClass}`}>{statusLabel}</span>
+                  {item.hasRecord && (
+                    <span className="inline-flex rounded-full bg-white/12 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                      {item.pct}% complete
+                    </span>
+                  )}
                 </div>
-                <div className="absolute right-6 bottom-6 text-white text-right">
-                  <div className="text-3xl font-bold">₦{amount.toLocaleString()}</div>
-                  <div className="text-sm opacity-90">Total fee</div>
+                <div className="absolute right-5 bottom-5 text-right text-white">
+                  <div className="text-3xl md:text-4xl font-bold">₦{item.amount.toLocaleString()}</div>
+                  <div className="text-xs uppercase tracking-[0.24em] text-white/75 mt-1">{item.info.label}</div>
                 </div>
               </div>
 
-              <div className="p-6">
-                <div className="flex justify-between items-start gap-4 mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-navy">{categoryInfo.label}</h3>
-                    <p className="text-sm text-ink-3 mt-1">{categoryInfo.description}</p>
+              <div className="p-6 md:p-7">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-5">
+                  <div className="max-w-2xl">
+                    <h3 className="font-display text-2xl text-[#0A1F44] font-semibold mb-2">{item.info.label}</h3>
+                    <p className="text-sm leading-relaxed text-slate-600">{item.info.description}</p>
                   </div>
-                  <div className="text-right shrink-0">
-                    <p className="text-xs text-ink-3">Paid</p>
-                    <p className="text-lg font-bold text-navy">₦{paid.toLocaleString()}</p>
+                  <div className="shrink-0 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-right">
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Paid</p>
+                    <p className="text-xl font-bold text-[#0A1F44]">₦{item.paid.toLocaleString()}</p>
                   </div>
                 </div>
 
-                <div className="flex justify-between gap-2 text-sm text-ink-3 mb-3">
-                  <span>Remaining: ₦{remaining.toLocaleString()}</span>
-                  <span className="font-semibold">{pct}% complete</span>
+                <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-600 mb-3">
+                  <span>Remaining: ₦{item.remaining.toLocaleString()}</span>
+                  <span className="font-semibold text-[#0A1F44]">{item.pct}% complete</span>
                 </div>
 
-                <div className="h-2 bg-canvas-border rounded-full overflow-hidden mb-6">
-                  <div 
-                    className={`h-full transition-all ${isPaid ? 'bg-emerald-500' : 'bg-amber-500'}`}
-                    style={{ width: `${pct}%` }}
+                <div className="h-2 rounded-full bg-slate-200 overflow-hidden mb-6">
+                  <div
+                    className={`h-full rounded-full transition-all ${item.isPaid ? 'bg-emerald-500' : item.isPartial ? 'bg-amber-500' : 'bg-[#0A1F44]'}`}
+                    style={{ width: `${item.pct}%` }}
                   />
                 </div>
 
-                <div className="flex gap-3 flex-wrap">
+                <div className="flex flex-wrap gap-3">
                   <Link
-                    href={`/student/dashboard/payments/${category}`}
-                    className="flex-1 min-w-40 text-center px-4 py-2.5 rounded-lg border border-canvas-border text-navy font-semibold text-sm hover:bg-canvas transition-colors"
+                    href={detailHref}
+                    className="flex-1 min-w-[180px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0A1F44] transition-colors hover:border-[#0A1F44]/30 hover:bg-[#0A1F44]/5"
                   >
                     View details
                   </Link>
-                  {!isPaid && (
-                    <button
-                      className="flex-1 min-w-[200px] px-4 py-2.5 rounded-lg bg-crimson text-white font-semibold text-sm hover:bg-crimson-deep transition-colors"
-                    >
-                      Pay ₦{remaining.toLocaleString()}
-                    </button>
-                  )}
+                  <button
+                    className={`flex-1 min-w-[220px] rounded-2xl px-4 py-3 text-sm font-semibold text-white transition-colors ${item.isPaid ? 'cursor-default bg-emerald-500' : 'bg-[#0A1F44] hover:bg-[#0E2A59]'}`}
+                    disabled={item.isPaid}
+                  >
+                    {item.isPaid ? 'Payment completed' : `Pay ₦${item.remaining.toLocaleString()}`}
+                  </button>
                 </div>
               </div>
             </section>
