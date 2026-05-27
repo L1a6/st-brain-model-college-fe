@@ -5,7 +5,7 @@ import ScrollReveal from "./ScrollReveal"
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy text-white min-h-[60vh] sm:min-h-[68vh] lg:min-h-[92vh]">
+    <section className="relative overflow-hidden bg-navy text-white min-h-[72vh] sm:min-h-[78vh] lg:min-h-[92vh]">
       <div className="absolute inset-0 pointer-events-none">
         <Image
           src="/images/home/about/image1.png"
@@ -18,7 +18,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(11,18,32,0.28)_0%,rgba(11,18,32,0.16)_48%,rgba(11,18,32,0.08)_100%)]" />
       </div>
 
-      <div className="relative z-10 container min-h-[60vh] sm:min-h-[68vh] lg:min-h-[92vh] flex items-end py-12 sm:py-16 lg:py-28">
+      <div className="relative z-10 container min-h-[72vh] sm:min-h-[78vh] lg:min-h-[92vh] flex items-end py-12 sm:py-16 lg:py-28">
         <ScrollReveal>
           <div className="max-w-2xl pb-4 sm:pb-0">
             <div className="flex items-center gap-3 mb-4 sm:mb-5">

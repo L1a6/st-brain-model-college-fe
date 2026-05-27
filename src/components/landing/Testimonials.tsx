@@ -22,7 +22,7 @@ const testimonials = [
       "The administration backs us fully. I have the tools, the time and the support to teach at the highest level. Watching students who once feared algebra go on to score A1 is why I come to work every single day.",
   },
   {
-    img: "/assets/images/auth/user-icon.png",
+    img: "/testimonials/t-student.png",
     name: "Emeka Adeyemi",
     role: "SS3 Student",
     title: "I found myself at St. Brain\'s.",

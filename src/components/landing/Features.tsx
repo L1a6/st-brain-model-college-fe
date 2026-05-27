@@ -18,9 +18,9 @@ export default function Features() {
                 Clean delivery, focused teaching, and environments that make it easy to stay engaged.
               </p>
             </div>
-            <div className="relative overflow-hidden rounded-[34px] aspect-[16/10] border border-canvas-border bg-canvas-white lg:mt-8">
+            <div className="relative overflow-hidden rounded-[34px] aspect-16/10 border border-canvas-border bg-canvas-white lg:mt-8">
               <Image
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1800&q=90&auto=format&fit=crop"
+                src="/images/features/image4.png"
                 alt="students reading together"
                 fill
                 sizes="(max-width:1024px) 100vw, 58vw"

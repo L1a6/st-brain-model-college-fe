@@ -10,7 +10,7 @@ const floatingStats = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-[60vh] sm:min-h-[68vh] lg:min-h-screen flex flex-col overflow-hidden">
+    <section className="relative w-full min-h-[72vh] sm:min-h-[78vh] lg:min-h-screen flex flex-col overflow-hidden">
       <div className="absolute inset-0 z-0">
           <Image
             src="/images/home/about/image1.png"
