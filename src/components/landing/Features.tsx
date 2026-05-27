@@ -20,7 +20,7 @@ export default function Features() {
             </div>
             <div className="relative overflow-hidden rounded-[34px] aspect-16/10 border border-canvas-border bg-canvas-white lg:mt-8">
               <Image
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=90"
+                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=90"
                 alt="students reading together"
                 fill
                 sizes="(max-width:1024px) 100vw, 58vw"

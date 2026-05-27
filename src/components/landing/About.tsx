@@ -8,7 +8,7 @@ export default function About() {
       <div className="container grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-10 lg:gap-16 items-center">
         <ScrollReveal>
           <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:pr-10">
-            <div className="relative overflow-hidden aspect-[4/5] rounded-[34px] border border-canvas-border bg-canvas-white">
+            <div className="relative overflow-hidden aspect-4/5 rounded-[34px] border border-canvas-border bg-canvas-white">
               <Image
                 src="/images/home/about/image1.png"
                 alt="students learning together"
@@ -17,7 +17,7 @@ export default function About() {
                 className="object-cover"
               />
             </div>
-            <div className="relative overflow-hidden aspect-[4/5] rounded-[34px] mt-10 border border-canvas-border bg-canvas-white">
+            <div className="relative overflow-hidden aspect-4/5 rounded-[34px] mt-10 border border-canvas-border bg-canvas-white">
               <Image
                 src="/images/home/about/image2.png"
                 alt="school campus atmosphere"
@@ -34,7 +34,7 @@ export default function About() {
             <span className="section-eyebrow mb-5">About us</span>
             <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight mb-6 max-w-xl">
               Built on discipline,
-              <span className="block text-navy">calm, and character.</span>
+              <span className="block text-[#2563EB]/80">calm, and character.</span>
             </h2>
 
             <p className="text-ink-3 text-base lg:text-lg leading-relaxed mb-4 max-w-xl">

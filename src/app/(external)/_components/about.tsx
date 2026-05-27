@@ -18,7 +18,7 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div className="relative grid grid-cols-2 gap-5 reveal">
             <div className="flex flex-col gap-5">
-              <div className="relative overflow-hidden aspect-[4/5]">
+              <div className="relative overflow-hidden aspect-4/5">
                 <Image src="/images/home/for-who/image1.png" alt="Students in class" fill sizes="(max-width:1024px) 40vw, 20vw" className="object-cover" loading="lazy" />
               </div>
               <div className="bg-crimson p-6 flex flex-col gap-2">
@@ -32,7 +32,7 @@ export default function About() {
                 <p className="font-display text-4xl text-white font-bold">98%</p>
                 <p className="text-white/60 text-xs uppercase tracking-widest">WAEC pass rate 2024</p>
               </div>
-              <div className="relative overflow-hidden aspect-[4/5]">
+              <div className="relative overflow-hidden aspect-4/5">
                 <Image src="/images/home/for-who/image2.png" alt="School campus" fill sizes="(max-width:1024px) 40vw, 20vw" className="object-cover" loading="lazy" />
               </div>
             </div>
@@ -44,7 +44,7 @@ export default function About() {
             <span className="section-eyebrow mb-5">About Us</span>
             <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight mb-6">
               Building minds that<br />
-              <span className="text-crimson italic">lead Nigeria forward.</span>
+              <span className="text-[#2563EB]/80">lead Nigeria forward.</span>
             </h2>
 
             <p className="text-ink-3 text-base lg:text-lg leading-relaxed mb-5">
@@ -57,7 +57,7 @@ export default function About() {
             <ul className="space-y-3 mb-10">
               {pillars.map((pillar) => (
                 <li key={pillar} className="flex items-start gap-3">
-                  <CheckCircle size={16} className="text-crimson flex-shrink-0 mt-0.5" />
+                  <CheckCircle size={16} className="text-crimson shrink-0 mt-0.5" />
                   <span className="text-sm text-ink-2">{pillar}</span>
                 </li>
               ))}
