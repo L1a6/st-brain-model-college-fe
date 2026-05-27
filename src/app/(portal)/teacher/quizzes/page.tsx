@@ -41,7 +41,7 @@ export default function TeacherQuizzesPage() {
 
   const studentsQuery = useQuery({
     queryKey: ['class-students', selectedClass],
-    queryFn: () => (selectedClass ? ClassesAPI.getStudentsForClass(selectedClass) : Promise.resolve({ data: [] })),
+    queryFn: () => ClassesAPI.getStudentsForClass(selectedClass),
     enabled: !!selectedClass,
   })
 
