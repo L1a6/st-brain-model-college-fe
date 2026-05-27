@@ -43,13 +43,13 @@ const events = [
 
 export default function Events() {
   return (
-    <section className="bg-canvas py-20 lg:py-28 overflow-hidden">
+    <section className="bg-canvas py-14 lg:py-18 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-14 reveal">
           <div>
             <span className="section-eyebrow mb-5">School Life</span>
             <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight">
-              Latest <span className="text-crimson italic">Events</span>
+              Latest <span className="text-[#2563EB]/80">Events</span>
             </h2>
           </div>
           <Link href="/events" className="flex items-center gap-2 text-sm font-semibold text-crimson hover:text-crimson-deep transition-colors group">

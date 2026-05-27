@@ -52,7 +52,7 @@ const typeColors: Record<string, string> = {
 
 export default function Testimonials() {
   return (
-    <section className="bg-canvas-white py-12 lg:py-16 overflow-hidden">
+    <section className="bg-canvas-white py-8 lg:py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="max-w-2xl mb-10 lg:mb-12 reveal">
           <span className="section-eyebrow mb-5">Testimonials</span>

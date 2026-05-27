@@ -101,7 +101,7 @@ export default function EnrollPage() {
 
   return (
     <main className="min-h-screen bg-white dark:bg-[#0A1236] pt-24">
-      <section className="relative min-h-[60vh] md:min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[52vh] md:min-h-[64vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="brand-menu-overlay" />
         <div className="absolute inset-0">
           <Image

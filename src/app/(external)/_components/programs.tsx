@@ -7,7 +7,7 @@ const programs = [
     title: "Junior Secondary School",
     range: "JSS 1 — JSS 3",
     desc: "A strong foundational curriculum covering core subjects including Mathematics, English, Basic Science, Social Studies, CRS/IRS, Creative Arts, and more.",
-    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=90&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=90",
     subjects: ["Mathematics", "English Language", "Basic Science", "Social Studies", "French"],
   },
   {
@@ -30,14 +30,14 @@ const programs = [
 
 export default function Programs() {
   return (
-      <section id="academics" className="bg-canvas-white py-12 lg:py-16 overflow-hidden">
+      <section id="academics" className="bg-canvas-white py-10 lg:py-14 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 reveal">
           <div className="max-w-xl">
             <span className="section-eyebrow mb-5">Academics</span>
             <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight">
               Programmes that<br />
-              <span className="text-crimson italic">shape champions.</span>
+              <span className="text-[#2563EB]/80">shape champions.</span>
             </h2>
           </div>
           <p className="text-ink-3 text-base max-w-sm leading-relaxed">
