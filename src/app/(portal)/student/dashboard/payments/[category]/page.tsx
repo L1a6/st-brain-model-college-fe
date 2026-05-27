@@ -45,7 +45,7 @@ export default function PaymentDetailPage() {
     if (!category || !feeDetails) return null
 
     const categoryInfo = PAYMENT_CATEGORIES[category]
-    const feeBreakdown = feeDetails.data?.data?.data?.fee_breakdown || []
+    const feeBreakdown = feeDetails.data?.data?.fee_breakdown || []
     const normalizedCategory = category.replace(/_/g, ' ')
     const feeItem = feeBreakdown.find((item: { component_name: string }) => item.component_name.toLowerCase() === normalizedCategory)
     const amount = feeItem?.amount || 0
@@ -53,7 +53,7 @@ export default function PaymentDetailPage() {
     const remaining = Math.max(amount - paid, 0)
     const isPaid = amount > 0 ? remaining <= 0 : false
     const paymentHistory =
-      feeDetails.data?.data?.data?.payment_history?.filter((item: { fee_component?: string }) =>
+      feeDetails.data?.data?.payment_history?.filter((item: { fee_component?: string }) =>
         (item.fee_component || '').toLowerCase().includes(normalizedCategory)
       ) || []
 
