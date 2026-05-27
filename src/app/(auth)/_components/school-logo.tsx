@@ -6,7 +6,7 @@ const SchoolLogo = () => {
   return (
     <div>
       <Link href="/">
-        <div className="-gap-1.5 mb-8 flex flex-col items-center justify-center">
+        <div className="mb-8 flex flex-col items-center justify-center gap-1.5">
           <Image
             src="/logo123.jpg"
             alt="St. Brian's Model College logo"

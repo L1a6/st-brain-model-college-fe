@@ -1,49 +1,50 @@
 "use client"
 
-import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import {
-  LayoutGrid,
-  GraduationCap,
+  BookOpen,
   CalendarDays,
+  CreditCard,
   FileBadge,
+  GraduationCap,
+  LayoutGrid,
   SettingsIcon,
 } from "lucide-react"
 
+import Logo from "@/components/logo"
 import {
   Sidebar,
-  SidebarHeader,
-  SidebarTrigger,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar"
-import Logo from "@/components/logo"
+
 import { SidebarFooterUser } from "../sidebar-footer-user"
 
-// Menu items
 const items = [
   { title: "Dashboard", url: "/student", icon: LayoutGrid, exactMatch: true },
   { title: "Results", url: "/student/results", icon: FileBadge },
   { title: "Timetable", url: "/student/timetable", icon: CalendarDays },
   { title: "Attendance", url: "/student/attendance", icon: GraduationCap },
+  { title: "Quizzes", url: "/student/dashboard/quizzes", icon: BookOpen },
+  { title: "Payments", url: "/student/dashboard/payments", icon: CreditCard },
 ]
 
-const bottomItems = [
-  // { title: "Help", url: "/teacher/support", icon: HelpCircle },
-  { title: "Settings", url: "/student/settings", icon: SettingsIcon },
-]
+const bottomItems = [{ title: "Settings", url: "/student/settings", icon: SettingsIcon }]
 
 export function StudentSidebar() {
   const pathname = usePathname()
   const { isMobile, setOpenMobile, state } = useSidebar()
 
-  // Close mobile sidebar when link is clicked
   const handleLinkClick = () => {
     if (isMobile) {
       setOpenMobile(false)
@@ -99,39 +100,40 @@ export function StudentSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Bottom Items */}
-        <div className="mt-auto px-3 pb-2">
-          <SidebarMenu className="space-y-1">
-            {bottomItems.map((item) => {
-              const isActive =
-                pathname === item.url || pathname.startsWith(item.url + "/")
-              return (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    className={`rounded-md px-3 py-2.5 ${
-                      isActive
-                        ? "bg-[#DA3743] text-white hover:bg-[#DA3743] hover:text-white"
-                        : "text-gray-700 hover:bg-gray-100"
-                    }`}
-                  >
-                    <Link
-                      href={item.url || "#"}
-                      className="flex items-center gap-3"
-                      onClick={handleLinkClick}
+        <SidebarGroup className="mt-auto">
+          <SidebarGroupLabel className="sr-only">Secondary</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {bottomItems.map((item) => {
+                const isActive = pathname === item.url || pathname.startsWith(item.url + "/")
+
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className={
+                        isActive
+                          ? "bg-[#DA3743]/10 text-[#DA3743]"
+                          : "text-primary hover:bg-[#DA3743]/10 hover:text-[#DA3743]"
+                      }
                     >
-                      <item.icon className="h-5 w-5" />
-                      <span className="text-sm font-medium">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              )
-            })}
-          </SidebarMenu>
-        </div>
+                      <Link href={item.url} className="flex items-center gap-2" onClick={handleLinkClick}>
+                        <item.icon className="h-4 w-4" />
+                        <span>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                )
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooterUser />
+      <SidebarFooter>
+        <SidebarFooterUser />
+      </SidebarFooter>
     </Sidebar>
   )
 }

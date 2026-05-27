@@ -1,7 +1,25 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios"
 import { getUserFriendlyMessage } from "../errors"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3008/api/v1"
+const DEFAULT_API_BASE_URL = "https://st-brains-model-college-be.onrender.com/api/v1"
+
+const resolveApiBaseUrl = (): string => {
+  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.trim()
+
+  if (configuredBaseUrl) {
+    const isLocalhost = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
+      configuredBaseUrl,
+    )
+
+    if (!isLocalhost) {
+      return configuredBaseUrl
+    }
+  }
+
+  return DEFAULT_API_BASE_URL
+}
+
+const API_BASE_URL = resolveApiBaseUrl()
 const AUTH_BYPASS_ENABLED = false
 const MOCK_SESSION_KEY = "osp_mock_auth_session"
 
@@ -434,10 +452,6 @@ const resolveRequestUrl = (path: string, proxy?: boolean): string => {
 
   if (proxy) {
     return `/api/proxy-auth${path.startsWith("/") ? path : "/" + path}`
-  }
-
-  if (!API_BASE_URL) {
-    throw new Error("NEXT_PUBLIC_API_BASE_URL is not defined")
   }
 
   return normalizeBackendPath(path)

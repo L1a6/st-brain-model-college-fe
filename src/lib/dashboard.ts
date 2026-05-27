@@ -53,6 +53,26 @@ interface ResponsePack<T> {
   data: T
 }
 
+export interface EnrollmentSubmission {
+  id: string
+  full_name: string
+  email: string
+  phone?: string | null
+  school_name?: string | null
+  message: string
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+export interface EnrollmentListResponse {
+  data: EnrollmentSubmission[]
+  total: number
+  page: number
+  limit: number
+  total_pages: number
+}
+
 // --------------------
 // API Wrapper
 // --------------------
@@ -61,6 +81,13 @@ export const DashboardAPI = {
   getTodayActivities: () =>
     apiFetch<ResponsePack<TodayActivitiesData>>(
       "/dashboard/admin/today-activities",
+      { method: "GET" },
+      true
+    ),
+
+  getEnrollments: (page = 1, limit = 20) =>
+    apiFetch<ResponsePack<EnrollmentListResponse>>(
+      `/enroll?page=${page}&limit=${limit}`,
       { method: "GET" },
       true
     ),

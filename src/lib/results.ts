@@ -401,21 +401,39 @@ export const getCurrentStudentId = async (): Promise<{
 export const getParentLinkedStudents = (): Promise<StudentBasicInfo[]> => {
   return apiFetch<ResponsePack<ParentStudentsResponse>>("/parents/my-students", {}, true)
     .then((response) => {
-      // Make sure we always return an array, even if the structure is different
-      if (response.data && Array.isArray(response.data.data)) {
-        return response.data.data
-      } else if (response.data && Array.isArray(response.data)) {
-        return response.data
-      } else if (Array.isArray(response)) {
-        return response
+      // Normalize possible response envelopes from proxy/backend
+      if (response && typeof response === "object") {
+        const maybeResponse = response as {
+          data?: unknown
+          students?: unknown
+        }
+
+        if (Array.isArray(maybeResponse.data)) {
+          return maybeResponse.data as StudentBasicInfo[]
+        }
+
+        if (
+          maybeResponse.data &&
+          typeof maybeResponse.data === "object" &&
+          Array.isArray((maybeResponse.data as { data?: unknown }).data)
+        ) {
+          return (maybeResponse.data as { data: StudentBasicInfo[] }).data
+        }
+
+        if (Array.isArray(maybeResponse.students)) {
+          return maybeResponse.students as StudentBasicInfo[]
+        }
       }
-      // Always return an array, never undefined
+
+      if (Array.isArray(response)) {
+        return response as unknown as StudentBasicInfo[]
+      }
+
       return []
     })
     .catch((error) => {
       console.error("Error fetching parent linked students:", error)
-      // Return empty array instead of throwing to prevent the query from failing
-      return []
+      throw error
     })
 }
 

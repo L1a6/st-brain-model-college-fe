@@ -3,7 +3,6 @@
 
 import { usePathname, useSearchParams } from "next/navigation"
 import Footer from "@/components/Footer"
-import WaitlistFooter from "@/app/(external)/waitlist/_components/waitlist-footer"
 
 export default function FooterWrapper() {
   const pathname = usePathname()
@@ -12,5 +11,5 @@ export default function FooterWrapper() {
 
   const isWaitlistFlow = from === "waitlist" || pathname.startsWith("/waitlist")
 
-  return isWaitlistFlow ? <WaitlistFooter /> : <Footer />
+  return <Footer key={isWaitlistFlow ? "waitlist" : "default"} />
 }

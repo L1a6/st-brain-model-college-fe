@@ -13,14 +13,14 @@ const Logo: React.FC<LogoProps> = ({
 }) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="relative shrink-0 overflow-hidden rounded-md" style={{ width: size, height: size }}>
+      <div
+        className="relative shrink-0 overflow-hidden rounded-md ring-1 ring-black/5 dark:ring-white/10"
+        style={{ width: size, height: size }}
+      >
         <Image src="/logo123.jpg" alt="St. Brian's Model College logo" fill className="object-cover" />
       </div>
 
-      <span
-        className="font-bold tracking-wider"
-        style={{ color: textColor, fontSize: size * 0.5 }}
-      >
+      <span className="font-semibold tracking-tight" style={{ color: textColor, fontSize: size * 0.5 }}>
         St. Brian's Model College
       </span>
     </div>

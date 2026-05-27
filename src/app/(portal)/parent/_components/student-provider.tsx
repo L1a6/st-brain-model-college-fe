@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useGetParentStudents } from "../_hooks/use-parent-students"
 import { Student } from "@/lib/parents/client"
 import { NoStudentLinkedModal } from "./no-assigned-student-modal"
@@ -17,9 +17,9 @@ const StudentContext = createContext<StudentContextParams | null>(null)
 
 export const StudentProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: students, isLoading, error } = useGetParentStudents()
-  const studentList = Array.isArray(students) ? students : []
+  const studentList = useMemo(() => (Array.isArray(students) ? students : []), [students])
 
-  const isEmpty = studentList.length === 0
+  const isEmpty = !isLoading && studentList.length === 0
   const is404 = error?.message?.includes("not found")
   const shouldShow = isEmpty || is404
 
@@ -27,7 +27,11 @@ export const StudentProvider = ({ children }: { children: React.ReactNode }) => 
   const selectedID = _selectedID ?? studentList[0]?.id
 
   // Modal visibility
-  const [showModal, setShowModal] = useState(!!shouldShow)
+  const [showModal, setShowModal] = useState(false)
+
+  useEffect(() => {
+    setShowModal(Boolean(shouldShow))
+  }, [shouldShow])
 
   function handleSelectStudent(studentID: string) {
     setSelectedID(studentID)

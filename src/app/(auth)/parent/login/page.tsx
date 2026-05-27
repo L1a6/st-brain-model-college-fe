@@ -5,7 +5,7 @@ const ParentLoginPage = () => {
     <MockRoleLoginForm
       role="parent"
       title="Parent Login"
-      description="Use this mock login to open the parent dashboard."
+      description="Use this mock login to continue to the parent portal."
     />
   )
 }

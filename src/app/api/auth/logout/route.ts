@@ -8,42 +8,30 @@ export async function POST(req: Request) {
   const session_id = cookieStore.get("session_id")?.value
   const user_id = cookieStore.get("user_id")?.value
 
-  // Optional: read incoming body (if needed)
-  const incomingBody = await req.json().catch(() => ({}))
+  let data: unknown = null
 
-  // 2. Build final request body including cookie values
-  const body = {
-    ...incomingBody,
-    session_id,
-    user_id,
-  }
+  if (session_id && user_id) {
+    const incomingBody = await req.json().catch(() => ({}))
 
-  // 3. Forward request + new body to backend
-  const backendResponse = await proxyAuthRequest(
-    new Request(req, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }),
-    "/auth/logout"
-  )
-
-  const data = await backendResponse.json()
-
-  if (!backendResponse.ok) {
-    return NextResponse.json(
-      data ?? { message: "An unexpected error occurred during logout. Please try again later" },
-      { status: backendResponse.status }
+    const backendResponse = await proxyAuthRequest(
+      new Request(req, {
+        method: "POST",
+        body: JSON.stringify({
+          ...incomingBody,
+          session_id,
+          user_id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      "/auth/logout"
     )
+
+    data = await backendResponse.json().catch(() => null)
   }
 
-  // Create response with original backend data if present, otherwise a success message.
-  const response = NextResponse.json(
-    data ?? { message: "Logout successful" },
-    { status: 200 }
-  )
+  const response = NextResponse.json(data ?? { message: "Logout successful" }, { status: 200 })
 
   response.cookies.delete("access_token")
   response.cookies.delete("refresh_token")

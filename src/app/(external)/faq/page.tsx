@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import ScrollReveal from "@/components/ScrollReveal"
 
 interface FAQItem {
   id: number
@@ -14,73 +15,75 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     id: 0,
-    question: "What is SchoolBase?",
+    question: "What is St. Brain's Model College?",
     answer:
-      "SchoolBase is an open digital school management system that helps schools replace manual processes with automated tools for administration, academics, attendance, report cards, and parent engagement.",
+      "St. Brain's Model College is a co-educational secondary school in Lagos focused on academic excellence, character formation, and modern school communication.",
   },
   {
     id: 1,
-    question: "Who can use SchoolBase and what do they get?",
+    question: "Who can use the school portal?",
     answer:
-      "SchoolBase supports Admins, Teachers, Students, and Parents, each with their own dashboard and permissions. Parents get read-only access, while teachers and admins can manage academic and administrative tasks.",
+      "Students, teachers, parents, and administrators each have access to the right school tools and information for their role.",
   },
   {
     id: 2,
-    question: "How secure is the platform?",
+    question: "How secure is the portal?",
     answer:
-      "SchoolBase uses secure login, encrypted data, role-based access control (RBAC), and audit logs to ensure safety, privacy, and controlled access for all users.",
+      "Access is role-based and protected with secure sign-in, so each user only sees what they are meant to see.",
   },
   {
     id: 3,
-    question: "How does school setup work?",
+    question: "How does admissions work?",
     answer:
-      "Admins can create academic sessions, classes, and streams, then assign teachers and students. Everything automatically links to the active session to keep the academic structure organized.",
+      "Families submit an application, the school reviews the details, and shortlisted candidates are guided through enrollment and onboarding.",
   },
   {
     id: 4,
-    question: "How does the attendance system work?",
+    question: "How do school announcements reach parents?",
     answer:
-      "Teachers mark attendance using NFC tap-in for fast, accurate records. Offline tap-ins sync automatically, and admins can make corrections with full audit history.",
+      "We use the portal, email, and direct school communication to keep families updated on notices, events, and important dates.",
   },
   {
     id: 5,
-    question: "What does the timetable feature offer?",
+    question: "What can parents expect from the school?",
     answer:
-      "Admins create subjects, periods, and teacher assignments. SchoolBase detects conflicts automatically and updates timetables instantly for teachers and students.",
+      "Parents can expect disciplined learning, strong academics, responsive communication, and a community focused on student growth.",
   },
   {
     id: 6,
-    question: "How are grades and report cards handled?",
+    question: "How does the school support learning beyond the classroom?",
     answer:
-      "Teachers enter grades digitally, the system calculates totals, and admins review before publishing. Report cards are generated instantly and available for students and parents to download.",
+      "Through co-curricular activities, mentoring, leadership opportunities, and a structured environment that develops the whole child.",
   },
   {
     id: 7,
-    question: "What can parents do on the Parent Portal?",
+    question: "What can parents do on the parent portal?",
     answer:
-      "Parents can view their child’s profile, attendance, grades, report cards, and school notices. Their access is strictly read-only and supports multiple children under one account.",
+      "Parents can stay informed about results, attendance, notices, and fee-related updates without needing to call the office for every detail.",
   },
   {
     id: 8,
-    question: "Is SchoolBase mobile-friendly?",
+    question: "Is the site mobile-friendly?",
     answer:
-      "Yes. SchoolBase is fully mobile-responsive and built to support 5,000+ users per school, ensuring fast performance even with heavy usage.",
+      "Yes. The site and portal are designed to work smoothly on phones, tablets, and desktop screens.",
   },
 ]
 
 const Faq = () => {
   return (
-    <div className="container flex min-h-screen flex-col gap-6 bg-white py-8 md:gap-8 md:py-12">
-      <div className="mx-auto flex max-w-220 flex-col gap-4">
-        <h1 className="text-center text-2xl font-semibold text-[#2d2d2d] md:text-3xl">
-          Frequently Asked Question
+    <div className="min-h-screen bg-canvas py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 mb-12 reveal">
+        <span className="section-eyebrow mb-5">FAQ</span>
+        <h1 className="font-display text-4xl lg:text-6xl text-navy leading-tight mb-4">
+          Questions families ask<br />
+          <span className="text-crimson italic">most often.</span>
         </h1>
-        <p className="text-center text-sm text-[#535353] sm:text-xl md:text-2xl">
-          Everything you need to know about how Open School Portal works for schools,
-          parents, teachers, and students.
+        <p className="text-ink-3 text-lg leading-relaxed max-w-3xl">
+          Answers about admissions, the portal, school communication, and daily life at St. Brain's Model College.
         </p>
       </div>
-      <section className="md:pt-20">
+
+      <section className="max-w-7xl mx-auto px-5 lg:px-8 md:pt-6">
         <Accordion
           type="single"
           collapsible
@@ -91,10 +94,10 @@ const Faq = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="rounded-md border border-[#2D2D2D]/15 px-4 py-2 last:border-b"
+              className="rounded-md border border-canvas-border bg-canvas-white px-4 py-2 last:border-b"
             >
               <AccordionTrigger
-                className="flex w-full flex-row items-center py-2 text-left font-normal text-[#535353] transition-colors duration-200"
+                className="flex w-full flex-row items-center py-2 text-left font-normal text-ink-2 transition-colors duration-200"
                 style={{ fontSize: "clamp(16px, 2vw, 20px)" }}
               >
                 <span className="block w-full sm:text-lg md:text-2xl">
@@ -104,7 +107,7 @@ const Faq = () => {
 
               <AccordionContent className="flex flex-col gap-4">
                 <p
-                  className="leading-relaxed text-[#535353]/80"
+                  className="leading-relaxed text-ink-3"
                   style={{ fontSize: "clamp(14px, 2vw, 16px)" }}
                 >
                   <span className="text-sm md:text-xl">{faq.answer}</span>
@@ -114,6 +117,8 @@ const Faq = () => {
           ))}
         </Accordion>
       </section>
+
+      <ScrollReveal />
     </div>
   )
 }

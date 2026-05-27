@@ -5,7 +5,7 @@ const StudentLoginPage = () => {
     <MockRoleLoginForm
       role="student"
       title="Student Login"
-      description="Use this mock login to open the student dashboard."
+      description="Use this mock login to continue to the student portal."
     />
   )
 }

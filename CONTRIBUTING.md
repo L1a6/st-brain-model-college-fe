@@ -1,7 +1,8 @@
 # Contributing Guidelines
-Hey, **Frontend Engineer!** We’re thrilled to have you contribute to Open School Portal. We value **collaboration, clarity, and high-quality code**. Please review these guidelines to ensure a smooth contribution process.
+Hey, **Frontend Engineer!** We’re glad you’re contributing to St. Brian's Model College. We value **collaboration, clarity, and high-quality code**. Please review these guidelines to keep the school site polished and consistent.
 
-**What we’re building:** Open School Portal digitizes school operations—attendance (including NFC check-ins), results, fee management, timetables, communications, and analytics—so every school can run on a private, customizable instance with real-time visibility for admins, teachers, students, and parents.
+**What we’re building:** St. Brian's Model College is a calm, modern school experience with public landing pages, enrollment, academics, events, and portal access for admins, teachers, students, and parents.
+Enrollment requests are submitted through `/enroll` and reviewed in the admin dashboard.
 
 ---
 
@@ -20,8 +21,8 @@ Hey, **Frontend Engineer!** We’re thrilled to have you contribute to Open Scho
 
 ## 1. How to Contribute
 We welcome contributions in many forms:
-* **Bug Reports:** Submit detailed issues if you encounter a bug (e.g., attendance sync errors, timetable conflicts, fee summaries not loading).
-* **Feature Requests:** Suggest enhancements (like new attendance modes, better analytics, parent notifications).
+* **Bug Reports:** Submit detailed issues if you encounter a bug (e.g., enrollment form failures, timetable conflicts, portal navigation issues).
+* **Feature Requests:** Suggest enhancements (like better landing sections, clearer enrollment flows, enroll inbox filters, or parent notifications).
 * **Code Contributions:** Fix bugs or implement new features across the app (auth, dashboards, portals, UI).
 * **Documentation:** Improve our docs, folder structure explanations, or onboarding guides.
 
@@ -30,8 +31,8 @@ We welcome contributions in many forms:
 ---
 
 ## 2. Pull Request Process
-* **Base Branch:** Always branch off `dev`. PRs must be raised against `dev`, never against `main`.
-* **Small, Focused Changes:** Each PR should solve one issue or implement one feature (e.g., “Add timetable clash validation”).
+* **Base Branch:** Always branch off the active integration branch for your workspace. PRs should target the branch used by the school project workflow.
+* **Small, Focused Changes:** Each PR should solve one issue or implement one feature (e.g., “Add enrollment form submission”).
 * **Clear Title & Summary:** Use descriptive titles and explain your changes, rationale, and testing steps.
 * **Follow Feedback:** Address review comments and update your PR accordingly.
 * **CI/CD Compliance:** Ensure linting, formatting, and tests pass before submission.
@@ -118,4 +119,4 @@ Regularly pull from `dev` to keep your branch updated.
 
 ---
 
-Thank you for contributing to **Open School Portal** and helping us build a reliable platform for schools, teachers, parents, and students.
+Thank you for contributing to **St. Brian's Model College** and helping us build a reliable school experience for students, parents, teachers, and administrators.

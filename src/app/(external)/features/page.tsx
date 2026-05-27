@@ -1,38 +1,21 @@
-import React from "react"
-import { featuresData } from "./_lib/features.data"
-import FeatureSection from "./_components/feature-section"
+import Programs from "../_components/programs"
+import ScrollReveal from "@/components/ScrollReveal"
 
-const page = () => {
+export default function FeaturesPage() {
   return (
-    <div className="min-h-screen pt-15">
-      <div className="container flex flex-col gap-8">
-        <div className="flex flex-col items-center gap-2.5 text-center">
-          <h1 className="text-lg font-medium text-[#2d2d2d] uppercase md:text-2xl lg:text-3xl">
-            WHY YOU SHOULD USE SCHOOL BASE
-          </h1>
-          <p className="text-sm text-[#535353] sm:text-lg md:text-xl">
-            Our platform powers the full student and school lifecycle from admissions to
-            graduation.
-          </p>
-        </div>
-        <div className="flex flex-col gap-20 py-10">
-          {featuresData.map((data, index) => (
-            <FeatureSection
-              key={index}
-              number={data.number}
-              title={data.title}
-              description={data.description}
-              features={data.listItems}
-              imageSrc={data.imageSrc}
-              imgWidth={data.imgWidth}
-              imgHeight={data.imgHeight}
-              isReversed={index % 2 === 1}
-            />
-          ))}
-        </div>
+    <div className="min-h-screen bg-canvas py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8 mb-10 reveal">
+        <span className="section-eyebrow mb-5">Academics</span>
+        <h1 className="font-display text-4xl lg:text-6xl text-navy leading-tight mb-4">
+          Programmes that shape<br />
+          <span className="text-crimson italic">confident learners.</span>
+        </h1>
+        <p className="text-ink-3 text-lg leading-relaxed max-w-3xl">
+          From junior secondary foundations to senior secondary specializations, St. Brian's keeps the curriculum rigorous and personal.
+        </p>
       </div>
+      <Programs />
+      <ScrollReveal />
     </div>
   )
 }
-
-export default page

@@ -3,9 +3,9 @@ import Footer from "@/components/Footer"
 import NavBarWrapper from "@/components/navbar-wrapper"
 
 export const metadata: Metadata = {
-  title: "School Base",
+  title: "St. Brian's Model College",
   description:
-    "School Base streamlines attendance, grading, communication, and payments so schools can focus on learning.",
+    "St. Brian's Model College is a modern school website for admissions, academics, events, and portal access.",
 }
 
 export default function ExternalLayout({ children }: { children: React.ReactNode }) {

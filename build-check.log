@@ -1,0 +1,27 @@
+
+> state-branch-model-college-fe@0.1.0 build
+> next build
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ✓ Compiled successfully in 5.4min
+   Running TypeScript ...
+Failed to compile.
+
+./src/app/(portal)/student/dashboard/payments/[category]/page.tsx:39:43
+Type error: Property 'fee_breakdown' does not exist on type 'StudentFeeDetailsResponse'.
+
+[0m [90m 37 |[39m
+ [90m 38 |[39m     [36mconst[39m categoryInfo [33m=[39m [33mPAYMENT_CATEGORIES[39m[category]
+[31m[1m>[22m[39m[90m 39 |[39m     [36mconst[39m feeBreakdown [33m=[39m feeDetails[33m.[39mdata[33m?[39m[33m.[39mfee_breakdown [33m||[39m []
+ [90m    |[39m                                           [31m[1m^[22m[39m
+ [90m 40 |[39m     [36mconst[39m feeItem [33m=[39m feeBreakdown[33m.[39mfind(f [33m=>[39m f[33m.[39mcomponent_name[33m.[39mtoLowerCase() [33m===[39m category[33m.[39mreplace([35m/_/g[39m[33m,[39m [32m' '[39m))
+ [90m 41 |[39m
+ [90m 42 |[39m     [36mif[39m ([33m![39mfeeItem) [36mreturn[39m [36mnull[39m[0m
+Next.js build worker exited with code: 1 and signal: null
