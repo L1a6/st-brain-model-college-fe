@@ -4,7 +4,7 @@ import ScrollReveal from "./ScrollReveal"
 
 export default function Features() {
   return (
-    <section className="bg-canvas-white py-20 lg:py-28 overflow-hidden">
+    <section className="bg-canvas-white py-14 lg:py-20 overflow-hidden">
       <div className="container">
         <ScrollReveal>
           <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-10 lg:gap-16 items-start mb-12">
@@ -12,7 +12,7 @@ export default function Features() {
               <span className="section-eyebrow mb-5">Academics</span>
               <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight">
                 Academics made
-                <span className="block text-navy">clear and structured.</span>
+                <span className="block text-[#2563EB]/80">clear and structured.</span>
               </h2>
               <p className="mt-5 text-ink-3 text-base leading-relaxed max-w-xl">
                 Clean delivery, focused teaching, and environments that make it easy to stay engaged.
@@ -20,7 +20,7 @@ export default function Features() {
             </div>
             <div className="relative overflow-hidden rounded-[34px] aspect-16/10 border border-canvas-border bg-canvas-white lg:mt-8">
               <Image
-                src="/images/features/image4.png"
+                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=90"
                 alt="students reading together"
                 fill
                 sizes="(max-width:1024px) 100vw, 58vw"

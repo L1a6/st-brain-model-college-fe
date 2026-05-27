@@ -58,7 +58,7 @@ export default function Testimonials() {
           <span className="section-eyebrow mb-5">Testimonials</span>
           <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight mb-4">
             Voices that echo our values,<br />
-            <span className="text-crimson italic">from class to campus.</span>
+            <span className="text-[#2563EB]/80">from class to campus.</span>
           </h2>
           <p className="text-ink-3 text-lg leading-relaxed">
             Real words from the students, teachers, and parents who live the St. Brain's experience every day.

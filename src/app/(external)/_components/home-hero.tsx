@@ -10,7 +10,7 @@ const floatingStats = [
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-[72vh] sm:min-h-[78vh] lg:min-h-screen flex flex-col overflow-hidden">
+    <section className="relative flex w-full min-h-[62vh] flex-col overflow-hidden sm:min-h-[66vh] md:min-h-[72vh] lg:min-h-[86vh]">
       <div className="absolute inset-0 z-0">
           <Image
             src="/images/home/about/image1.png"
@@ -24,20 +24,20 @@ export default function Hero() {
         <div className="absolute bottom-0 left-0 right-0 h-48" style={{ background: "linear-gradient(to top, rgba(11,18,32,0.6) 0%, transparent 100%)" }} />
       </div>
 
-      <div className="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-5 lg:px-8 pt-28 pb-16 lg:pt-36 lg:pb-24 w-full">
-        <div className="max-w-3xl">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16 lg:px-8 lg:pt-36 lg:pb-24">
+        <div className="max-w-2xl lg:max-w-3xl">
           <div className="flex items-center gap-3 mb-6 animate-fade-up">
             <div className="w-12 h-px bg-crimson" />
             <span className="text-crimson text-2xs font-semibold uppercase tracking-[0.25em]">Lagos · Nigeria</span>
           </div>
 
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white leading-[1.06] animate-fade-up delay-100" style={{ animationFillMode: "both" }}>
+          <h1 className="font-display animate-fade-up delay-100 text-4xl leading-[1.06] text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl" style={{ animationFillMode: "both" }}>
             Excellence in<br />
             <span className="text-crimson italic">Education,</span><br />
             Excellence in Life.
           </h1>
 
-          <p className="mt-6 text-white/70 text-lg lg:text-xl max-w-xl leading-relaxed font-light animate-fade-up delay-200" style={{ animationFillMode: "both" }}>
+          <p className="mt-5 max-w-xl animate-fade-up delay-200 text-base leading-relaxed font-light text-white/70 sm:text-lg lg:mt-6 lg:text-xl" style={{ animationFillMode: "both" }}>
             St. Brain's Model College is where young minds are shaped into tomorrow's leaders — through rigorous academics, strong values, and a nurturing community.
           </p>
 
@@ -49,7 +49,7 @@ export default function Hero() {
             <Link href="/enroll" className="btn-outline-white">Enroll</Link>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-3 max-w-lg animate-fade-up delay-400" style={{ animationFillMode: "both" }}>
+          <div className="mt-10 grid max-w-lg grid-cols-3 gap-3 animate-fade-up delay-400 sm:mt-12 lg:mt-16" style={{ animationFillMode: "both" }}>
             {floatingStats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="glass-pill px-4 py-3 flex flex-col gap-1.5">
                 <Icon size={15} className="text-crimson" />

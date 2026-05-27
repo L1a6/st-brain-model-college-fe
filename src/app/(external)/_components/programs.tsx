@@ -15,7 +15,7 @@ const programs = [
     title: "Senior Secondary School",
     range: "SS 1 — SS 3",
     desc: "Specialised tracks in Science, Arts, and Commercial — all preparing students for WAEC, NECO, and JAMB with distinction.",
-    img: "/images/features/image4.png",
+    img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1600&q=90",
     subjects: ["Physics", "Chemistry", "Biology", "Economics", "Literature"],
   },
   {
@@ -23,7 +23,7 @@ const programs = [
     title: "Sports & Co-Curricular",
     range: "All levels",
     desc: "Football, athletics, debate, cultural dance, science olympiad, coding club — we develop the student beyond the classroom.",
-    img: "/images/features/image5.png",
+    img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1600&q=90",
     subjects: ["Football", "Athletics", "Debate Club", "Science Olympiad", "Coding Club"],
   },
 ]
