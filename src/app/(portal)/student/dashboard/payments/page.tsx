@@ -91,42 +91,25 @@ export default function StudentPaymentsPage() {
 
   return (
     <div className="min-h-screen bg-white p-6 md:p-8 lg:p-10">
-      <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-[#0A1F44] via-[#12396D] to-[#0E234D] text-white shadow-[0_24px_70px_rgba(10,31,68,0.18)] mb-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.18),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.08),transparent_28%)]" />
-        <div className="relative grid gap-8 lg:grid-cols-[1.3fr_0.8fr] p-6 md:p-8 lg:p-10">
-          <div>
-            <p className="text-xs md:text-sm uppercase tracking-[0.32em] text-white/70 mb-4">Student Payments</p>
-            <h1 className="font-display text-3xl md:text-5xl font-light leading-tight mb-4">
-              Manage every fee category
-              <span className="block text-white/80 italic">from school fees to exam fees.</span>
-            </h1>
-            <p className="max-w-2xl text-sm md:text-base text-white/80 leading-relaxed">
-              View each payment category with its own image, status, and progress so you always know what is due, what has been paid, and what is left.
-            </p>
-          </div>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-3">Student Payments</p>
+          <h1 className="font-display text-3xl md:text-5xl font-semibold text-[#0A1F44]">
+            Payments by category
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm md:text-base text-slate-600">
+            Every fee category has its own card and image so students can quickly see what is due, what has been paid, and what is still open.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Total due</p>
-              <p className="text-2xl font-bold">₦{totalExpected.toLocaleString()}</p>
-            </div>
-            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Paid</p>
-              <p className="text-2xl font-bold text-emerald-300">₦{totalPaid.toLocaleString()}</p>
-            </div>
-            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Remaining</p>
-              <p className="text-2xl font-bold text-amber-300">₦{totalRemaining.toLocaleString()}</p>
-            </div>
-            <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/65 mb-2">Categories</p>
-              <p className="text-2xl font-bold">{paymentCards.length}</p>
-            </div>
-          </div>
+        <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+          <p className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Summary</p>
+          <p className="text-sm font-semibold text-[#0A1F44]">₦{totalPaid.toLocaleString()} paid</p>
+          <p className="text-sm text-slate-500">₦{totalRemaining.toLocaleString()} remaining</p>
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-3 mb-6">
+      <div className="mb-6 flex flex-wrap gap-3">
         <div className="rounded-full bg-[#0A1F44]/8 px-4 py-2 text-sm font-semibold text-[#0A1F44]">{paidCount} paid</div>
         <div className="rounded-full bg-amber-50 px-4 py-2 text-sm font-semibold text-amber-700">{partialCount} partial</div>
         <div className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">{pendingCount} pending</div>
@@ -176,14 +159,14 @@ export default function StudentPaymentsPage() {
                 <div className="flex flex-wrap items-center justify-between gap-2 text-sm text-slate-600 mb-3">
                   <span>Remaining: ₦{item.remaining.toLocaleString()}</span>
                   <span className="font-semibold text-[#0A1F44]">{item.pct}% complete</span>
-                </div>
-
-                <div className="h-2 rounded-full bg-slate-200 overflow-hidden mb-6">
-                  <div
-                    className={`h-full rounded-full transition-all ${item.isPaid ? 'bg-emerald-500' : item.isPartial ? 'bg-amber-500' : 'bg-[#0A1F44]'}`}
-                    style={{ width: `${item.pct}%` }}
+                  <Link
+                    href={detailHref}
+                    className="flex-1 min-w-[180px] rounded-2xl border border-slate-200 bg-white px-4 py-3 text-center text-sm font-semibold text-[#0A1F44] transition-colors hover:border-[#0A1F44]/30 hover:bg-[#0A1F44]/5"
+                  >
+                    View details
+                  </Link>
                   />
-                </div>
+                    className={`flex-1 min-w-[220px] rounded-2xl px-4 py-3 text-sm font-semibold text-white transition-colors ${item.isPaid ? 'cursor-default bg-emerald-500' : 'bg-[#0A1F44] hover:bg-[#0E2A59]'}`}
 
                 <div className="flex flex-wrap gap-3">
                   <Link

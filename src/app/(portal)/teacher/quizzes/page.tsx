@@ -22,156 +22,154 @@ type QForm = {
 
 const emptyQ = (): QForm => ({ text: '', type: 'multiple_choice', options: ['', '', '', ''], correctAnswer: '', points: 1 })
 
-const BRAND = {
-  navy: '#0A1F44',
-  navyDeep: '#07162F',
-  crimson: '#B91C1C',
-  crimsonDeep: '#8F1313',
-  soft: '#F8FAFC',
-}
-
-function heroStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-md">
-      <div className="text-[11px] uppercase tracking-[0.22em] text-white/70">{label}</div>
-      <div className="mt-1 text-lg font-bold text-white">{value}</div>
-    </div>
-  )
-}
-
-export default function TeacherQuizzesPage() {
-  const { data: teacher } = useAuthUser()
-  const teacherId = teacher?.teacher_id ?? ''
-  const { data: classesData } = useGetTeacherAssignedClasses()
-  const { data: activeSession } = useActiveAcademicSessionFromList()
-  const { data: terms } = useGetTerms()
-  // Sonner toast
-
-  const classes = classesData || []
-
-  const [view, setView] = useState<'list' | 'create'>('list')
-  const [selectedClass, setSelectedClass] = useState<string>('')
-  const [form, setForm] = useState({ title: '', subject: '', timeLimitMinutes: 30, dueDate: '', termId: '' })
-  const [questions, setQuestions] = useState<QForm[]>([emptyQ()])
-  const [saving, setSaving] = useState(false)
-  const [editingQuizId, setEditingQuizId] = useState<string | null>(null)
-  const qc = useQueryClient()
-
-  const studentsQuery = useQuery({
-    queryKey: ['class-students', selectedClass],
-    queryFn: () => ClassesAPI.getStudentsForClass(selectedClass),
-    enabled: !!selectedClass,
-  })
-
-  const students = (studentsQuery.data as any)?.data || []
-
-  const { data: teacherQuizzesData, isLoading: isLoadingQuizzes } = useQuery({
-    queryKey: ['teacher-quizzes', teacherId],
-    queryFn: () => QuizAPI.getTeacherQuizzes(teacherId),
-    enabled: !!teacherId,
-  })
-
-  const teacherQuizzes = (teacherQuizzesData as any)?.data?.items || []
-
-  const assignedClassLabel = useMemo(() => {
-    const found = classes.find((item: any) => item.id === selectedClass)
-    if (!found) return 'Select a class'
-    return `${found.name}${found.arm ? ` ${found.arm}` : ''}`
-  }, [classes, selectedClass])
-
-  const publishedCount = teacherQuizzes.filter((quiz: any) => (quiz.status || '').toLowerCase() === 'published').length
-  const draftCount = teacherQuizzes.filter((quiz: any) => (quiz.status || '').toLowerCase() === 'draft').length
-
-  useEffect(() => {
-    if (editingQuizId) {
-      // load quiz to edit
-      ;(async () => {
-        try {
-          const res = await QuizAPI.getQuiz(editingQuizId)
-          const q = res.data
-          setForm({ title: q.title || '', subject: q.description || '', timeLimitMinutes: q.timeLimitMinutes || 30, dueDate: q.dueDate || '', termId: q.term_id || '' })
-          setQuestions(q.questions?.map((qq: any) => ({ text: qq.text, type: qq.type, options: qq.options || [], correctAnswer: qq.correctAnswer, points: qq.points || 1 })) || [emptyQ()])
-        } catch (err) {
-          toast.error('Failed to load quiz for editing')
-        }
-      })()
-    }
-  }, [editingQuizId])
-
-  const totalPoints = useMemo(() => questions.reduce((s, q) => s + q.points, 0), [questions])
-
-  const addQuestion = () => setQuestions((p) => [...p, emptyQ()])
-  const removeQuestion = (i: number) => setQuestions((p) => p.filter((_, idx) => idx !== i))
-  const updateQ = (i: number, field: keyof QForm, value: any) => setQuestions((p) => p.map((q, idx) => (idx === i ? { ...q, [field]: value } : q)))
-  const updateOption = (qi: number, oi: number, val: string) => setQuestions((p) => p.map((q, idx) => idx === qi ? { ...q, options: q.options.map((o, i) => (i === oi ? val : o)) } : q))
-
-  const resetForm = () => {
-    setForm({ title: '', subject: '', timeLimitMinutes: 30, dueDate: '', termId: '' })
-    setQuestions([emptyQ()])
-    setSelectedClass('')
-  }
-
-  const handleCreate = async () => {
-    const hasInvalidQuestion = questions.some((q) => !q.text || !q.correctAnswer || (q.type === 'multiple_choice' && q.options.filter((o) => o.trim()).length < 2))
-    if (!form.title || !selectedClass || !form.dueDate || hasInvalidQuestion) {
-      toast.error('Complete required fields before publishing')
-      return
-    }
-
-    setSaving(true)
-
-    try {
-      const payload = {
-        title: form.title,
-        description: form.subject,
-        class_id: selectedClass,
-        subject_id: undefined,
-        term_id: form.termId || (terms && terms.length ? terms[0].id : ''),
-        session_id: activeSession?.id || '',
-        due_date: form.dueDate,
-        time_limit_minutes: form.timeLimitMinutes,
-        questions: questions.map((q) => ({ text: q.text, type: q.type, options: q.type === 'multiple_choice' ? q.options.filter((o) => o.trim()) : undefined, correct_answer: q.correctAnswer, points: q.points })),
-        status: 'published',
-      }
-
-      if (editingQuizId) {
-        await QuizAPI.updateQuiz(editingQuizId, payload)
-        toast.success('Quiz updated.')
-        setEditingQuizId(null)
-      } else {
-        await QuizAPI.createQuiz(payload)
-        toast.success('Quiz created and published.')
-      }
-
-      qc.invalidateQueries({ queryKey: ['teacher-quizzes', teacherId] })
-      setView('list')
-      resetForm()
-    } catch (err: any) {
-      console.error('Create/update quiz error', err)
-      toast.error(err?.message || 'Failed to create/update quiz')
-    }
-
-    setSaving(false)
-  }
-
-  if (view === 'create') {
-    return (
-      <div className="p-6 max-w-4xl">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold">{editingQuizId ? 'Edit Quiz' : 'Create New Quiz'}</h2>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => { setView('list'); setEditingQuizId(null); resetForm() }}>Cancel</Button>
-            <Button onClick={handleCreate} disabled={saving}>{saving ? 'Publishing...' : editingQuizId ? 'Save Changes' : 'Publish Quiz'}</Button>
+            </div>
           </div>
         </div>
 
-        <div className="mb-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-          <input placeholder="Quiz Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="input" />
-          <input placeholder="Subject" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="input" />
-          <select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)} className="input">
-            <option value="">Select class to assign</option>
-            {classes.map((c: any) => (
-              <option key={c.id} value={c.id}>{c.name} {c.arm ? `(${c.arm})` : ''}</option>
+        <div className="mx-auto max-w-6xl p-6 md:p-8 lg:p-10">
+          <PageHeader
+            title="Quizzes"
+            subtitle="Create and publish assessments for your classes"
+            actions={
+              <Button onClick={() => setView('create')} className="bg-[#0A1F44] hover:bg-[#0E2A59]">
+                Create quiz
+              </Button>
+            }
+          />
+
+          <div className="mb-6 overflow-hidden rounded-3xl bg-linear-to-br from-[#0A1F44] via-[#12396D] to-[#0E234D] text-white shadow-[0_24px_70px_rgba(10,31,68,0.18)]">
+            <div className="relative grid gap-8 p-6 md:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
+              <div>
+                <div className="text-xs uppercase tracking-[0.3em] text-white/70 mb-4">Quiz studio</div>
+                <h2 className="font-display text-3xl md:text-5xl font-light leading-tight mb-4">Build quizzes, assign them, and publish them to students.</h2>
+                <p className="max-w-2xl text-sm md:text-base text-white/80 leading-relaxed mb-6">
+                  Every quiz you publish here can be delivered straight to the students in the selected class so it shows up in their dashboard automatically.
+                </p>
+                <Button onClick={() => setView('create')} className="bg-white text-[#0A1F44] hover:bg-white/90">Open quiz studio</Button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                {heroStat({ label: 'Assigned classes', value: `${classes.length}` })}
+                {heroStat({ label: 'Total quizzes', value: `${teacherQuizzes.length}` })}
+                {heroStat({ label: 'Published', value: `${publishedCount}` })}
+                {heroStat({ label: 'Drafts', value: `${draftCount}` })}
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-6 grid gap-3 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:grid-cols-3">
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <div className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">Classes</div>
+              <div className="text-2xl font-bold text-[#0A1F44]">{classes.length}</div>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <div className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">Published</div>
+              <div className="text-2xl font-bold text-[#0A1F44]">{publishedCount}</div>
+            </div>
+            <div className="rounded-2xl bg-slate-50 p-4">
+              <div className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">Drafts</div>
+              <div className="text-2xl font-bold text-[#0A1F44]">{draftCount}</div>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {isLoadingQuizzes ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">Loading quizzes...</div>
+            ) : teacherQuizzes.length === 0 ? (
+              <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:col-span-2">No quizzes yet. Create one to get started.</div>
+            ) : (
+              teacherQuizzes.map((q: any) => {
+                const due = new Date(q.dueDate)
+                const status = (q.status || 'published').toLowerCase()
+                const statusLabel = status === 'draft' ? 'Draft' : status === 'closed' ? 'Closed' : 'Published'
+                const statusClass = status === 'draft' ? 'bg-slate-100 text-slate-700' : status === 'closed' ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
+
+                return (
+                  <div key={q.id} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)]">
+                    <div className="relative min-h-52">
+                      <img
+                        src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
+                        alt={q.title}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/82" />
+                      <div className="absolute left-5 top-5 flex flex-wrap gap-2">
+                        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${statusClass}`}>{statusLabel}</span>
+                        <span className="rounded-full bg-white/12 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">{q.questions?.length || 0} questions</span>
+                      </div>
+                      <div className="absolute right-5 bottom-5 text-right text-white">
+                        <div className="text-3xl font-bold">{q.timeLimitMinutes}m</div>
+                        <div className="text-xs uppercase tracking-[0.22em] text-white/75 mt-1">Time limit</div>
+                      </div>
+                    </div>
+
+                    <div className="p-6">
+                      <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                        <div>
+                          <h4 className="font-display text-2xl font-semibold text-[#0A1F44] mb-2">{q.title}</h4>
+                          <p className="text-sm text-slate-600">{q.description || q.subject}</p>
+                        </div>
+                        <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-right">
+                          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-500 mb-1">Due</div>
+                          <div className="text-sm font-semibold text-[#0A1F44]">{due.toLocaleDateString()}</div>
+                        </div>
+                      </div>
+
+                      <div className="mb-5 flex flex-wrap gap-2">
+                        <Badge variant="outline">{q.timeLimitMinutes}m</Badge>
+                        <Badge variant="secondary">{q.questions?.length || 0} items</Badge>
+                        <Badge variant="outline">Class: {q.classId}</Badge>
+                      </div>
+
+                      <div className="flex flex-wrap gap-3">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => { setEditingQuizId(q.id); setView('create') }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={async () => {
+                            if (!confirm('Delete this quiz? This cannot be undone.')) return
+                            try {
+                              await QuizAPI.deleteQuiz(q.id)
+                              toast.success('Quiz deleted')
+                              qc.invalidateQueries({ queryKey: ['teacher-quizzes', teacherId] })
+                            } catch (err) {
+                              toast.error('Failed to delete quiz')
+                            }
+                          }}
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          className="bg-[#0A1F44] hover:bg-[#0E2A59]"
+                          size="sm"
+                          onClick={async () => {
+                            try {
+                              const res = await QuizAPI.getQuizSubmissions(q.id)
+                              const subs = res.data?.submissions || []
+                              const avg = subs.length ? Math.round(subs.reduce((a: any, b: any) => a + (b.score || 0), 0) / subs.length) : 0
+                              alert(`Submissions: ${subs.length}\nAvg score: ${avg}`)
+                            } catch (err) {
+                              toast.error('Failed to load submissions')
+                            }
+                          }}
+                        >
+                          View submissions
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            )}
+          </div>
+        </div>
+      </div>
             ))}
           </select>
           <input type="datetime-local" value={form.dueDate} onChange={(e) => setForm({ ...form, dueDate: e.target.value })} className="input" />
