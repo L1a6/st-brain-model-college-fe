@@ -52,7 +52,7 @@ export default function StudentPaymentsPage() {
       </div>
 
       {/* Summary Card */}
-      <div className="bg-gradient-to-r from-navy to-navy-mid rounded-2xl p-6 text-white mb-8 shadow-lg">
+      <div className="bg-linear-to-r from-navy to-navy-mid rounded-2xl p-6 text-white mb-8 shadow-lg">
         <div className="grid grid-cols-3 gap-6">
           <div>
             <p className="text-white/80 text-sm mb-1">Total Due</p>
@@ -88,7 +88,7 @@ export default function StudentPaymentsPage() {
                   alt={categoryInfo.label}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy/40 to-navy/70" />
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-navy/40 to-navy/70" />
                 <div className="absolute left-6 top-6">
                   <div className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                     isPaid ? 'bg-emerald-500 text-white' : pct > 0 ? 'bg-amber-500 text-white' : 'bg-slate-500 text-white'
@@ -108,7 +108,7 @@ export default function StudentPaymentsPage() {
                     <h3 className="text-xl font-bold text-navy">{categoryInfo.label}</h3>
                     <p className="text-sm text-ink-3 mt-1">{categoryInfo.description}</p>
                   </div>
-                  <div className="text-right flex-shrink-0">
+                  <div className="text-right shrink-0">
                     <p className="text-xs text-ink-3">Paid</p>
                     <p className="text-lg font-bold text-navy">₦{paid.toLocaleString()}</p>
                   </div>
@@ -129,7 +129,7 @@ export default function StudentPaymentsPage() {
                 <div className="flex gap-3 flex-wrap">
                   <Link
                     href={`/student/dashboard/payments/${category}`}
-                    className="flex-1 min-w-[160px] text-center px-4 py-2.5 rounded-lg border border-canvas-border text-navy font-semibold text-sm hover:bg-canvas transition-colors"
+                    className="flex-1 min-w-40 text-center px-4 py-2.5 rounded-lg border border-canvas-border text-navy font-semibold text-sm hover:bg-canvas transition-colors"
                   >
                     View details
                   </Link>
