@@ -29,7 +29,7 @@ export default function StudentPaymentsPage() {
     refetchOnWindowFocus: false,
   })
 
-  const feeBreakdown = feeDetails?.data?.data?.data?.fee_breakdown || []
+  const feeBreakdown = feeDetails?.data?.data?.fee_breakdown || []
 
   const paymentCards = useMemo(() => {
     const feeMap = new Map(
