@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
@@ -63,5 +63,7 @@ jobs:
       - name: Copy Artifacts to Server
         shell: bash
         run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
           sshpass -p "${{ secrets.PASSWORD }}" scp -o StrictHostKeyChecking=no open-school-portal-fe.tar.gz ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/tmp/prod/open-school-portal-fe-artifact.tar.gz
           rm -f open-school-portal-fe.tar.gz
