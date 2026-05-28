@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -130,10 +131,13 @@ export default function PaymentDetailPage() {
 
       <div className="mb-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)]">
         <div className="relative min-h-72 md:min-h-[360px]">
-          <img
+          <Image
             src={CATEGORY_IMAGES[category]}
             alt={details.info.label}
-            className="absolute inset-0 h-full w-full object-cover"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 1200px"
+            priority
           />
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/86" />
           <div className="absolute left-5 top-5 flex flex-wrap gap-2">

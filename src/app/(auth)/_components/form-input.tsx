@@ -59,9 +59,8 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [showWarningModal, setShowWarningModal] = useState(false)
   const [showLockedModal, setShowLockedModal] = useState(false)
-  const [isLocked, setIsLocked] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [attemptCount, setAttemptCount] = useState(0)
+  const isLocked = false
 
   // ?next=/path
   const nextRoute =
@@ -124,21 +123,11 @@ const LoginForm = () => {
       return
     }
 
-    // all roles
-    const roleToRoute: Record<string, string> = {
-      ADMIN: "admin",
-      SUPER_ADMIN: "super-admin",
-      TEACHER: "teacher",
-      STUDENT: "student",
-      PARENT: "parent",
-    }
-
     setIsLoading(true)
     setErrors({})
 
     const route = nextRoute && nextRoute.startsWith("/") ? nextRoute : resolveLocalDashboardRoute(formData.email)
     router.push(route)
-    setAttemptCount(0)
   }
 
   const renderError = (field: LoginField) => {

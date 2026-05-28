@@ -521,7 +521,7 @@ const TeacherQuizzesPage = () => {
 
           <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
             <h4 className="mb-4 text-sm font-extrabold uppercase tracking-[0.18em] text-[#0A1F44]">
-              Assigned students ({classes.find((item: any) => item?.id === selectedClass)?.students?.length ?? 0})
+              Assigned students ({classes.find((item) => item.id === selectedClass)?.students?.length ?? 0})
             </h4>
             <p className="text-sm text-slate-500">
               Pick a class to preview the students who will receive this quiz.

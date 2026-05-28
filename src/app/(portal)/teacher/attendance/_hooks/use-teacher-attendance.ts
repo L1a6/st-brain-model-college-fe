@@ -102,7 +102,7 @@ export const useMarkStudentAttendance = (classId: string) => {
   const qc = useQueryClient()
 
   return useMutation({
-    mutationFn: async (payload: {
+    mutationFn: async (_payload: {
       date: string
       attendance_records: Array<{
         student_id: string

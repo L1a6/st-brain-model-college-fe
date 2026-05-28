@@ -1,7 +1,6 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import Link from 'next/link'
 import { useStudentAuth } from '@/hooks/use-auth-user'
 import { useQuery } from '@tanstack/react-query'
 import { QuizAPI } from '@/lib/quiz'
@@ -34,7 +33,7 @@ function TrendBadge({ label, value }: { label: string; value: string }) {
   )
 }
 
-function StatusBadge({ status, isDone, isOverdue }: { status: string; isDone: boolean; isOverdue: boolean }) {
+function StatusBadge({ isDone, isOverdue }: { isDone: boolean; isOverdue: boolean }) {
   const baseClasses = 'inline-block px-3 py-1 rounded-full text-xs font-semibold'
   if (isDone) return <span className={`${baseClasses} bg-emerald-100 text-emerald-700`}>Completed</span>
   if (isOverdue) return <span className={`${baseClasses} bg-red-100 text-red-700`}>Overdue</span>
@@ -61,14 +60,14 @@ export default function StudentQuizzesPage() {
     enabled: !!studentId,
   })
 
-  const quizzes = quizzesData?.data?.quizzes || []
+  const quizzes = useMemo(() => quizzesData?.data?.quizzes ?? [], [quizzesData?.data?.quizzes])
   const submissions = useMemo(() => {
     const subs = quizzesData?.data?.submissions || {}
     return Object.keys(subs).reduce((acc, key) => {
       acc[key] = subs[key]
       return acc
     }, {} as Record<string, QuizSubmission>)
-  }, [quizzesData])
+  }, [quizzesData?.data?.submissions])
 
   const completedCount = useMemo(() => quizzes.filter((q) => submissions[q.id]).length, [quizzes, submissions])
   const pendingCount = quizzes.length - completedCount
@@ -86,7 +85,7 @@ export default function StudentQuizzesPage() {
   }
 
   const submitQuiz = useCallback(
-    async (autoSubmitted = false) => {
+    async () => {
       if (!activeQuiz || !studentId) return
 
       let correct = 0
@@ -117,8 +116,11 @@ export default function StudentQuizzesPage() {
   useEffect(() => {
     if (!activeQuiz || submitted) return
     if (timeLeft <= 0) {
-      submitQuiz(true)
-      return
+      const timeout = window.setTimeout(() => {
+        void submitQuiz(true)
+      }, 0)
+
+      return () => window.clearTimeout(timeout)
     }
 
     const timer = window.setInterval(() => {
@@ -427,7 +429,7 @@ export default function StudentQuizzesPage() {
                     backgroundPosition: 'center',
                   }}
                 >
-                  <StatusBadge status={isDone ? 'Completed' : isOverdue ? 'Overdue' : 'Available'} isDone={isDone} isOverdue={isOverdue} />
+                  <StatusBadge isDone={isDone} isOverdue={isOverdue} />
                   <span className="text-xs font-semibold opacity-95">{quiz.timeLimitMinutes} mins</span>
                 </div>
 

@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback } from "react"
 import Link from "next/link"
-import { Upload, Plus } from "lucide-react"
+import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import DashboardTitle from "@/components/dashboard/dashboard-title"
 import StatsCards from "./_components/stats-cards"

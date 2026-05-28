@@ -39,7 +39,6 @@ export function UsersTable({
   const deleteStudentMutation = useDeleteStudent()
   const deleteParentMutation = useDeleteParent()
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
-  const [userToDelete, setUserToDelete] = useState<User | null>(null)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
 
