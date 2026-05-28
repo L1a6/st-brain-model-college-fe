@@ -7,7 +7,7 @@ const programs = [
     title: "Junior Secondary School",
     range: "JSS 1 — JSS 3",
     desc: "A strong foundational curriculum covering core subjects including Mathematics, English, Basic Science, Social Studies, CRS/IRS, Creative Arts, and more.",
-    img: "/images/home/for-who/image3.png",
+    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=90",
     subjects: ["Mathematics", "English Language", "Basic Science", "Social Studies", "French"],
   },
   {
@@ -15,7 +15,7 @@ const programs = [
     title: "Senior Secondary School",
     range: "SS 1 — SS 3",
     desc: "Specialised tracks in Science, Arts, and Commercial — all preparing students for WAEC, NECO, and JAMB with distinction.",
-    img: "/images/features/image4.png",
+    img: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1600&q=90",
     subjects: ["Physics", "Chemistry", "Biology", "Economics", "Literature"],
   },
   {
@@ -23,21 +23,21 @@ const programs = [
     title: "Sports & Co-Curricular",
     range: "All levels",
     desc: "Football, athletics, debate, cultural dance, science olympiad, coding club — we develop the student beyond the classroom.",
-    img: "/images/features/image5.png",
+    img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1600&q=90",
     subjects: ["Football", "Athletics", "Debate Club", "Science Olympiad", "Coding Club"],
   },
 ]
 
 export default function Programs() {
   return (
-    <section id="academics" className="bg-canvas-white py-20 lg:py-28 overflow-hidden">
+      <section id="academics" className="bg-canvas-white py-10 lg:py-14 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16 reveal">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 reveal">
           <div className="max-w-xl">
             <span className="section-eyebrow mb-5">Academics</span>
             <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight">
               Programmes that<br />
-              <span className="text-crimson italic">shape champions.</span>
+              <span className="text-[#2563EB]/80">shape champions.</span>
             </h2>
           </div>
           <p className="text-ink-3 text-base max-w-sm leading-relaxed">
@@ -61,7 +61,7 @@ export default function Programs() {
 
                   <div className="p-7 flex flex-col gap-4 flex-1">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 bg-crimson-soft flex items-center justify-center flex-shrink-0">
+                      <div className="w-9 h-9 bg-crimson-soft flex items-center justify-center shrink-0">
                         <Icon size={16} className="text-crimson" />
                       </div>
                       <p className="font-display text-lg font-semibold text-navy">{program.title}</p>

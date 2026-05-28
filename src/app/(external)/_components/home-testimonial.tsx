@@ -7,14 +7,11 @@ export default function HomeTestimonial() {
     <section className="w-full bg-[#fafafa] px-4 py-20 text-black md:px-6 lg:px-8">
       <div className="font-outfit mx-auto max-w-[1285px] px-4">
         <div className="mb-12">
-          <p className="text-primary mb-4 text-lg font-medium">Testimonials</p>
-          <h3
-            className="text-text-secondary mb-4 text-base leading-tight font-semibold md:text-2xl"
-            // style={{ fontSize: "clamp(28px, 5vw, 40px)" }}
-          >
+          <span className="section-eyebrow mb-5">Testimonials</span>
+          <h2 className="font-display mb-4 max-w-3xl text-4xl leading-tight text-navy md:text-5xl">
             What Students, Staff & Parents Say About School Base
-          </h3>
-          <p className="text-primary mx-auto max-w-3xl lg:mx-0">
+          </h2>
+          <p className="text-ink-3 mx-auto max-w-3xl text-base leading-relaxed lg:mx-0">
             Real stories from people who use School Base every day to learn, teach, and
             stay organized
           </p>

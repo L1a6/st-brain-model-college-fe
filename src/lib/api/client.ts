@@ -4,7 +4,8 @@ import { getUserFriendlyMessage } from "../errors"
 const DEFAULT_API_BASE_URL = "https://st-brains-model-college-be.onrender.com/api/v1"
 
 const resolveApiBaseUrl = (): string => {
-  const configuredBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.trim()
+  const configuredBaseUrl =
+    process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || process.env.API_BASE_URL?.trim()
 
   if (configuredBaseUrl) {
     const isLocalhost = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
@@ -201,11 +202,29 @@ const buildMockApiResponse = (path: string, config: AxiosRequestConfig): unknown
     saveMockUser(user)
 
     if (normalizedPath === "/api/auth/superadmin/login") {
-      return { message: "Login successful" }
+      return {
+        message: "Login successful",
+        user: {
+          id: user.id,
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          role: user.role,
+        },
+        session_id: "sess-mock-001",
+      }
     }
 
     return {
       message: "Login successful",
+      user: {
+        id: user.id,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        role: user.role,
+      },
+      session_id: "sess-mock-001",
       data: {
         user: {
           id: user.id,

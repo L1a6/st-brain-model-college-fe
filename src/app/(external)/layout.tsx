@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Footer from "@/components/Footer"
+import FooterWrapper from "@/components/footer-wrapper"
 import NavBarWrapper from "@/components/navbar-wrapper"
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function ExternalLayout({ children }: { children: React.ReactNode
     <>
       <NavBarWrapper />
       <main className="pt-16 md:pt-22 lg:pt-26">{children}</main>
-      <Footer />
+      <FooterWrapper />
     </>
   )
 }

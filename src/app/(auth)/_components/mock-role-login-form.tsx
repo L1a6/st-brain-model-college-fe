@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { apiFetch } from "@/lib/api/client"
-import { loginUsingEmail } from "@/lib/api/auth"
+import { loginUsingEmail, storeAuthSessionFromResponse } from "@/lib/api/auth"
+import type { LoginResponse } from "@/types/auth"
 import SchoolLogo from "./school-logo"
 
 type MockRoleLoginFormProps = {
@@ -27,8 +28,10 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
     setIsLoading(true)
 
     try {
+      let loginResponse: LoginResponse | null = null
+
       if (role === "super-admin") {
-        await apiFetch(
+        loginResponse = await apiFetch<LoginResponse>(
           "/api/auth/superadmin/login",
           {
             method: "POST",
@@ -37,7 +40,11 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
           true
         )
       } else {
-        await loginUsingEmail({ email, password })
+        loginResponse = await loginUsingEmail({ email, password })
+      }
+
+      if (loginResponse) {
+        storeAuthSessionFromResponse(loginResponse)
       }
 
       const nextRoute = new URLSearchParams(window.location.search).get("next")

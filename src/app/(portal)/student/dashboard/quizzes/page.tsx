@@ -8,26 +8,26 @@ import { QuizAPI } from '@/lib/quiz'
 import type { Quiz, QuizSubmission } from '@/types/quiz'
 
 const SUBJECT_IMAGES: Record<string, string> = {
-  mathematics: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=900&q=80',
-  english: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80',
-  physics: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=900&q=80',
-  chemistry: 'https://images.unsplash.com/photo-1532634993-15f421e42ec0?auto=format&fit=crop&w=900&q=80',
-  biology: 'https://images.unsplash.com/photo-1530210124550-912dc1381cb8?auto=format&fit=crop&w=900&q=80',
-  economics: 'https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=900&q=80',
-  history: 'https://images.unsplash.com/photo-1507842217343-583f20270319?auto=format&fit=crop&w=900&q=80',
-  literature: 'https://images.unsplash.com/photo-1507842217343-583f20270319?auto=format&fit=crop&w=900&q=80',
-  'computer-science': 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80',
-  geography: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=900&q=80',
+  mathematics: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80',
+  english: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80',
+  physics: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80',
+  chemistry: 'https://images.unsplash.com/photo-1532634993-15f421e42ec0?auto=format&fit=crop&w=1200&q=80',
+  biology: 'https://images.unsplash.com/photo-1530210124550-912dc1381cb8?auto=format&fit=crop&w=1200&q=80',
+  economics: 'https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=1200&q=80',
+  history: 'https://images.unsplash.com/photo-1507842217343-583f20270319?auto=format&fit=crop&w=1200&q=80',
+  literature: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80',
+  'computer-science': 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80',
+  geography: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80',
 }
 
 function getSubjectImage(subject: string): string {
   const key = subject.toLowerCase().replace(/\s+/g, '-')
-  return SUBJECT_IMAGES[key] || 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80'
+  return SUBJECT_IMAGES[key] || 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80'
 }
 
 function TrendBadge({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-canvas border border-canvas-border rounded-lg p-3">
+    <div className="rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
       <p className="text-xs text-ink-3 mb-1">{label}</p>
       <p className="text-lg font-bold text-navy">{value}</p>
     </div>
@@ -38,7 +38,7 @@ function StatusBadge({ status, isDone, isOverdue }: { status: string; isDone: bo
   const baseClasses = 'inline-block px-3 py-1 rounded-full text-xs font-semibold'
   if (isDone) return <span className={`${baseClasses} bg-emerald-100 text-emerald-700`}>Completed</span>
   if (isOverdue) return <span className={`${baseClasses} bg-red-100 text-red-700`}>Overdue</span>
-  return <span className={`${baseClasses} bg-blue-100 text-blue-700`}>Available</span>
+  return <span className={`${baseClasses} bg-[#0A1F44]/10 text-[#0A1F44]`}>Available</span>
 }
 
 export default function StudentQuizzesPage() {
@@ -142,25 +142,24 @@ export default function StudentQuizzesPage() {
     const seconds = String(Math.max(timeLeft % 60, 0)).padStart(2, '0')
 
     return (
-      <div className="max-w-3xl mx-auto p-6">
+      <div className="max-w-3xl mx-auto bg-white p-6">
         {/* Quiz Header */}
         <div
-          className="bg-white rounded-2xl border border-canvas-border overflow-hidden mb-6 shadow-sm"
+          className="rounded-2xl border border-slate-200 overflow-hidden mb-6 shadow-sm bg-white"
           style={{
-            backgroundImage: `linear-gradient(180deg, rgba(11,18,32,0.22), rgba(11,18,32,0.7)), url(${getSubjectImage(activeQuiz.subject)})`,
+            backgroundImage: `linear-gradient(180deg, rgba(10,31,68,0.10), rgba(10,31,68,0.32)), url(${getSubjectImage(activeQuiz.subject)})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
           }}
         >
-          <div className="p-6 text-white">
+          <div className="p-6 text-white" style={{ minHeight: 220 }}>
             <div className="flex justify-between items-start gap-4 mb-4">
               <div>
                 <h2 className="text-2xl font-bold">{activeQuiz.title}</h2>
                 <p className="text-sm opacity-90 mt-2">{activeQuiz.subject} · {activeQuiz.questions.length} questions</p>
               </div>
-              <div className="text-right flex-shrink-0">
-                <div className="text-3xl font-bold text-amber-400">
+              <div className="text-right shrink-0">
+                <div className="text-3xl font-bold text-white">
                   {minutes}:{seconds}
                 </div>
                 <div className="text-xs opacity-85 mt-1">Time remaining</div>
@@ -173,9 +172,9 @@ export default function StudentQuizzesPage() {
                 <span>Answered: {answeredCount}/{activeQuiz.questions.length}</span>
                 <span>{progress}% complete</span>
               </div>
-              <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+              <div className="h-2 bg-white/30 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-blue-500 transition-all"
+                  className="h-full bg-white transition-all"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -186,15 +185,15 @@ export default function StudentQuizzesPage() {
         {/* Questions */}
         <div className="space-y-4">
           {activeQuiz.questions.map((q, idx) => (
-            <div key={q.id} className="bg-white rounded-lg border border-canvas-border p-6">
+            <div key={q.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
               <div className="mb-4">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">
+                  <span className="inline-block bg-[#0A1F44]/10 text-[#0A1F44] px-3 py-1 rounded-full text-xs font-bold">
                     Q{idx + 1}
                   </span>
-                  <span className="text-xs text-ink-3">{q.points} points</span>
+                  <span className="text-xs text-slate-500">{q.points} points</span>
                 </div>
-                <p className="text-navy font-semibold">{q.text}</p>
+                <p className="text-[#0A1F44] font-semibold">{q.text}</p>
               </div>
 
               {q.type === 'multiple_choice' &&
@@ -205,8 +204,8 @@ export default function StudentQuizzesPage() {
                       key={i}
                       className={`flex items-center gap-3 p-3 rounded-lg mb-2 cursor-pointer transition-colors ${
                         selected
-                          ? 'bg-blue-100 border border-blue-400'
-                          : 'bg-canvas border border-canvas-border hover:border-canvas'
+                            ? 'bg-[#0A1F44]/8 border border-[#0A1F44]/25'
+                            : 'bg-white border border-slate-200 hover:border-[#0A1F44]/30'
                       }`}
                     >
                       <input
@@ -223,7 +222,7 @@ export default function StudentQuizzesPage() {
                 })}
 
               {q.type === 'true_false' && (
-                <div className="flex gap-3">
+                  <div className="flex gap-3">
                   {['True', 'False'].map((opt) => {
                     const selected = answers[q.id] === opt
                     return (
@@ -231,8 +230,8 @@ export default function StudentQuizzesPage() {
                         key={opt}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg cursor-pointer transition-colors ${
                           selected
-                            ? 'bg-blue-100 border border-blue-400'
-                            : 'bg-canvas border border-canvas-border hover:border-canvas'
+                            ? 'bg-[#0A1F44]/8 border border-[#0A1F44]/25'
+                              : 'bg-white border border-slate-200 hover:border-[#0A1F44]/30'
                         }`}
                       >
                         <input
@@ -254,7 +253,7 @@ export default function StudentQuizzesPage() {
                 <input
                   value={answers[q.id] || ''}
                   onChange={(e) => setAnswers((p) => ({ ...p, [q.id]: e.target.value }))}
-                  className="w-full px-4 py-2 border border-canvas-border rounded-lg focus:outline-none focus:border-blue-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#0A1F44]"
                   placeholder="Type your answer here"
                 />
               )}
@@ -266,7 +265,7 @@ export default function StudentQuizzesPage() {
         <div className="flex gap-3 mt-8 flex-wrap">
           <button
             onClick={() => setActiveQuiz(null)}
-            className="px-6 py-3 bg-canvas border border-canvas-border text-navy rounded-lg font-semibold hover:bg-gold-muted transition-colors"
+            className="px-6 py-3 bg-white border border-slate-200 text-[#0A1F44] rounded-lg font-semibold hover:bg-[#0A1F44]/5 transition-colors"
           >
             Cancel
           </button>
@@ -288,13 +287,13 @@ export default function StudentQuizzesPage() {
     const gradeLabel = pct >= 90 ? 'Excellent' : pct >= 75 ? 'Very Good' : pct >= 60 ? 'Good' : pct >= 50 ? 'Fair' : 'Needs Work'
 
     return (
-      <div className="max-w-2xl mx-auto p-6">
-        <div className="bg-white rounded-2xl border border-canvas-border overflow-hidden shadow-lg">
+      <div className="max-w-2xl mx-auto bg-white p-6">
+        <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-lg bg-white">
           {/* Hero Image */}
           <div
-            className="min-h-[240px] flex items-end p-6 text-white"
+            className="min-h-60 flex items-end p-6 text-white"
             style={{
-              backgroundImage: `linear-gradient(180deg, rgba(11,18,32,0.18), rgba(11,18,32,0.8)), url(${getSubjectImage(activeQuiz.subject)})`,
+              backgroundImage: `linear-gradient(180deg, rgba(10,31,68,0.10), rgba(10,31,68,0.42)), url(${getSubjectImage(activeQuiz.subject)})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -304,8 +303,8 @@ export default function StudentQuizzesPage() {
 
           {/* Result Content */}
           <div className="p-8 text-center">
-            <h2 className="text-2xl font-bold text-navy mb-2">Your Result</h2>
-            <p className="text-ink-3 mb-6">{activeQuiz.title}</p>
+            <h2 className="text-2xl font-bold text-[#0A1F44] mb-2">Your Result</h2>
+            <p className="text-slate-500 mb-6">{activeQuiz.title}</p>
 
             {/* Score Display */}
             <div className="mb-8">
@@ -317,7 +316,7 @@ export default function StudentQuizzesPage() {
               >
                 {score}/{maxScore}
               </div>
-              <p className="text-lg text-ink-3">{pct}% Overall Performance</p>
+              <p className="text-lg text-slate-500">{pct}% Overall Performance</p>
             </div>
 
             {/* Stats */}
@@ -330,7 +329,7 @@ export default function StudentQuizzesPage() {
             {/* Feedback */}
             {passed && (
               <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6">
-                <p className="text-emerald-700 font-semibold">✓ Great job! You passed this quiz.</p>
+                <p className="text-emerald-700 font-semibold">Great job! You passed this quiz.</p>
               </div>
             )}
 
@@ -340,7 +339,7 @@ export default function StudentQuizzesPage() {
                 setActiveQuiz(null)
                 setSubmitted(false)
               }}
-              className="w-full px-6 py-3 bg-navy text-white rounded-lg font-semibold hover:bg-navy-mid transition-colors"
+              className="w-full px-6 py-3 bg-[#0A1F44] text-white rounded-lg font-semibold hover:bg-[#0E2A59] transition-colors"
             >
               Back to Quizzes
             </button>
@@ -352,13 +351,13 @@ export default function StudentQuizzesPage() {
 
   // QUIZZES LIST VIEW
   return (
-    <div className="p-6">
+    <div className="bg-white p-6">
       {/* Page Header */}
       <div className="mb-8">
         <div className="flex justify-between items-start gap-6 mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-navy mb-2">Quizzes</h1>
-            <p className="text-ink-3">{quizzes.length} quizzes available for your class</p>
+            <h1 className="text-3xl font-bold text-[#0A1F44] mb-2">Quizzes</h1>
+            <p className="text-slate-500">{quizzes.length} quizzes available for your class</p>
           </div>
           <div className="grid grid-cols-5 gap-2 min-w-[500px]">
             <TrendBadge label="Total" value={`${quizzes.length}`} />
@@ -372,7 +371,7 @@ export default function StudentQuizzesPage() {
         {/* Subject Tags */}
         <div className="flex flex-wrap gap-2">
           {courseSubjects.map((subject) => (
-            <span key={subject} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+            <span key={subject} className="px-3 py-1 bg-[#0A1F44]/10 text-[#0A1F44] rounded-full text-sm font-medium">
               {subject}
             </span>
           ))}
@@ -382,18 +381,18 @@ export default function StudentQuizzesPage() {
       {/* Loading State */}
       {isLoading && (
         <div className="text-center py-12">
-          <div className="inline-block animate-spin w-8 h-8 border-4 border-canvas-border border-t-blue-500 rounded-full"></div>
-          <p className="text-ink-3 mt-4">Loading quizzes...</p>
+          <div className="inline-block animate-spin w-8 h-8 border-4 border-slate-200 border-t-[#0A1F44] rounded-full"></div>
+          <p className="text-slate-500 mt-4">Loading quizzes...</p>
         </div>
       )}
 
       {/* Empty State */}
       {!isLoading && quizzes.length === 0 && (
         <div
-          className="rounded-2xl border border-canvas-border min-h-[280px] flex items-end p-8 text-white"
+          className="rounded-2xl border border-slate-200 min-h-[280px] flex items-end p-8 text-white"
           style={{
             backgroundImage:
-              'linear-gradient(180deg, rgba(11,18,32,0.12), rgba(11,18,32,0.7)), url(https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80)',
+              'linear-gradient(180deg, rgba(10,31,68,0.10), rgba(10,31,68,0.58)), url(https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=1200&q=80)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -414,12 +413,12 @@ export default function StudentQuizzesPage() {
             const isOverdue = new Date(quiz.dueDate) < new Date() && !isDone
 
             return (
-              <div key={quiz.id} className="bg-white rounded-2xl border border-canvas-border overflow-hidden hover:shadow-md transition-shadow">
+              <div key={quiz.id} className="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
                 {/* Quiz Image */}
                 <div
-                  className="relative min-h-[160px] flex justify-between items-start p-4 text-white"
+                  className="relative min-h-40 flex justify-between items-start p-4 text-white"
                   style={{
-                    backgroundImage: `linear-gradient(180deg, rgba(11,18,32,0.06), rgba(11,18,32,0.6)), url(${getSubjectImage(quiz.subject)})`,
+                    backgroundImage: `linear-gradient(180deg, rgba(10,31,68,0.06), rgba(10,31,68,0.44)), url(${getSubjectImage(quiz.subject)})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                   }}
@@ -430,16 +429,16 @@ export default function StudentQuizzesPage() {
 
                 {/* Quiz Details */}
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-navy mb-2 line-clamp-2">{quiz.title}</h3>
-                  <p className="text-sm text-ink-3 mb-4">{quiz.subject}</p>
+                  <h3 className="text-lg font-bold text-[#0A1F44] mb-2 line-clamp-2">{quiz.title}</h3>
+                  <p className="text-sm text-slate-500 mb-4">{quiz.subject}</p>
 
                   <div className="flex gap-2 text-xs text-ink-3 mb-4 flex-wrap">
-                    <span>📋 {quiz.questions.length} questions</span>
-                    <span>📅 Due: {new Date(quiz.dueDate).toLocaleDateString('en-NG')}</span>
+                    <span>{quiz.questions.length} questions</span>
+                    <span>Due: {new Date(quiz.dueDate).toLocaleDateString('en-NG')}</span>
                   </div>
 
                   <div className="flex gap-2 mb-4 flex-wrap">
-                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded font-medium">{quiz.subject}</span>
+                    <span className="px-2 py-1 bg-[#0A1F44]/10 text-[#0A1F44] text-xs rounded font-medium">{quiz.subject}</span>
                     <span className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded font-medium">{quiz.questions.length} items</span>
                     <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-xs rounded font-medium">{quiz.timeLimitMinutes}m</span>
                   </div>
@@ -469,7 +468,7 @@ export default function StudentQuizzesPage() {
                     className={`w-full px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${
                       isDone
                         ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
-                        : 'bg-blue-600 text-white hover:bg-blue-700'
+                        : 'bg-[#0A1F44] text-white hover:bg-[#0E2A59]'
                     }`}
                   >
                     {isDone ? 'Review Quiz' : 'Start Quiz'}

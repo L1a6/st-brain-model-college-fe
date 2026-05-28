@@ -10,7 +10,7 @@ const events = [
 
 export default function Events() {
   return (
-    <section className="bg-canvas-white pt-14 pb-20 lg:pt-16 lg:pb-24 overflow-hidden" id="events">
+    <section className="bg-canvas-white pt-10 pb-14 lg:pt-12 lg:pb-18 overflow-hidden" id="events">
       <div className="container">
         <ScrollReveal>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-14">
@@ -18,7 +18,7 @@ export default function Events() {
               <span className="section-eyebrow mb-5">School Life</span>
               <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight">
                 Moments that feel
-                <span className="block text-navy">alive and memorable.</span>
+                <span className="block text-[#2563EB]/80">alive and memorable.</span>
               </h2>
             </div>
             <a href="#admissions" className="text-sm font-semibold text-navy hover:text-navy-mid transition-colors">
@@ -29,7 +29,7 @@ export default function Events() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-5">
             {events.map((e) => (
               <article key={e.title} className="md:col-span-4 group">
-                <div className="relative aspect-[16/11] overflow-hidden rounded-[30px] border border-canvas-border bg-canvas-white">
+                <div className="relative aspect-16/11 overflow-hidden rounded-[30px] border border-canvas-border bg-canvas-white">
                   <Image src={e.img} alt={e.title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,18,32,0.58)_0%,rgba(11,18,32,0.12)_58%,transparent_100%)]" />
                   <div className="absolute left-5 right-5 bottom-5">

@@ -11,6 +11,14 @@ export interface SignUpPayload {
 
 export type AuthUser = Record<string, unknown>
 
+export type LoginUser = {
+  id: string
+  email: string
+  first_name: string
+  last_name: string
+  role: string[]
+}
+
 export interface AuthApiResponse<Data = unknown> {
   status?: string | number | boolean
   message?: string
@@ -36,13 +44,13 @@ export interface UserProfileResponse {
 
 export type LoginResponse = {
   message: string
-  data: {
-    user: {
-      id: string
-      email: string
-      first_name: string
-      last_name: string
-      role: string[]
-    }
+  user?: LoginUser
+  access_token?: string
+  refresh_token?: string
+  session_id?: string
+  session_expires_at?: string
+  data?: {
+    user: LoginUser
   }
+  [key: string]: unknown
 }

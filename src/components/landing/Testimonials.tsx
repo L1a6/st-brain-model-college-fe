@@ -22,7 +22,7 @@ const testimonials = [
       "The administration backs us fully. I have the tools, the time and the support to teach at the highest level. Watching students who once feared algebra go on to score A1 is why I come to work every single day.",
   },
   {
-    img: "/assets/images/auth/user-icon.png",
+    img: "/testimonials/t-student.png",
     name: "Emeka Adeyemi",
     role: "SS3 Student",
     title: "I found myself at St. Brain\'s.",
@@ -41,7 +41,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-canvas-white py-20 lg:py-28 overflow-hidden">
+    <section className="bg-canvas-white py-14 lg:py-20 overflow-hidden">
       <div className="container">
         <ScrollReveal>
           <div className="grid grid-cols-1 lg:grid-cols-[0.96fr_1.04fr] gap-10 lg:gap-16 items-end mb-12 lg:mb-14">
