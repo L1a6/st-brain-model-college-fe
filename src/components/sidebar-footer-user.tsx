@@ -1,6 +1,4 @@
 "use client"
-
-import Image from "next/image"
 import { LogOut } from "lucide-react"
 import { useState } from "react"
 import { useAuthStore } from "@/store/auth-store"
@@ -33,7 +31,7 @@ export function SidebarFooterUser({ isCollapsed = false }: SidebarFooterUserProp
 
   return (
     <>
-      <div className="border-t border-black/[0.06] p-4 dark:border-white/[0.06]">
+      <div className="border-t border-black/6 p-4 dark:border-white/6">
         <div className="flex items-center justify-between">
           <Link href={`/${role}/profile`} className="flex flex-1 items-center gap-3">
             <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 text-[11px] font-semibold text-neutral-600 dark:bg-white/10 dark:text-neutral-200">

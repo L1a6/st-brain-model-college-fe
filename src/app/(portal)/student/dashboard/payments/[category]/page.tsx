@@ -17,12 +17,24 @@ const CATEGORY_IMAGES: Record<PaymentCategory, string> = {
   exam_fee: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1600&q=80',
 }
 
-function getPaymentDate(payment: any): string {
+type PaymentRecord = {
+  payment_date?: string
+  date?: string
+  created_at?: string
+  createdAt?: string
+  transaction_reference?: string
+  reference?: string
+  paystackReference?: string
+  amount_paid?: number
+  paidAmount?: number
+}
+
+function getPaymentDate(payment: PaymentRecord): string {
   const rawDate = payment.payment_date || payment.date || payment.created_at || payment.createdAt
   return rawDate ? new Date(rawDate).toLocaleDateString('en-NG', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Pending'
 }
 
-function getPaymentReference(payment: any): string {
+function getPaymentReference(payment: PaymentRecord): string {
   return payment.transaction_reference || payment.reference || payment.paystackReference || 'No reference'
 }
 
@@ -45,17 +57,20 @@ export default function PaymentDetailPage() {
     if (!category || !feeDetails) return null
 
     const categoryInfo = PAYMENT_CATEGORIES[category]
-    const feeBreakdown = feeDetails.data?.data?.fee_breakdown || []
+    const feeBreakdown = (feeDetails.data?.data?.fee_breakdown || []) as Array<{
+      component_name: string
+      amount?: number
+      amount_paid?: number
+      status?: string
+    }>
     const normalizedCategory = category.replace(/_/g, ' ')
     const feeItem = feeBreakdown.find((item: { component_name: string }) => item.component_name.toLowerCase() === normalizedCategory)
     const amount = feeItem?.amount || 0
     const paid = feeItem?.amount_paid || 0
     const remaining = Math.max(amount - paid, 0)
     const isPaid = amount > 0 ? remaining <= 0 : false
-    const paymentHistory =
-      feeDetails.data?.data?.payment_history?.filter((item: { fee_component?: string }) =>
-        (item.fee_component || '').toLowerCase().includes(normalizedCategory)
-      ) || []
+    const paymentHistory = ((feeDetails.data?.data?.payment_history || []) as Array<{ fee_component?: string }>)
+      .filter((item) => (item.fee_component || '').toLowerCase().includes(normalizedCategory)) as PaymentRecord[]
 
     return {
       info: categoryInfo,
@@ -185,7 +200,7 @@ export default function PaymentDetailPage() {
         {details.paymentHistory.length === 0 ? (
           <div className="rounded-2xl border border-slate-200 bg-white p-6 text-slate-500 shadow-sm">No payments recorded yet for this fee.</div>
         ) : (
-          details.paymentHistory.map((payment: any, idx: number) => (
+          details.paymentHistory.map((payment: PaymentRecord, idx: number) => (
             <div key={payment.id || `${payment.payment_date || payment.date || idx}`} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <div>
                 <p className="text-base font-bold text-[#0A1F44]">₦{(payment.amount_paid || payment.paidAmount || 0).toLocaleString()}</p>

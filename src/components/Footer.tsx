@@ -39,13 +39,13 @@ export default function Footer() {
                 <Image src="/logo123.jpg" alt="St. Brain's" fill className="object-contain" />
               </div>
               <div>
-                <p className="font-display text-sm font-bold text-white leading-tight">St. Brain's</p>
+                <p className="font-display text-sm font-bold text-white leading-tight">St. Brain&apos;s</p>
                 <p className="text-2xs text-crimson uppercase tracking-widest">Model College</p>
               </div>
             </Link>
 
             <p className="text-sm text-white/50 leading-relaxed mb-6 max-w-xs">
-              Shaping tomorrow's leaders through academic rigour, moral values, and a community that believes in every student.
+              Shaping tomorrow&apos;s leaders through academic rigour, moral values, and a community that believes in every student.
             </p>
 
             <div className="flex items-center gap-3">
@@ -125,7 +125,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">© {new Date().getFullYear()} St. Brain's Model College. All rights reserved.</p>
+          <p className="text-xs text-white/30">© {new Date().getFullYear()} St. Brain&apos;s Model College. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-xs text-white/30 hover:text-white/60 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="text-xs text-white/30 hover:text-white/60 transition-colors">Terms of Use</Link>

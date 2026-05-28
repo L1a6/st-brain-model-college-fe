@@ -73,8 +73,8 @@ export const QuizAPI = {
   /**
    * Create a new quiz (for teachers)
    */
-  createQuiz: (payload: any) =>
-    apiFetch<ResponsePack<any>>('/quizzes', {
+  createQuiz: (payload: Record<string, unknown>) =>
+    apiFetch<ResponsePack<unknown>>('/quizzes', {
       method: 'POST',
       data: payload,
     }, true),
@@ -82,7 +82,7 @@ export const QuizAPI = {
    * Get quizzes created by a teacher
    */
   getTeacherQuizzes: (teacherId: string, params?: { page?: number; limit?: number }) =>
-    apiFetch<ResponsePack<{ items: any[]; meta?: any }>>(
+    apiFetch<ResponsePack<{ items: unknown[]; meta?: Record<string, unknown> }>>(
       '/quizzes',
       {
         method: 'GET',
@@ -94,8 +94,8 @@ export const QuizAPI = {
   /**
    * Update a quiz
    */
-  updateQuiz: (quizId: string, payload: any) =>
-    apiFetch<ResponsePack<any>>(`/quizzes/${quizId}`, {
+  updateQuiz: (quizId: string, payload: Record<string, unknown>) =>
+    apiFetch<ResponsePack<unknown>>(`/quizzes/${quizId}`, {
       method: 'PUT',
       data: payload,
     }, true),
@@ -110,5 +110,5 @@ export const QuizAPI = {
    * Get submissions for a quiz
    */
   getQuizSubmissions: (quizId: string) =>
-    apiFetch<ResponsePack<{ submissions: any[] }>>(`/quiz-submissions`, { method: 'GET', params: { quiz_id: quizId } }, true),
+    apiFetch<ResponsePack<{ submissions: unknown[] }>>(`/quiz-submissions`, { method: 'GET', params: { quiz_id: quizId } }, true),
 }

@@ -38,7 +38,7 @@ export default function About() {
             </h2>
 
             <p className="text-ink-3 text-base lg:text-lg leading-relaxed mb-4 max-w-xl">
-              St. Brain's Model College is about focused teaching, thoughtful guidance, and spaces that feel bright and composed.
+              St. Brain&apos;s Model College is about focused teaching, thoughtful guidance, and spaces that feel bright and composed.
             </p>
 
             <p className="text-sm sm:text-base text-ink-2 leading-relaxed max-w-xl border-t border-canvas-border pt-5">

@@ -23,21 +23,16 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ]
 
-export default function Navbar() {
+function NavbarContent({ pathname }: { pathname: string }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [dropdown, setDropdown] = useState<string | null>(null)
-  const pathname = usePathname()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handler)
     return () => window.removeEventListener("scroll", handler)
   }, [])
-
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname])
 
   return (
     <>
@@ -58,14 +53,14 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <div className="hidden sm:block">
-              <p
-                className={clsx(
-                  "font-display text-sm font-bold leading-tight transition-colors",
-                  scrolled ? "text-navy" : "text-white"
-                )}
-              >
-                St. Brian's
+              <div className="hidden sm:block">
+                <p
+                  className={clsx(
+                    "font-display text-sm font-bold leading-tight transition-colors",
+                    scrolled ? "text-navy" : "text-white"
+                  )}
+                >
+                  St. Brain&apos;s
               </p>
               <p
                 className={clsx(
@@ -157,7 +152,7 @@ export default function Navbar() {
               <Image src="/logo123.jpg" alt="St. Brian's" fill className="object-contain" />
             </div>
             <div>
-              <p className="font-display text-sm font-bold text-navy leading-tight">St. Brian's</p>
+              <p className="font-display text-sm font-bold text-navy leading-tight">St. Brain&apos;s</p>
               <p className="text-2xs text-crimson uppercase tracking-widest">Model College</p>
             </div>
           </div>
@@ -197,10 +192,16 @@ export default function Navbar() {
             Enroll
           </Link>
           <p className="text-2xs text-center text-ink-4">
-            © {new Date().getFullYear()} St. Brian's Model College
+            © {new Date().getFullYear()} St. Brain&apos;s Model College
           </p>
         </div>
       </aside>
     </>
   )
+}
+
+export default function Navbar() {
+  const pathname = usePathname()
+
+  return <NavbarContent key={pathname} pathname={pathname} />
 }

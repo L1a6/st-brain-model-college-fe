@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between h-16">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/logo123.jpg" alt="logo" width={40} height={40} className="rounded-sm" />
-          <span className="text-sm font-semibold">St. Brian's Model College</span>
+          <span className="text-sm font-semibold">St. Brain&apos;s Model College</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">

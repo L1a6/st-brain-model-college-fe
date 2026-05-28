@@ -11,7 +11,7 @@ export default function FeaturesPage() {
           <span className="text-crimson italic">confident learners.</span>
         </h1>
         <p className="text-ink-3 text-lg leading-relaxed max-w-3xl">
-          From junior secondary foundations to senior secondary specializations, St. Brian's keeps the curriculum rigorous and personal.
+          From junior secondary foundations to senior secondary specializations, St. Brain&apos;s keeps the curriculum rigorous and personal.
         </p>
       </div>
       <Programs />

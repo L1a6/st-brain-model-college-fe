@@ -52,7 +52,7 @@ export default function Testimonials() {
                 <span className="block text-[#2563EB]/80">community.</span>
               </h2>
               <p className="text-ink-3 text-base lg:text-lg leading-relaxed max-w-xl">
-                Real voices from parents, teachers, and students sharing what life at St. Brain's feels like.
+                Real voices from parents, teachers, and students sharing what life at St. Brain&apos;s feels like.
               </p>
             </div>
 

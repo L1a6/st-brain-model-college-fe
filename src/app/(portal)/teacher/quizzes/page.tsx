@@ -18,6 +18,43 @@ type QForm = {
   points: number
 }
 
+type QuizItem = {
+  id: string
+  title?: string
+  subject?: string
+  description?: string
+  dueDate?: string
+  due_date?: string
+  timeLimitMinutes?: number
+  classId?: string
+  class_id?: string
+  status?: string
+  questions?: Array<{
+    text?: string
+    type?: "multiple_choice" | "short_answer" | string
+    options?: string[]
+    correctAnswer?: string
+    correct_answer?: string
+    points?: number
+  }>
+}
+
+type ClassItem = {
+  id: string
+  name?: string
+  arm?: string
+  students?: unknown[]
+}
+
+type ApiDataEnvelope = {
+  data?: unknown
+  items?: unknown
+}
+
+type SubmissionItem = {
+  score?: number
+}
+
 const emptyQ = (): QForm => ({
   text: "",
   type: "multiple_choice",
@@ -39,18 +76,18 @@ const normalizeArray = <T,>(value: unknown): T[] => {
   return []
 }
 
-const getQuizItems = (value: unknown): any[] => {
+const getQuizItems = (value: unknown): QuizItem[] => {
   if (Array.isArray(value)) return value
 
   if (value && typeof value === "object") {
-    const maybeValue = value as { data?: unknown; items?: unknown }
+    const maybeValue = value as ApiDataEnvelope
 
-    if (Array.isArray(maybeValue.items)) return maybeValue.items as any[]
+    if (Array.isArray(maybeValue.items)) return maybeValue.items as QuizItem[]
 
     if (maybeValue.data && typeof maybeValue.data === "object") {
-      const nestedData = maybeValue.data as { items?: unknown; data?: unknown }
-      if (Array.isArray(nestedData.items)) return nestedData.items as any[]
-      if (Array.isArray(nestedData.data)) return nestedData.data as any[]
+      const nestedData = maybeValue.data as ApiDataEnvelope
+      if (Array.isArray(nestedData.items)) return nestedData.items as QuizItem[]
+      if (Array.isArray(nestedData.data)) return nestedData.data as QuizItem[]
     }
   }
 
@@ -70,19 +107,19 @@ const TeacherQuizzesPage = () => {
   const [saving, setSaving] = useState(false)
 
   const assignedClassesQuery = useGetTeacherAssignedClasses()
-  const classes = useMemo(() => {
+  const classes = useMemo<ClassItem[]>(() => {
     const data = assignedClassesQuery.data as unknown
-    if (Array.isArray(data)) return data
+    if (Array.isArray(data)) return data as ClassItem[]
 
     if (data && typeof data === "object") {
-      const maybeData = data as { data?: unknown; items?: unknown }
-      if (Array.isArray(maybeData.items)) return maybeData.items
-      if (Array.isArray(maybeData.data)) return maybeData.data
+      const maybeData = data as ApiDataEnvelope
+      if (Array.isArray(maybeData.items)) return maybeData.items as ClassItem[]
+      if (Array.isArray(maybeData.data)) return maybeData.data as ClassItem[]
 
-      const nestedData = maybeData.data as { items?: unknown; data?: unknown } | undefined
+      const nestedData = maybeData.data as ApiDataEnvelope | undefined
       if (nestedData) {
-        if (Array.isArray(nestedData.items)) return nestedData.items
-        if (Array.isArray(nestedData.data)) return nestedData.data
+        if (Array.isArray(nestedData.items)) return nestedData.items as ClassItem[]
+        if (Array.isArray(nestedData.data)) return nestedData.data as ClassItem[]
       }
     }
 
@@ -96,14 +133,14 @@ const TeacherQuizzesPage = () => {
     refetchOnWindowFocus: false,
   })
 
-  const teacherQuizzes = useMemo(() => getQuizItems(quizzesQuery.data), [quizzesQuery.data])
+  const teacherQuizzes = useMemo<QuizItem[]>(() => getQuizItems(quizzesQuery.data), [quizzesQuery.data])
 
   const publishedCount = teacherQuizzes.filter((quiz) => (quiz?.status || "published").toLowerCase() === "published").length
   const draftCount = teacherQuizzes.filter((quiz) => (quiz?.status || "published").toLowerCase() === "draft").length
   const totalPoints = questions.reduce((sum, question) => sum + (Number(question.points) || 0), 0)
 
   const selectedClassLabel = useMemo(() => {
-    const matchedClass = classes.find((item: any) => item?.id === selectedClass)
+    const matchedClass = classes.find((item) => item?.id === selectedClass)
     if (!matchedClass) return "No class selected"
     return `${matchedClass.name ?? "Class"}${matchedClass.arm ? ` (${matchedClass.arm})` : ""}`
   }, [classes, selectedClass])
@@ -148,7 +185,7 @@ const TeacherQuizzesPage = () => {
   const loadQuizForEdit = async (quizId: string) => {
     try {
       const response = await QuizAPI.getQuiz(quizId)
-      const quiz = (response as any)?.data ?? response
+      const quiz = (response as { data?: QuizItem } | QuizItem)?.data ?? response
 
       setEditingQuizId(quizId)
       setForm({
@@ -161,7 +198,7 @@ const TeacherQuizzesPage = () => {
       setSelectedClass(quiz?.classId ?? quiz?.class_id ?? classes[0]?.id ?? "")
       setQuestions(
         Array.isArray(quiz?.questions) && quiz.questions.length > 0
-          ? quiz.questions.map((question: any) => ({
+          ? quiz.questions.map((question) => ({
               text: question.text ?? "",
               type: question.type === "short_answer" ? "short_answer" : "multiple_choice",
               options: Array.isArray(question.options) ? question.options : ["", "", "", ""],
@@ -342,7 +379,7 @@ const TeacherQuizzesPage = () => {
                 className="w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none transition-colors focus:border-[#0A1F44]"
               >
                 <option value="">Select class to assign</option>
-                {classes.map((item: any) => (
+                {classes.map((item) => (
                   <option key={item.id} value={item.id}>
                     {item.name} {item.arm ? `(${item.arm})` : ""}
                   </option>
@@ -363,7 +400,7 @@ const TeacherQuizzesPage = () => {
                 Assigned class: <span className="font-semibold text-[#0A1F44]">{selectedClassLabel}</span>
               </span>
               <span>
-                Students in class: <span className="font-semibold text-[#0A1F44]">{classes.find((item: any) => item?.id === selectedClass)?.students?.length ?? 0}</span>
+                Students in class: <span className="font-semibold text-[#0A1F44]">{classes.find((item) => item?.id === selectedClass)?.students?.length ?? 0}</span>
               </span>
             </div>
           </div>
@@ -500,7 +537,7 @@ const TeacherQuizzesPage = () => {
               No quizzes yet. Create one to get started.
             </div>
           ) : (
-            teacherQuizzes.map((quiz: any) => {
+            teacherQuizzes.map((quiz) => {
               const dueDate = new Date(quiz?.dueDate ?? quiz?.due_date ?? Date.now())
               const status = String(quiz?.status || "published").toLowerCase()
               const statusLabel = status === "draft" ? "Draft" : status === "closed" ? "Closed" : "Published"
@@ -578,9 +615,9 @@ const TeacherQuizzesPage = () => {
                         onClick={async () => {
                           try {
                             const response = await QuizAPI.getQuizSubmissions(quiz.id)
-                            const submissions = (response as any)?.data?.submissions ?? []
+                            const submissions = (response as { data?: { submissions?: SubmissionItem[] } }).data?.submissions ?? []
                             const averageScore = submissions.length
-                              ? Math.round(submissions.reduce((sum: number, submission: any) => sum + (submission.score || 0), 0) / submissions.length)
+                              ? Math.round(submissions.reduce((sum: number, submission) => sum + (submission.score || 0), 0) / submissions.length)
                               : 0
                             alert(`Submissions: ${submissions.length}\nAvg score: ${averageScore}`)
                           } catch (error) {

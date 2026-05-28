@@ -179,11 +179,12 @@ export const proxyAuthRequest = async (req: Request, pathname: string) => {
   } catch (err) {
     console.error("[proxy] Proxy error caught:", err)
     // Detect common connection-refused error and return a clearer message
-    const cause = (err as any)?.cause || (err as any)
+    const errorLike = err as { cause?: unknown; message?: unknown }
+    const cause = (errorLike.cause ?? err) as { code?: string; errno?: string | number; message?: string }
     const code = cause?.code || cause?.errno || null
     if (
       code === 'ECONNREFUSED' ||
-      (typeof (err as any)?.message === 'string' && (err as any).message.includes('ECONNREFUSED'))
+      (typeof errorLike.message === 'string' && errorLike.message.includes('ECONNREFUSED'))
     ) {
       const apiBase = ensureApiBaseUrl()
       return NextResponse.json(

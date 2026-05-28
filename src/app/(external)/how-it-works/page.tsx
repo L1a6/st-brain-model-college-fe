@@ -30,7 +30,7 @@ export default function HowItWorksPage() {
             <span className="text-crimson italic">to enrollment.</span>
           </h1>
           <p className="text-ink-3 text-lg leading-relaxed">
-            St. Brian's keeps the admissions journey simple: apply, review, enroll, and begin learning.
+            St. Brain&apos;s keeps the admissions journey simple: apply, review, enroll, and begin learning.
           </p>
         </section>
 

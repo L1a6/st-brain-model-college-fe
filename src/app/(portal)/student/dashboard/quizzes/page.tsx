@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useStudentAuth } from '@/hooks/use-auth-user'
 import { useQuery } from '@tanstack/react-query'
@@ -49,7 +49,11 @@ export default function StudentQuizzesPage() {
   const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [maxScore, setMaxScore] = useState(0)
-  const [startTime] = useState<number>(Date.now())
+  const startTimeRef = useRef(0)
+
+  useEffect(() => {
+    startTimeRef.current = Date.now()
+  }, [])
 
   const { data: quizzesData, isLoading } = useQuery({
     queryKey: ['student-quizzes', studentId],
@@ -92,7 +96,7 @@ export default function StudentQuizzesPage() {
         if (ans.toLowerCase() === expected.toLowerCase()) correct += q.points
       })
 
-      const timeSpent = Math.floor((Date.now() - startTime) / 1000)
+      const timeSpent = Math.floor((Date.now() - startTimeRef.current) / 1000)
       setScore(correct)
       setSubmitted(true)
 
@@ -107,7 +111,7 @@ export default function StudentQuizzesPage() {
         console.error('Quiz submission error:', error)
       }
     },
-    [activeQuiz, studentId, answers, startTime]
+    [activeQuiz, studentId, answers]
   )
 
   useEffect(() => {
