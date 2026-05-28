@@ -27,7 +27,7 @@ export default function ContactPage() {
         <section className="reveal">
           <span className="section-eyebrow mb-5">Contact Us</span>
           <h1 className="font-display text-4xl lg:text-6xl text-navy leading-tight mb-5">
-            Talk to St. Brian's<br />
+            Talk to St. Brain&apos;s<br />
             <span className="text-crimson italic">about admissions.</span>
           </h1>
           <p className="text-ink-3 text-lg leading-relaxed max-w-xl mb-8">

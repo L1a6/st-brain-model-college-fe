@@ -19,7 +19,7 @@ export default function ForWho() {
             <span className="text-crimson italic">every stakeholder.</span>
           </h2>
           <p className="text-ink-3 text-lg leading-relaxed">
-            Whether you're studying in JSS1 or running the school from the principal's chair, our platform has a tailored experience designed just for you.
+            Whether you&apos;re studying in JSS1 or running the school from the principal&apos;s chair, our platform has a tailored experience designed just for you.
           </p>
         </div>
 

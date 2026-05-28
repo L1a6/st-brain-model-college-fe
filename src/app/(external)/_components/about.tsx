@@ -48,7 +48,7 @@ export default function About() {
             </h2>
 
             <p className="text-ink-3 text-base lg:text-lg leading-relaxed mb-5">
-              St. Brain's Model College is a co-educational secondary school founded in 1989 in Lagos, Nigeria. Since inception, we have been dedicated to academic excellence, moral development, and the holistic nurturing of every student who walks through our gates.
+              St. Brain&apos;s Model College is a co-educational secondary school founded in 1989 in Lagos, Nigeria. Since inception, we have been dedicated to academic excellence, moral development, and the holistic nurturing of every student who walks through our gates.
             </p>
             <p className="text-ink-3 text-base lg:text-lg leading-relaxed mb-8">
               Our school bridges classical values with a thoroughly modern approach to learning — equipping students not just to pass examinations, but to think critically, lead boldly, and serve with integrity.

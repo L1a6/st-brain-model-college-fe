@@ -19,12 +19,12 @@ export default function CTASection() {
             </div>
 
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Your child's best<br />
+              Your child&apos;s best<br />
               <span className="text-white/80 italic">future starts here.</span>
             </h2>
 
             <p className="text-white/75 text-lg leading-relaxed max-w-xl mb-10">
-              Whether you're an existing student accessing your portal, or a new family looking to enrol — St. Brain's Model College welcomes you.
+              Whether you&apos;re an existing student accessing your portal, or a new family looking to enrol — St. Brain&apos;s Model College welcomes you.
             </p>
 
             <div className="flex flex-wrap gap-4">

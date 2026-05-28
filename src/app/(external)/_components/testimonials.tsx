@@ -61,7 +61,7 @@ export default function Testimonials() {
             <span className="text-[#2563EB]/80">from class to campus.</span>
           </h2>
           <p className="text-ink-3 text-lg leading-relaxed">
-            Real words from the students, teachers, and parents who live the St. Brain's experience every day.
+            Real words from the students, teachers, and parents who live the St. Brain&apos;s experience every day.
           </p>
         </div>
 

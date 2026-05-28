@@ -79,7 +79,7 @@ const Faq = () => {
           <span className="text-crimson italic">most often.</span>
         </h1>
         <p className="text-ink-3 text-lg leading-relaxed max-w-3xl">
-          Answers about admissions, the portal, school communication, and daily life at St. Brain's Model College.
+          Answers about admissions, the portal, school communication, and daily life at St. Brain&apos;s Model College.
         </p>
       </div>
 

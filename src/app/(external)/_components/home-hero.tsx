@@ -38,7 +38,7 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 max-w-xl animate-fade-up delay-200 text-base leading-relaxed font-light text-white/70 sm:text-lg lg:mt-6 lg:text-xl" style={{ animationFillMode: "both" }}>
-            St. Brain's Model College is where young minds are shaped into tomorrow's leaders — through rigorous academics, strong values, and a nurturing community.
+            St. Brain&apos;s Model College is where young minds are shaped into tomorrow&apos;s leaders — through rigorous academics, strong values, and a nurturing community.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4 animate-fade-up delay-300" style={{ animationFillMode: "both" }}>

@@ -41,7 +41,7 @@ export default function Programs() {
             </h2>
           </div>
           <p className="text-ink-3 text-base max-w-sm leading-relaxed">
-            Every programme at St. Brain's is designed to challenge, engage, and prepare students for the highest levels of achievement.
+            Every programme at St. Brain&apos;s is designed to challenge, engage, and prepare students for the highest levels of achievement.
           </p>
         </div>
 

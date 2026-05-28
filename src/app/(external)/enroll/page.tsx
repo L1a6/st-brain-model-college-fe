@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
 import Image from 'next/image'
 
 import { safeJsonFetch } from '@/lib/safeJsonFetch'
@@ -162,12 +163,12 @@ export default function EnrollPage() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a
+                  <Link
                     href="/"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-[#0A1236] font-medium hover:bg-gray-100 transition-all duration-300 hover:-translate-y-0.5 shadow-lg"
                   >
                     <span>Back to Home</span>
-                  </a>
+                  </Link>
                   <a
                     href="/contact"
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white font-medium hover:bg-white/20 transition-all duration-300"
