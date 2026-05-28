@@ -10,7 +10,7 @@ const resolveApiBaseUrl = (): string => {
 
   if (configuredBaseUrl) {
     const isLocalhost = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
-      configuredBaseUrl,
+      configuredBaseUrl
     )
 
     if (!isLocalhost) {
@@ -180,11 +180,16 @@ export const proxyAuthRequest = async (req: Request, pathname: string) => {
     console.error("[proxy] Proxy error caught:", err)
     // Detect common connection-refused error and return a clearer message
     const errorLike = err as { cause?: unknown; message?: unknown }
-    const cause = (errorLike.cause ?? err) as { code?: string; errno?: string | number; message?: string }
+    const cause = (errorLike.cause ?? err) as {
+      code?: string
+      errno?: string | number
+      message?: string
+    }
     const code = cause?.code || cause?.errno || null
     if (
-      code === 'ECONNREFUSED' ||
-      (typeof errorLike.message === 'string' && errorLike.message.includes('ECONNREFUSED'))
+      code === "ECONNREFUSED" ||
+      (typeof errorLike.message === "string" &&
+        errorLike.message.includes("ECONNREFUSED"))
     ) {
       const apiBase = ensureApiBaseUrl()
       return NextResponse.json(
@@ -194,7 +199,7 @@ export const proxyAuthRequest = async (req: Request, pathname: string) => {
     }
 
     return NextResponse.json(
-      { message: 'Proxy error. Please try again later.' },
+      { message: "Proxy error. Please try again later." },
       { status: 502 }
     )
   }

@@ -8,7 +8,7 @@ const resolveApiBaseUrl = (): string => {
 
   if (configuredBaseUrl) {
     const isLocalhost = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
-      configuredBaseUrl,
+      configuredBaseUrl
     )
 
     if (!isLocalhost) {

@@ -55,18 +55,21 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
   }
 
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center px-6 py-12 lg:px-8 bg-canvas">
+    <section className="bg-canvas flex min-h-screen flex-col items-center justify-center px-6 py-12 lg:px-8">
       <SchoolLogo />
 
-      <div className="w-full max-w-md mt-10">
+      <div className="mt-10 w-full max-w-md">
         <header className="mb-8 text-center">
-          <h1 className="mb-2 text-2xl font-semibold text-navy">{title}</h1>
-          <p className="text-sm text-ink-3">{description}</p>
+          <h1 className="text-navy mb-2 text-2xl font-semibold">{title}</h1>
+          <p className="text-ink-3 text-sm">{description}</p>
         </header>
 
-        <form onSubmit={handleSubmit} className="space-y-6 rounded-[34px] border border-canvas-border bg-white p-6 sm:p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="border-canvas-border space-y-6 rounded-[34px] border bg-white p-6 sm:p-8"
+        >
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-navy">
+            <label htmlFor="email" className="text-navy block text-sm font-medium">
               Email Address
             </label>
             <div className="mt-2">
@@ -77,13 +80,13 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 disabled={isLoading}
-                className="w-full border-canvas-border bg-canvas-white"
+                className="border-canvas-border bg-canvas-white w-full"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-navy">
+            <label htmlFor="password" className="text-navy block text-sm font-medium">
               Password
             </label>
             <div className="mt-2">
@@ -94,7 +97,7 @@ const MockRoleLoginForm = ({ role, title, description }: MockRoleLoginFormProps)
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 disabled={isLoading}
-                className="w-full border-canvas-border bg-canvas-white"
+                className="border-canvas-border bg-canvas-white w-full"
               />
             </div>
           </div>

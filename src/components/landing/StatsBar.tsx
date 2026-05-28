@@ -10,16 +10,27 @@ const stats = [
 
 export default function StatsBar() {
   return (
-    <section className="bg-navy py-12 lg:py-16 overflow-hidden relative">
-      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, rgba(218,55,67,1) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+    <section className="bg-navy relative overflow-hidden py-12 lg:py-16">
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(218,55,67,1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
 
       <div className="relative container">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-8 gap-x-4 lg:gap-x-0 lg:divide-x lg:divide-white/10">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-white/10">
           {stats.map((s) => (
-            <div key={s.label} className="lg:px-8 first:pl-0 last:pr-0">
-              <p className="font-display text-4xl lg:text-5xl text-white font-bold leading-none mb-1">{s.value}</p>
-              <p className="text-sm font-semibold text-white/90 mt-2">{s.label}</p>
-              <p className="text-2xs text-white/40 uppercase tracking-wider mt-1">{s.note}</p>
+            <div key={s.label} className="first:pl-0 last:pr-0 lg:px-8">
+              <p className="font-display mb-1 text-4xl leading-none font-bold text-white lg:text-5xl">
+                {s.value}
+              </p>
+              <p className="mt-2 text-sm font-semibold text-white/90">{s.label}</p>
+              <p className="text-2xs mt-1 tracking-wider text-white/40 uppercase">
+                {s.note}
+              </p>
             </div>
           ))}
         </div>

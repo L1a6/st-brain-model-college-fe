@@ -27,7 +27,8 @@ export function SidebarFooterUser({ isCollapsed = false }: SidebarFooterUserProp
     await sendLogoutRequest()
   }
 
-  const initials = `${user?.first_name?.[0] || "S"}${user?.last_name?.[0] || "B"}`.toUpperCase()
+  const initials =
+    `${user?.first_name?.[0] || "S"}${user?.last_name?.[0] || "B"}`.toUpperCase()
 
   return (
     <>

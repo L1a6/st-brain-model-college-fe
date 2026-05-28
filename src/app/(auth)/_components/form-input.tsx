@@ -64,7 +64,9 @@ const LoginForm = () => {
 
   // ?next=/path
   const nextRoute =
-    typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("next") : null
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("next")
+      : null
 
   const router = useRouter()
 
@@ -126,7 +128,10 @@ const LoginForm = () => {
     setIsLoading(true)
     setErrors({})
 
-    const route = nextRoute && nextRoute.startsWith("/") ? nextRoute : resolveLocalDashboardRoute(formData.email)
+    const route =
+      nextRoute && nextRoute.startsWith("/")
+        ? nextRoute
+        : resolveLocalDashboardRoute(formData.email)
     router.push(route)
   }
 

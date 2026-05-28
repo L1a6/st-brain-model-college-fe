@@ -100,7 +100,7 @@ export function SuperAdminSidebar() {
         <div className="flex h-16 items-center justify-between px-4">
           <div className={isCollapsed ? "hidden" : ""}>
             <Logo size={32} className="flex-col items-start gap-1" />
-            <div className="mt-1 font-mono text-[9px] tracking-widest uppercase text-neutral-400">
+            <div className="mt-1 font-mono text-[9px] tracking-widest text-neutral-400 uppercase">
               Super admin portal
             </div>
           </div>
@@ -138,7 +138,7 @@ export function SuperAdminSidebar() {
                                   ? "border-l-2 border-[#DA3743] bg-[#DA3743]/8 text-[#DA3743]"
                                   : hasActiveChild
                                     ? ""
-                                    : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                                    : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                               }`}
                             >
                               <Link
@@ -169,7 +169,7 @@ export function SuperAdminSidebar() {
                                     className={`my-1.5 ${
                                       isSubActive
                                         ? "bg-[#DA3743]/8 text-[#DA3743]"
-                                        : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                                        : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                                     }`}
                                   >
                                     <Link href={subItem.url} onClick={handleLinkClick}>
@@ -194,7 +194,7 @@ export function SuperAdminSidebar() {
                       className={
                         isActive
                           ? "border-l-2 border-[#DA3743] bg-[#DA3743]/8 text-[#DA3743]"
-                          : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                          : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                       }
                     >
                       <Link

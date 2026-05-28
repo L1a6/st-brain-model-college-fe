@@ -293,28 +293,28 @@ html {
   }
 
   .btn-crimson {
-    @apply inline-flex items-center gap-2 bg-crimson text-white text-sm font-semibold px-7 py-3.5 rounded-2xl transition-all duration-200 hover:bg-crimson-deep active:scale-[0.98] disabled:opacity-50;
+    @apply bg-crimson hover:bg-crimson-deep inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98] disabled:opacity-50;
   }
 
   .btn-navy {
-    @apply inline-flex items-center gap-2 bg-navy text-white text-sm font-semibold px-7 py-3.5 rounded-2xl transition-all duration-200 hover:bg-navy-mid active:scale-[0.98];
+    @apply bg-navy hover:bg-navy-mid inline-flex items-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.98];
   }
 
   .btn-outline-white {
-    @apply inline-flex items-center gap-2 border border-white/40 text-white text-sm font-semibold px-7 py-3.5 rounded-2xl transition-all duration-200 hover:bg-white hover:text-navy active:scale-[0.98] backdrop-blur-sm;
+    @apply hover:text-navy inline-flex items-center gap-2 rounded-2xl border border-white/40 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:bg-white active:scale-[0.98];
   }
 
   .btn-outline-crimson {
-    @apply inline-flex items-center gap-2 border border-crimson text-crimson text-sm font-semibold px-7 py-3.5 rounded-2xl transition-all duration-200 hover:bg-crimson hover:text-white active:scale-[0.98];
+    @apply border-crimson text-crimson hover:bg-crimson inline-flex items-center gap-2 rounded-2xl border px-7 py-3.5 text-sm font-semibold transition-all duration-200 hover:text-white active:scale-[0.98];
   }
 
   .nav-link {
-    @apply relative text-sm font-medium text-ink-2 transition-colors duration-200 hover:text-crimson py-1;
+    @apply text-ink-2 hover:text-crimson relative py-1 text-sm font-medium transition-colors duration-200;
   }
 
   .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-px bg-crimson transition-all duration-300;
+    content: "";
+    @apply bg-crimson absolute bottom-0 left-0 h-px w-0 transition-all duration-300;
   }
 
   .nav-link:hover::after,
@@ -334,18 +334,18 @@ html {
   }
 
   .section-eyebrow {
-    @apply inline-flex items-center gap-2 font-semibold uppercase tracking-[0.2em] text-navy;
+    @apply text-navy inline-flex items-center gap-2 font-semibold tracking-[0.2em] uppercase;
     font-size: 0.625rem;
     line-height: 0.875rem;
   }
 
   .section-eyebrow::before {
-    content: '';
-    @apply block w-6 h-px bg-navy;
+    content: "";
+    @apply bg-navy block h-px w-6;
   }
 
   .footer-link {
-    @apply text-sm text-ink-3 hover:text-white transition-colors duration-200;
+    @apply text-ink-3 text-sm transition-colors duration-200 hover:text-white;
   }
 
   .clip-cta {
@@ -407,7 +407,9 @@ html {
 .reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
 }
 
 .reveal.visible {

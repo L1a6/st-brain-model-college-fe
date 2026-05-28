@@ -1,5 +1,5 @@
 // Quiz types for student portal
-export type QuestionType = 'multiple_choice' | 'short_answer' | 'true_false'
+export type QuestionType = "multiple_choice" | "short_answer" | "true_false"
 
 export interface QuizQuestion {
   id: string
@@ -22,7 +22,7 @@ export interface Quiz {
   classId: string
   term_id: string
   session_id: string
-  status: 'draft' | 'published' | 'closed'
+  status: "draft" | "published" | "closed"
   createdAt: string
   updatedAt: string
 }
@@ -35,7 +35,7 @@ export interface QuizSubmission {
   answers: Record<string, string>
   score: number
   maxScore: number
-  status: 'in_progress' | 'submitted' | 'graded'
+  status: "in_progress" | "submitted" | "graded"
   submittedAt: string
   timeSpentSeconds: number
 }

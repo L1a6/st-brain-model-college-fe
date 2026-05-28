@@ -71,19 +71,21 @@ const faqData: FAQItem[] = [
 
 const Faq = () => {
   return (
-    <div className="min-h-screen bg-canvas py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 mb-12 reveal">
+    <div className="bg-canvas min-h-screen py-20 lg:py-28">
+      <div className="reveal mx-auto mb-12 max-w-7xl px-5 lg:px-8">
         <span className="section-eyebrow mb-5">FAQ</span>
-        <h1 className="font-display text-4xl lg:text-6xl text-navy leading-tight mb-4">
-          Questions families ask<br />
+        <h1 className="font-display text-navy mb-4 text-4xl leading-tight lg:text-6xl">
+          Questions families ask
+          <br />
           <span className="text-crimson italic">most often.</span>
         </h1>
-        <p className="text-ink-3 text-lg leading-relaxed max-w-3xl">
-          Answers about admissions, the portal, school communication, and daily life at St. Brain&apos;s Model College.
+        <p className="text-ink-3 max-w-3xl text-lg leading-relaxed">
+          Answers about admissions, the portal, school communication, and daily life at
+          St. Brain&apos;s Model College.
         </p>
       </div>
 
-      <section className="max-w-7xl mx-auto px-5 lg:px-8 md:pt-6">
+      <section className="mx-auto max-w-7xl px-5 md:pt-6 lg:px-8">
         <Accordion
           type="single"
           collapsible
@@ -94,10 +96,10 @@ const Faq = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="rounded-md border border-canvas-border bg-canvas-white px-4 py-2 last:border-b"
+              className="border-canvas-border bg-canvas-white rounded-md border px-4 py-2 last:border-b"
             >
               <AccordionTrigger
-                className="flex w-full flex-row items-center py-2 text-left font-normal text-ink-2 transition-colors duration-200"
+                className="text-ink-2 flex w-full flex-row items-center py-2 text-left font-normal transition-colors duration-200"
                 style={{ fontSize: "clamp(16px, 2vw, 20px)" }}
               >
                 <span className="block w-full sm:text-lg md:text-2xl">
@@ -107,7 +109,7 @@ const Faq = () => {
 
               <AccordionContent className="flex flex-col gap-4">
                 <p
-                  className="leading-relaxed text-ink-3"
+                  className="text-ink-3 leading-relaxed"
                   style={{ fontSize: "clamp(14px, 2vw, 16px)" }}
                 >
                   <span className="text-sm md:text-xl">{faq.answer}</span>

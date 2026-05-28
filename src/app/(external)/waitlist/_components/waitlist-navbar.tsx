@@ -32,17 +32,13 @@ const WaitlistNavbar = () => {
         </section>
 
         {/* Mobile Navigation */}
-        <button
-          className="lg:hidden"
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
+        <button className="lg:hidden" onClick={toggleMobileMenu} aria-label="Toggle menu">
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 right-0 border-b border-gray-100 bg-[#fffbfc] p-4 lg:hidden">
+          <div className="absolute top-full right-0 left-0 border-b border-gray-100 bg-[#fffbfc] p-4 lg:hidden">
             <Link href="/" onClick={closeMobileMenu} className="block py-2">
               Back to Home
             </Link>

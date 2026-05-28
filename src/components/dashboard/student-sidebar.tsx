@@ -105,7 +105,8 @@ export function StudentSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {bottomItems.map((item) => {
-                const isActive = pathname === item.url || pathname.startsWith(item.url + "/")
+                const isActive =
+                  pathname === item.url || pathname.startsWith(item.url + "/")
 
                 return (
                   <SidebarMenuItem key={item.title}>
@@ -118,7 +119,11 @@ export function StudentSidebar() {
                           : "text-primary hover:bg-[#DA3743]/10 hover:text-[#DA3743]"
                       }
                     >
-                      <Link href={item.url} className="flex items-center gap-2" onClick={handleLinkClick}>
+                      <Link
+                        href={item.url}
+                        className="flex items-center gap-2"
+                        onClick={handleLinkClick}
+                      >
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </Link>

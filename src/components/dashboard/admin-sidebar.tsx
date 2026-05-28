@@ -118,7 +118,7 @@ export function AdminSidebar() {
         <div className="flex h-16 items-center justify-between px-4">
           <div className={isCollapsed ? "hidden" : "block"}>
             <Logo size={32} className="flex-col items-start gap-1" />
-            <div className="mt-1 font-mono text-[9px] tracking-widest uppercase text-neutral-400">
+            <div className="mt-1 font-mono text-[9px] tracking-widest text-neutral-400 uppercase">
               Admin portal
             </div>
           </div>
@@ -155,7 +155,7 @@ export function AdminSidebar() {
                             className={`${navButtonClass} ${
                               isActive || hasActiveChild
                                 ? "border-l-2 border-[#DA3743] bg-[#DA3743]/8 text-[#DA3743]"
-                                : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                                : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                             }`}
                           >
                             <div className="flex w-full cursor-pointer items-center justify-between">
@@ -173,7 +173,7 @@ export function AdminSidebar() {
                         </CollapsibleTrigger>
                         <CollapsibleContent>
                           <SidebarMenuSub className="mt-2 ml-4 space-y-1 border-l border-neutral-100 px-0 dark:border-neutral-800">
-                            <div className="mb-2 mt-4 font-mono text-[9px] tracking-widest uppercase text-neutral-400">
+                            <div className="mt-4 mb-2 font-mono text-[9px] tracking-widest text-neutral-400 uppercase">
                               Sections
                             </div>
                             {item.subItems?.map((subItem) => {
@@ -185,7 +185,7 @@ export function AdminSidebar() {
                                     className={`rounded-lg px-3 py-2.5 transition-all ${
                                       isSubActive
                                         ? "bg-[#DA3743]/8 text-[#DA3743]"
-                                        : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                                        : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                                     }`}
                                   >
                                     <Link href={subItem.url} onClick={handleLinkClick}>
@@ -209,7 +209,7 @@ export function AdminSidebar() {
                       className={`${navButtonClass} ${
                         isActive
                           ? "border-l-2 border-[#2563EB] bg-[#2563EB]/8 text-[#2563EB]"
-                          : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                          : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                       }`}
                     >
                       <Link
@@ -229,7 +229,7 @@ export function AdminSidebar() {
         </SidebarGroup>
 
         <div className="mt-auto px-3 pb-2">
-          <div className="mb-2 mt-6 font-mono text-[9px] tracking-widest uppercase text-neutral-400">
+          <div className="mt-6 mb-2 font-mono text-[9px] tracking-widest text-neutral-400 uppercase">
             System
           </div>
           <SidebarMenu className="space-y-1">
@@ -243,7 +243,7 @@ export function AdminSidebar() {
                     className={`${navButtonClass} ${
                       isActive
                         ? "border-l-2 border-[#DA3743] bg-[#DA3743]/8 text-[#DA3743]"
-                        : "text-neutral-500 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-neutral-900 dark:hover:text-neutral-100"
+                        : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-white/5 dark:hover:text-neutral-100"
                     }`}
                   >
                     <Link

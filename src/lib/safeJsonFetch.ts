@@ -1,11 +1,11 @@
 export async function safeJsonFetch<T>(
   input: RequestInfo | URL,
-  init: RequestInit = {},
+  init: RequestInit = {}
 ): Promise<T> {
   const headers = new Headers(init.headers)
 
-  if (init.body && !headers.has('Content-Type')) {
-    headers.set('Content-Type', 'application/json')
+  if (init.body && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json")
   }
 
   const response = await fetch(input, {
@@ -18,7 +18,9 @@ export async function safeJsonFetch<T>(
 
   if (!response.ok) {
     const message =
-      payload?.message || payload?.error || `Request failed with status ${response.status}`
+      payload?.message ||
+      payload?.error ||
+      `Request failed with status ${response.status}`
     throw new Error(message)
   }
 

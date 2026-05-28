@@ -21,17 +21,26 @@ export default function Loading({
         style={{ width: size + 24, height: size + 24 }}
       >
         <div
-          className="absolute inset-0 rounded-full bg-sky-400/10 blur-2xl animate-pulse"
+          className="absolute inset-0 animate-pulse rounded-full bg-sky-400/10 blur-2xl"
           style={{ animationDuration: "3.5s" }}
         />
         <div
-          className="relative overflow-hidden rounded-md animate-[pulse_3.5s_ease-in-out_infinite]"
+          className="relative animate-[pulse_3.5s_ease-in-out_infinite] overflow-hidden rounded-md"
           style={{ width: size, height: size }}
         >
-          <Image src="/logo123.jpg" alt="St. Brian's Model College logo" fill className="object-cover" />
+          <Image
+            src="/logo123.jpg"
+            alt="St. Brian's Model College logo"
+            fill
+            className="object-cover"
+          />
         </div>
       </div>
-      {showText && <p className="text-slate-600 animate-pulse text-sm font-medium tracking-wide">{text}</p>}
+      {showText && (
+        <p className="animate-pulse text-sm font-medium tracking-wide text-slate-600">
+          {text}
+        </p>
+      )}
     </div>
   )
 }

@@ -21,25 +21,32 @@ const steps = [
 
 export default function HowItWorksPage() {
   return (
-    <div className="min-h-screen bg-canvas py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <section className="max-w-3xl mb-14 reveal">
+    <div className="bg-canvas min-h-screen py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <section className="reveal mb-14 max-w-3xl">
           <span className="section-eyebrow mb-5">How It Works</span>
-          <h1 className="font-display text-4xl lg:text-6xl text-navy leading-tight mb-5">
-            A clear path from inquiry<br />
+          <h1 className="font-display text-navy mb-5 text-4xl leading-tight lg:text-6xl">
+            A clear path from inquiry
+            <br />
             <span className="text-crimson italic">to enrollment.</span>
           </h1>
           <p className="text-ink-3 text-lg leading-relaxed">
-            St. Brain&apos;s keeps the admissions journey simple: apply, review, enroll, and begin learning.
+            St. Brain&apos;s keeps the admissions journey simple: apply, review, enroll,
+            and begin learning.
           </p>
         </section>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {steps.map((step, index) => (
-            <article key={step.title} className={`reveal delay-${index + 1} bg-canvas-white border-t-2 border-crimson p-6`}>
-              <p className="font-display text-4xl text-canvas-border font-bold mb-3">0{index + 1}</p>
-              <h2 className="font-display text-xl text-navy mb-3">{step.title}</h2>
-              <p className="text-sm text-ink-3 leading-relaxed">{step.desc}</p>
+            <article
+              key={step.title}
+              className={`reveal delay-${index + 1} bg-canvas-white border-crimson border-t-2 p-6`}
+            >
+              <p className="font-display text-canvas-border mb-3 text-4xl font-bold">
+                0{index + 1}
+              </p>
+              <h2 className="font-display text-navy mb-3 text-xl">{step.title}</h2>
+              <p className="text-ink-3 text-sm leading-relaxed">{step.desc}</p>
             </article>
           ))}
         </div>

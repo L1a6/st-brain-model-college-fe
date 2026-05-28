@@ -8,7 +8,7 @@ export default function HomeTestimonial() {
       <div className="font-outfit mx-auto max-w-[1285px] px-4">
         <div className="mb-12">
           <span className="section-eyebrow mb-5">Testimonials</span>
-          <h2 className="font-display mb-4 max-w-3xl text-4xl leading-tight text-navy md:text-5xl">
+          <h2 className="font-display text-navy mb-4 max-w-3xl text-4xl leading-tight md:text-5xl">
             What Students, Staff & Parents Say About School Base
           </h2>
           <p className="text-ink-3 mx-auto max-w-3xl text-base leading-relaxed lg:mx-0">

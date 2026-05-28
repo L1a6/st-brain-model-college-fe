@@ -31,30 +31,31 @@ const loginLinks = [
 
 const Login = () => {
   return (
-    <main className="min-h-screen bg-canvas px-6 py-16 lg:px-12 lg:py-20">
+    <main className="bg-canvas min-h-screen px-6 py-16 lg:px-12 lg:py-20">
       <section className="mx-auto flex min-h-[calc(100vh-8rem)] w-full max-w-5xl flex-col justify-center gap-10 pt-8 lg:pt-12">
         <div className="flex flex-col items-center text-center">
           <SchoolLogo />
-          <p className="mt-6 text-2xs font-semibold uppercase tracking-[0.28em] text-ink-4">
+          <p className="text-2xs text-ink-4 mt-6 font-semibold tracking-[0.28em] uppercase">
             School Portal
           </p>
-          <h1 className="mt-4 font-display text-4xl leading-tight text-navy sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-navy mt-4 text-4xl leading-tight sm:text-5xl lg:text-6xl">
             Choose a login path.
           </h1>
-          <p className="mt-5 max-w-2xl text-sm leading-7 text-ink-3 sm:text-base lg:text-lg">
-            Use the universal login first, or go straight to a role if you already know where you need to be.
+          <p className="text-ink-3 mt-5 max-w-2xl text-sm leading-7 sm:text-base lg:text-lg">
+            Use the universal login first, or go straight to a role if you already know
+            where you need to be.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/login"
-              className="inline-flex items-center justify-center rounded-full border border-navy/15 px-6 py-3 text-sm font-semibold text-navy transition-colors hover:border-navy/30 hover:bg-white"
+              className="border-navy/15 text-navy hover:border-navy/30 inline-flex items-center justify-center rounded-full border px-6 py-3 text-sm font-semibold transition-colors hover:bg-white"
             >
               Universal login
             </Link>
             <Link
               href="/"
-              className="inline-flex items-center justify-center rounded-full border border-canvas-border px-6 py-3 text-sm font-semibold text-ink-3 transition-colors hover:border-navy/25 hover:text-navy"
+              className="border-canvas-border text-ink-3 hover:border-navy/25 hover:text-navy inline-flex items-center justify-center rounded-full border px-6 py-3 text-sm font-semibold transition-colors"
             >
               Back to home
             </Link>
@@ -63,11 +64,13 @@ const Login = () => {
 
         <div className="mx-auto w-full max-w-4xl">
           <div className="mb-4 flex items-center gap-3">
-            <div className="h-px w-10 bg-navy/25" />
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-ink-4">Role access</p>
+            <div className="bg-navy/25 h-px w-10" />
+            <p className="text-ink-4 text-xs font-semibold tracking-[0.22em] uppercase">
+              Role access
+            </p>
           </div>
 
-          <div className="divide-y divide-canvas-border border-y border-canvas-border">
+          <div className="divide-canvas-border border-canvas-border divide-y border-y">
             {loginLinks.map((item) => (
               <Link
                 key={item.href}
@@ -75,12 +78,14 @@ const Login = () => {
                 className="group flex items-start justify-between gap-4 py-5 transition-colors hover:bg-white/40"
               >
                 <div>
-                  <h2 className="text-xl font-semibold text-navy transition-colors group-hover:text-navy-mid">
+                  <h2 className="text-navy group-hover:text-navy-mid text-xl font-semibold transition-colors">
                     {item.title}
                   </h2>
-                  <p className="mt-2 max-w-md text-sm leading-6 text-ink-3">{item.description}</p>
+                  <p className="text-ink-3 mt-2 max-w-md text-sm leading-6">
+                    {item.description}
+                  </p>
                 </div>
-                <span className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-ink-4">
+                <span className="text-ink-4 mt-1 text-xs font-semibold tracking-[0.2em] uppercase">
                   Open
                 </span>
               </Link>

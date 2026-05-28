@@ -25,10 +25,12 @@ export default function ParentDashboard() {
         <p className="mb-6 text-gray-600">Here is your child&apos;s academic report</p>
 
         <div className="rounded-xl bg-white p-6 shadow">
-          <h2 className="mb-2 text-lg font-semibold text-gray-900">No Child Linked Yet</h2>
+          <h2 className="mb-2 text-lg font-semibold text-gray-900">
+            No Child Linked Yet
+          </h2>
           <p className="text-sm text-gray-600">
-            No student is linked to your parent account yet. Please contact your school admin to
-            link your child profile.
+            No student is linked to your parent account yet. Please contact your school
+            admin to link your child profile.
           </p>
         </div>
       </div>

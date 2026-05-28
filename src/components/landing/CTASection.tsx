@@ -19,22 +19,34 @@ export default function CTASection() {
       <div className="relative container text-white">
         <ScrollReveal>
           <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-px bg-white/40" />
-              <span className="text-white/60 text-2xs font-semibold uppercase tracking-[0.2em]">Get started</span>
+            <div className="mb-6 flex items-center gap-3">
+              <div className="h-px w-10 bg-white/40" />
+              <span className="text-2xs font-semibold tracking-[0.2em] text-white/60 uppercase">
+                Get started
+              </span>
             </div>
 
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight mb-5 max-w-xl">
+            <h2 className="font-display mb-5 max-w-xl text-3xl leading-tight sm:text-4xl lg:text-5xl">
               Ready to take the next step?
             </h2>
 
-            <p className="text-white/74 text-base leading-relaxed max-w-lg mb-8">
+            <p className="mb-8 max-w-lg text-base leading-relaxed text-white/74">
               Admissions, visits, and school contact in one place.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a href="/enroll" className="bg-white text-crimson font-semibold text-sm px-8 py-4 rounded-2xl">Enroll</a>
-              <a href="#events" className="border border-white/35 text-white font-semibold text-sm px-8 py-4 rounded-2xl hover:bg-white/10 transition-colors">Book a visit</a>
+              <a
+                href="/enroll"
+                className="text-crimson rounded-2xl bg-white px-8 py-4 text-sm font-semibold"
+              >
+                Enroll
+              </a>
+              <a
+                href="#events"
+                className="rounded-2xl border border-white/35 px-8 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                Book a visit
+              </a>
             </div>
           </div>
         </ScrollReveal>
