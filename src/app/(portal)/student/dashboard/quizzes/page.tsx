@@ -117,7 +117,7 @@ export default function StudentQuizzesPage() {
     if (!activeQuiz || submitted) return
     if (timeLeft <= 0) {
       const timeout = window.setTimeout(() => {
-        void submitQuiz(true)
+        void submitQuiz()
       }, 0)
 
       return () => window.clearTimeout(timeout)
@@ -152,7 +152,7 @@ export default function StudentQuizzesPage() {
         {/* Quiz Header */}
         <div
           className="rounded-2xl border border-slate-200 overflow-hidden mb-6 shadow-sm bg-white"
-          style={{
+          onClick={() => submitQuiz()}
             backgroundImage: `linear-gradient(180deg, rgba(10,31,68,0.10), rgba(10,31,68,0.32)), url(${getSubjectImage(activeQuiz.subject)})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
