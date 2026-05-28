@@ -202,7 +202,12 @@ const TeacherQuizzesPage = () => {
   const loadQuizForEdit = async (quizId: string) => {
     try {
       const response = await QuizAPI.getQuiz(quizId)
-      const quiz = (response as { data?: QuizItem } | QuizItem)?.data ?? response
+      let quiz: QuizItem
+      if (response && typeof response === "object" && "data" in (response as object)) {
+        quiz = ((response as { data?: QuizItem }).data ?? (response as QuizItem)) as QuizItem
+      } else {
+        quiz = response as QuizItem
+      }
 
       setEditingQuizId(quizId)
       setForm({
@@ -215,12 +220,10 @@ const TeacherQuizzesPage = () => {
       setSelectedClass(quiz?.classId ?? quiz?.class_id ?? classes[0]?.id ?? "")
       setQuestions(
         Array.isArray(quiz?.questions) && quiz.questions.length > 0
-          ? quiz.questions.map((question) => ({
+          ? quiz.questions.map((question: NonNullable<QuizItem["questions"]>[number]) => ({
               text: question.text ?? "",
               type: question.type === "short_answer" ? "short_answer" : "multiple_choice",
-              options: Array.isArray(question.options)
-                ? question.options
-                : ["", "", "", ""],
+              options: Array.isArray(question.options) ? question.options : ["", "", "", ""],
               correctAnswer: question.correctAnswer ?? question.correct_answer ?? "",
               points: Number(question.points) || 1,
             }))
@@ -663,7 +666,7 @@ const TeacherQuizzesPage = () => {
                   <div className="relative min-h-52">
                     <Image
                       src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
-                      alt={quiz.title}
+                      alt={quiz.title ?? ""}
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 1200px"

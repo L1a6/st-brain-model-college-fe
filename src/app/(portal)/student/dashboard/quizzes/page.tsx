@@ -330,7 +330,7 @@ export default function StudentQuizzesPage() {
             Cancel
           </button>
           <button
-            onClick={() => submitQuiz(false)}
+            onClick={() => submitQuiz()}
             className="bg-crimson hover:bg-crimson-deep min-w-[200px] flex-1 rounded-lg px-6 py-3 font-semibold text-white transition-colors"
           >
             Submit Quiz
