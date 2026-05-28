@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useStudentAuth } from '@/hooks/use-auth-user'
@@ -54,37 +54,6 @@ export default function PaymentDetailPage() {
     enabled: !!studentId,
   })
 
-  const details = useMemo(() => {
-    if (!category || !feeDetails) return null
-
-    const categoryInfo = PAYMENT_CATEGORIES[category]
-    const feeBreakdown = (feeDetails.data?.data?.fee_breakdown || []) as Array<{
-      component_name: string
-      amount?: number
-      amount_paid?: number
-      status?: string
-    }>
-    const normalizedCategory = category.replace(/_/g, ' ')
-    const feeItem = feeBreakdown.find((item: { component_name: string }) => item.component_name.toLowerCase() === normalizedCategory)
-    const amount = feeItem?.amount || 0
-    const paid = feeItem?.amount_paid || 0
-    const remaining = Math.max(amount - paid, 0)
-    const isPaid = amount > 0 ? remaining <= 0 : false
-    const paymentHistory = ((feeDetails.data?.data?.payment_history || []) as Array<{ fee_component?: string }>)
-      .filter((item) => (item.fee_component || '').toLowerCase().includes(normalizedCategory)) as PaymentRecord[]
-
-    return {
-      info: categoryInfo,
-      amount,
-      paid,
-      remaining,
-      isPaid,
-      paymentHistory,
-      pct: amount > 0 ? Math.round((paid / amount) * 100) : 0,
-      status: feeItem?.status,
-    }
-  }, [category, feeDetails])
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white p-6">
@@ -96,7 +65,7 @@ export default function PaymentDetailPage() {
     )
   }
 
-  if (!category || !details) {
+  if (!category || !feeDetails) {
     return (
       <div className="min-h-screen bg-white p-6">
         <div className="mb-6">
@@ -111,6 +80,33 @@ export default function PaymentDetailPage() {
         </div>
       </div>
     )
+  }
+
+  const categoryInfo = PAYMENT_CATEGORIES[category]
+  const feeBreakdown = (feeDetails.data?.data?.fee_breakdown || []) as Array<{
+    component_name: string
+    amount?: number
+    amount_paid?: number
+    status?: string
+  }>
+  const normalizedCategory = category.replace(/_/g, ' ')
+  const feeItem = feeBreakdown.find((item: { component_name: string }) => item.component_name.toLowerCase() === normalizedCategory)
+  const amount = feeItem?.amount || 0
+  const paid = feeItem?.amount_paid || 0
+  const remaining = Math.max(amount - paid, 0)
+  const isPaid = amount > 0 ? remaining <= 0 : false
+  const paymentHistory = ((feeDetails.data?.data?.payment_history || []) as Array<{ fee_component?: string }>)
+    .filter((item) => (item.fee_component || '').toLowerCase().includes(normalizedCategory)) as PaymentRecord[]
+
+  const details = {
+    info: categoryInfo,
+    amount,
+    paid,
+    remaining,
+    isPaid,
+    paymentHistory,
+    pct: amount > 0 ? Math.round((paid / amount) * 100) : 0,
+    status: feeItem?.status,
   }
 
   return (
@@ -205,7 +201,7 @@ export default function PaymentDetailPage() {
           <div className="rounded-2xl border border-slate-200 bg-white p-6 text-slate-500 shadow-sm">No payments recorded yet for this fee.</div>
         ) : (
           details.paymentHistory.map((payment: PaymentRecord, idx: number) => (
-            <div key={payment.id || `${payment.payment_date || payment.date || idx}`} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div key={`${getPaymentDate(payment)}-${getPaymentReference(payment)}-${idx}`} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
               <div>
                 <p className="text-base font-bold text-[#0A1F44]">₦{(payment.amount_paid || payment.paidAmount || 0).toLocaleString()}</p>
                 <p className="mt-1 text-xs text-slate-500">

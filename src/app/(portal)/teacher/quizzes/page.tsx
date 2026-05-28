@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { toast } from "sonner"
@@ -551,10 +552,12 @@ const TeacherQuizzesPage = () => {
               return (
                 <div key={quiz.id} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)]">
                   <div className="relative min-h-52">
-                    <img
+                    <Image
                       src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
                       alt={quiz.title}
-                      className="absolute inset-0 h-full w-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 1200px"
                     />
                     <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/82" />
                     <div className="absolute left-5 top-5 flex flex-wrap gap-2">

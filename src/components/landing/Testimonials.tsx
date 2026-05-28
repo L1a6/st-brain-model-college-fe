@@ -82,7 +82,7 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.name}
-                className={`group flex gap-5 lg:gap-7 p-6 lg:p-8 bg-canvas-white transition-all duration-300 hover:bg-[#F7FAFF] hover:shadow-[0_12px_28px_rgba(37,99,235,0.06)] ${
+                className={`group flex gap-5 lg:gap-7 p-6 lg:p-8 bg-[#F7FAFF] lg:bg-canvas-white transition-all duration-300 lg:hover:bg-[#F7FAFF] hover:shadow-[0_12px_28px_rgba(37,99,235,0.06)] ${
                   index % 2 === 0 ? "lg:border-r" : ""
                 } ${index < testimonials.length - 2 ? "border-b lg:border-b-0 border-canvas-border" : ""}`}
               >

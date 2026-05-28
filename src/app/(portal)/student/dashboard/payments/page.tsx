@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useMemo, useState } from "react"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
@@ -29,9 +30,8 @@ export default function StudentPaymentsPage() {
     refetchOnWindowFocus: false,
   })
 
-  const feeBreakdown = feeDetails?.data?.data?.fee_breakdown || []
-
   const paymentCards = useMemo(() => {
+    const feeBreakdown = feeDetails?.data?.data?.fee_breakdown || []
     const feeMap = new Map(
       feeBreakdown.map((feeItem) => {
         const rawCategory = feeItem.component_name.toLowerCase().replace(/\s+/g, "_") as PaymentCategory
@@ -71,7 +71,7 @@ export default function StudentPaymentsPage() {
         }
       }
     )
-  }, [feeBreakdown])
+  }, [feeDetails])
 
   const totalExpected = paymentCards.reduce((sum, item) => sum + item.amount, 0)
   const totalPaid = paymentCards.reduce((sum, item) => sum + item.paid, 0)
@@ -124,10 +124,12 @@ export default function StudentPaymentsPage() {
           return (
             <section key={item.category} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_14px_36px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(10,31,68,0.12)]">
               <div className="relative min-h-52 md:min-h-60">
-                <img
+                <Image
                   src={CATEGORY_IMAGES[item.category]}
                   alt={item.info.label}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 1200px"
                 />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#0A1F44]/35 to-[#0A1F44]/82" />
                 <div className="absolute left-5 top-5 flex flex-wrap items-center gap-2">
