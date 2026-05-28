@@ -152,7 +152,7 @@ export default function StudentQuizzesPage() {
         {/* Quiz Header */}
         <div
           className="rounded-2xl border border-slate-200 overflow-hidden mb-6 shadow-sm bg-white"
-          onClick={() => submitQuiz()}
+          style={{
             backgroundImage: `linear-gradient(180deg, rgba(10,31,68,0.10), rgba(10,31,68,0.32)), url(${getSubjectImage(activeQuiz.subject)})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
