@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   build:
+    environment: staging
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
