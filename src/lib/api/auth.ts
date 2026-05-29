@@ -73,10 +73,6 @@ export const storeAuthSessionFromResponse = (
   return session
 }
 
-const getStoredLogoutPayload = (): StoredAuthSession | null => {
-  return readStoredAuthSession()
-}
-
 export type RefreshResponse = AuthApiResponse<Record<string, unknown>>
 
 // ------------------------------
@@ -211,20 +207,18 @@ export const getUserData = (): Promise<AuthApiResponse<UserData>> => {
 }
 
 export const sendLogoutRequest = (): Promise<AuthApiResponse<null>> => {
-  const session = getStoredLogoutPayload()
-
-  if (!session) {
-    throw new Error("No active session was found. Please log in again.")
-  }
+  const session = readStoredAuthSession()
 
   return apiFetch<AuthApiResponse<null>>(
     LOGOUT_PATH,
     {
       method: "POST",
-      data: {
-        session_id: session.sessionId,
-        user_id: session.userId,
-      },
+      data: session
+        ? {
+            session_id: session.sessionId,
+            user_id: session.userId,
+          }
+        : {},
     },
     true // use proxy
   )

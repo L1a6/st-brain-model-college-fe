@@ -42,5 +42,5 @@ export const useAuthStore = create<AuthState>((set) => ({
       return { profile: userProfileSchema.parse(nextProfile) }
     }),
   setPendingEmail: (email) => set({ pendingEmail: email }),
-  clearAuth: () => set({ profile: null, tokens: null, pendingEmail: null }),
+  clearAuth: () => set({ profile: null, user: null, tokens: null, pendingEmail: null }),
 }))
