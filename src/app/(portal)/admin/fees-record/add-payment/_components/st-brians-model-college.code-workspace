@@ -1,11 +1,11 @@
 {
-	"folders": [
-		{
-			"path": "../../../../../../.."
-		},
-		{
-			"path": "../../../../../../../../st-brains-model-college-BE"
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "../../../../../../..",
+    },
+    {
+      "path": "../../../../../../../../st-brains-model-college-BE",
+    },
+  ],
+  "settings": {},
 }

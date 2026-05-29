@@ -144,7 +144,7 @@ const AddPaymentForm = () => {
 
     if (values.invoice) formData.append("invoice_number", values.invoice)
     if (file) formData.append("receipt_file", file)
- 
+
     createPayment(formData, {
       onSuccess: () => {
         setSuccessData({
