@@ -14,10 +14,6 @@ import { Badge } from "@/components/ui/badge"
 import { LinkIcon, Eye } from "lucide-react"
 import { SnakeUser as User, UserType } from "@/types/user"
 import { useRouter } from "next/navigation"
-import { useDeleteTeacher } from "@/app/(portal)/admin/teachers/_hooks/use-teachers"
-import { useDeleteStudent } from "@/app/(portal)/admin/students/_hooks/use-students"
-import { useDeleteParent } from "@/app/(portal)/admin/parents/_hooks/use-parents"
-import { DeleteConfirmationDialog } from "./delete-confirmation-dialog"
 import { getInitials } from "@/lib/utils"
 import { UserDetailsSheet } from "./user-details-sheet"
 import { Button } from "@/components/ui/button"
@@ -35,11 +31,6 @@ export function UsersTable({
   currentPage,
   itemsPerPage,
 }: UsersTableProps) {
-  const deleteTeacherMutation = useDeleteTeacher()
-  const deleteStudentMutation = useDeleteStudent()
-  const deleteParentMutation = useDeleteParent()
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
-  const [userToDelete, setUserToDelete] = useState<User | null>(null)
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
 
@@ -66,39 +57,10 @@ export function UsersTable({
     setSheetOpen(true)
   }
 
-  // const handleDeleteClick = (user: User, e?: React.MouseEvent) => {
-  //   if (e) e.stopPropagation()
-  //   setUserToDelete(user)
-  //   setDeleteDialogOpen(true)
-  // }
-
-  // const handleEditClick = (user: User, e?: React.MouseEvent) => {
-  //   if (e) e.stopPropagation()
-  //   if (isTeacher) {
-  //     router.push(`/admin/teachers/${user.id}`)
-  //   } else if (isStudent) {
-  //     router.push(`/admin/students/${user.id}`)
-  //   } else if (isParent) {
-  //     router.push(`/admin/parents/${user.id}`)
-  //   }
-  // }
-
   const handleLinkStudent = (user: User, e?: React.MouseEvent) => {
     if (e) e.stopPropagation()
     if (isParent) {
       router.push(`/admin/parents/${user.id}/link`)
-    }
-  }
-
-  const handleDeleteConfirm = async () => {
-    if (!userToDelete) return
-
-    if (isTeacher) {
-      await deleteTeacherMutation.mutateAsync(userToDelete.id)
-    } else if (isStudent) {
-      await deleteStudentMutation.mutateAsync(userToDelete.id)
-    } else if (isParent) {
-      await deleteParentMutation.mutateAsync(userToDelete.id)
     }
   }
 
@@ -209,25 +171,6 @@ export function UsersTable({
           ))}
         </TableBody>
       </Table>
-
-      {userToDelete && (
-        <DeleteConfirmationDialog
-          open={deleteDialogOpen}
-          onOpenChange={setDeleteDialogOpen}
-          onConfirm={handleDeleteConfirm}
-          title={
-            isTeacher ? "Delete Teacher" : isStudent ? "Delete Student" : "Delete Parent"
-          }
-          description={
-            isTeacher
-              ? "Are you sure you want to delete this teacher? This action cannot be undone."
-              : isStudent
-                ? "Are you sure you want to delete this student? This action cannot be undone."
-                : "Are you sure you want to delete this parent? This action cannot be undone."
-          }
-          itemName={getFullName(userToDelete)}
-        />
-      )}
 
       <UserDetailsSheet
         open={sheetOpen}

@@ -1,5 +1,5 @@
-import { proxyAuthRequest } from '../auth/_proxy'
+import { proxyAuthRequest } from "../auth/_proxy"
 
 export async function POST(req: Request) {
-  return proxyAuthRequest(req, '/enroll')
+  return proxyAuthRequest(req, "/enroll")
 }

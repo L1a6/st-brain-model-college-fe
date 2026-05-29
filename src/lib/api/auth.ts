@@ -51,7 +51,9 @@ export const clearStoredAuthSession = (): void => {
   window.localStorage.removeItem(AUTH_SESSION_STORAGE_KEY)
 }
 
-export const storeAuthSessionFromResponse = (response: LoginResponse): StoredAuthSession | null => {
+export const storeAuthSessionFromResponse = (
+  response: LoginResponse
+): StoredAuthSession | null => {
   const user = response.user ?? response.data?.user
   const sessionId =
     typeof response.session_id === "string"

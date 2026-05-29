@@ -17,8 +17,12 @@ concurrency:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      PROD_SERVER_HOST: ${{ secrets.PROD_SERVER_HOST }}
+      PROD_SERVER_USER: ${{ secrets.PROD_SERVER_USER }}
+      PROD_SERVER_SSH_KEY: ${{ secrets.PROD_SERVER_SSH_KEY }}
 
     steps:
       - name: Checkout code
@@ -61,7 +65,11 @@ jobs:
         run: tar -czf open-school-portal-fe.tar.gz .next public package.json next.config.ts tsconfig.json pnpm-lock.yaml .env
 
       - name: Copy Artifacts to Server
-        shell: bash
-        run: |
-          sshpass -p "${{ secrets.PASSWORD }}" scp -o StrictHostKeyChecking=no open-school-portal-fe.tar.gz ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/tmp/prod/open-school-portal-fe-artifact.tar.gz
-          rm -f open-school-portal-fe.tar.gz
+        if: ${{ github.event_name == 'push' && env.PROD_SERVER_HOST != '' && env.PROD_SERVER_USER != '' && env.PROD_SERVER_SSH_KEY != '' }}
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ env.PROD_SERVER_HOST }}
+          username: ${{ env.PROD_SERVER_USER }}
+          key: ${{ env.PROD_SERVER_SSH_KEY }}
+          source: open-school-portal-fe.tar.gz
+          target: /tmp/prod/open-school-portal-fe-artifact.tar.gz

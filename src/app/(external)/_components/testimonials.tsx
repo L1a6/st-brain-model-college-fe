@@ -7,8 +7,10 @@ const testimonials = [
     name: "Mrs. Adaeze Okonkwo",
     role: "Parent — SS2 Student",
     type: "Parent",
-    title: '"The results portal changed how I stay connected with my daughter\'s education."',
-    content: "Before St. Brain's introduced the online portal, I was completely in the dark about my daughter's academic performance until report cards. Now I can check her results, her fee status, and even receive school announcements — all from my phone. It has made parenting a school child so much easier.",
+    title:
+      '"The results portal changed how I stay connected with my daughter\'s education."',
+    content:
+      "Before St. Brain's introduced the online portal, I was completely in the dark about my daughter's academic performance until report cards. Now I can check her results, her fee status, and even receive school announcements — all from my phone. It has made parenting a school child so much easier.",
     img: "/assets/images/parent.png",
     accent: "bg-navy",
   },
@@ -18,7 +20,8 @@ const testimonials = [
     role: "Mathematics Teacher",
     type: "Teacher",
     title: '"Uploading and managing results has never been this seamless."',
-    content: "In my 14 years of teaching, I've seen many school systems come and go. St. Brain's portal is genuinely the most intuitive I've used. I can enter scores for my entire SS3A Mathematics class in under 5 minutes, and students see their results instantly. That kind of efficiency is rare.",
+    content:
+      "In my 14 years of teaching, I've seen many school systems come and go. St. Brain's portal is genuinely the most intuitive I've used. I can enter scores for my entire SS3A Mathematics class in under 5 minutes, and students see their results instantly. That kind of efficiency is rare.",
     img: "/images/home/for-who/image1.png",
     accent: "bg-crimson",
   },
@@ -28,7 +31,8 @@ const testimonials = [
     role: "Student — JSS 3A",
     type: "Student",
     title: '"Being able to track my results and practice with quizzes is amazing!"',
-    content: "I use the student portal almost every day. I love how I can see my CA and exam scores as soon as sir uploads them. The quiz section especially helps me revise — it feels like real exam practice. My grades have improved so much since I started using it consistently.",
+    content:
+      "I use the student portal almost every day. I love how I can see my CA and exam scores as soon as sir uploads them. The quiz section especially helps me revise — it feels like real exam practice. My grades have improved so much since I started using it consistently.",
     img: "/assets/images/auth/school-logo.png",
     accent: "bg-gold",
   },
@@ -37,8 +41,9 @@ const testimonials = [
     name: "Dr. Folake Adeyemi",
     role: "Parent — JSS2 Student",
     type: "Parent",
-    title: '"St. Brain\'s gave my son confidence and structure I didn\'t expect."',
-    content: "My son Kolade struggled in his previous school. Since joining St. Brain's Model College, the turnaround has been remarkable. The teachers here actually care. The portal keeps me informed, and the school's culture of discipline has truly transformed him.",
+    title: "\"St. Brain's gave my son confidence and structure I didn't expect.\"",
+    content:
+      "My son Kolade struggled in his previous school. Since joining St. Brain's Model College, the turnaround has been remarkable. The teachers here actually care. The portal keeps me informed, and the school's culture of discipline has truly transformed him.",
     img: "/assets/images/dashboard/avatar.svg",
     accent: "bg-navy",
   },
@@ -52,47 +57,63 @@ const typeColors: Record<string, string> = {
 
 export default function Testimonials() {
   return (
-    <section className="bg-canvas-white py-8 lg:py-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="max-w-2xl mb-10 lg:mb-12 reveal">
+    <section className="bg-canvas-white overflow-hidden py-8 lg:py-12">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="reveal mb-10 max-w-2xl lg:mb-12">
           <span className="section-eyebrow mb-5">Testimonials</span>
-          <h2 className="font-display text-4xl lg:text-5xl text-navy leading-tight mb-4">
-            Voices that echo our values,<br />
+          <h2 className="font-display text-navy mb-4 text-4xl leading-tight lg:text-5xl">
+            Voices that echo our values,
+            <br />
             <span className="text-[#2563EB]/80">from class to campus.</span>
           </h2>
           <p className="text-ink-3 text-lg leading-relaxed">
-            Real words from the students, teachers, and parents who live the St. Brain's experience every day.
+            Real words from the students, teachers, and parents who live the St.
+            Brain&apos;s experience every day.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {testimonials.map((testimonial, index) => (
-            <div key={testimonial.id} className={`reveal delay-${(index % 2) + 1} bg-canvas border border-canvas-border p-6 lg:p-8 flex gap-5 lg:gap-7 group transition-all duration-300 hover:border-crimson/30`}>
+            <div
+              key={testimonial.id}
+              className={`reveal delay-${(index % 2) + 1} bg-canvas border-canvas-border group hover:border-crimson/30 flex gap-5 border p-6 transition-all duration-300 lg:gap-7 lg:p-8`}
+            >
               <div className="shrink-0">
-                <div className="relative w-28 lg:w-36 h-36 lg:h-44 overflow-hidden">
-                  <Image src={testimonial.img} alt={testimonial.name} fill sizes="160px" className="object-cover" loading="lazy" />
-                  <div className={`absolute top-0 left-0 w-1 h-full ${testimonial.accent}`} />
+                <div className="relative h-36 w-28 overflow-hidden lg:h-44 lg:w-36">
+                  <Image
+                    src={testimonial.img}
+                    alt={testimonial.name}
+                    fill
+                    sizes="160px"
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                  <div
+                    className={`absolute top-0 left-0 h-full w-1 ${testimonial.accent}`}
+                  />
                 </div>
               </div>
 
-              <div className="flex flex-col gap-3 flex-1 min-w-0">
-                <span className={`self-start text-2xs font-semibold uppercase tracking-widest px-2.5 py-1 ${typeColors[testimonial.type]}`}>
+              <div className="flex min-w-0 flex-1 flex-col gap-3">
+                <span
+                  className={`text-2xs self-start px-2.5 py-1 font-semibold tracking-widest uppercase ${typeColors[testimonial.type]}`}
+                >
                   {testimonial.type}
                 </span>
 
                 <Quote size={20} className="text-crimson/30" />
 
-                <p className="font-display text-sm lg:text-base font-semibold text-navy leading-snug line-clamp-3">
+                <p className="font-display text-navy line-clamp-3 text-sm leading-snug font-semibold lg:text-base">
                   {testimonial.title}
                 </p>
 
-                <p className="text-xs lg:text-sm text-ink-3 leading-relaxed line-clamp-4 hidden sm:block">
+                <p className="text-ink-3 line-clamp-4 hidden text-xs leading-relaxed sm:block lg:text-sm">
                   {testimonial.content}
                 </p>
 
-                <div className="mt-auto pt-3 border-t border-canvas-border">
-                  <p className="text-sm font-semibold text-navy">{testimonial.name}</p>
-                  <p className="text-xs text-ink-3 mt-0.5">{testimonial.role}</p>
+                <div className="border-canvas-border mt-auto border-t pt-3">
+                  <p className="text-navy text-sm font-semibold">{testimonial.name}</p>
+                  <p className="text-ink-3 mt-0.5 text-xs">{testimonial.role}</p>
                 </div>
               </div>
             </div>

@@ -29,7 +29,7 @@ const MarkAttendancePage = () => {
 
   const { data: students, isLoading } = useGetClassStudents(classId)
 
-  const toggleAttendance = (studentId: string, studentName: string) => {
+  const toggleAttendance = (studentId: string, _studentName: string) => {
     setAttendance((prev) => {
       const newMap = new Map(prev)
       const current = newMap.get(studentId)
@@ -76,7 +76,7 @@ const MarkAttendancePage = () => {
 
       toast.success("Attendance marked successfully")
       router.push("/teacher/attendance")
-    } catch (error) {
+    } catch (_error) {
       toast.error("Failed to mark attendance")
     } finally {
       setIsSubmitting(false)

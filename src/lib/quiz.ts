@@ -1,5 +1,11 @@
-import { apiFetch } from './api/client'
-import type { Quiz, QuizSubmission, StudentQuizzesResponse, QuizSubmissionResponse, QuizAnswerPayload } from '@/types/quiz'
+import { apiFetch } from "./api/client"
+import type {
+  Quiz,
+  QuizSubmission,
+  StudentQuizzesResponse,
+  QuizSubmissionResponse,
+  QuizAnswerPayload,
+} from "@/types/quiz"
 
 type ResponsePack<T> = {
   status_code: number
@@ -11,11 +17,14 @@ export const QuizAPI = {
   /**
    * Get all quizzes available for a student's class
    */
-  getStudentQuizzes: (studentId: string, params?: { term_id?: string; session_id?: string; limit?: number; page?: number }) =>
+  getStudentQuizzes: (
+    studentId: string,
+    params?: { term_id?: string; session_id?: string; limit?: number; page?: number }
+  ) =>
     apiFetch<ResponsePack<StudentQuizzesResponse>>(
       `/quizzes/student/${studentId}`,
       {
-        method: 'GET',
+        method: "GET",
         params,
       },
       true
@@ -28,7 +37,7 @@ export const QuizAPI = {
     apiFetch<ResponsePack<Quiz>>(
       `/quizzes/${quizId}`,
       {
-        method: 'GET',
+        method: "GET",
       },
       true
     ),
@@ -38,9 +47,9 @@ export const QuizAPI = {
    */
   submitQuiz: (payload: QuizAnswerPayload) =>
     apiFetch<ResponsePack<QuizSubmissionResponse>>(
-      '/quiz-submissions',
+      "/quiz-submissions",
       {
-        method: 'POST',
+        method: "POST",
         data: payload,
       },
       true
@@ -53,7 +62,7 @@ export const QuizAPI = {
     apiFetch<ResponsePack<QuizSubmission>>(
       `/quiz-submissions/${submissionId}`,
       {
-        method: 'GET',
+        method: "GET",
       },
       true
     ),
@@ -61,11 +70,14 @@ export const QuizAPI = {
   /**
    * Get all submissions for a student
    */
-  getStudentSubmissions: (studentId: string, params?: { limit?: number; page?: number }) =>
+  getStudentSubmissions: (
+    studentId: string,
+    params?: { limit?: number; page?: number }
+  ) =>
     apiFetch<ResponsePack<{ submissions: QuizSubmission[]; total: number }>>(
       `/quiz-submissions/student/${studentId}`,
       {
-        method: 'GET',
+        method: "GET",
         params,
       },
       true
@@ -73,19 +85,23 @@ export const QuizAPI = {
   /**
    * Create a new quiz (for teachers)
    */
-  createQuiz: (payload: any) =>
-    apiFetch<ResponsePack<any>>('/quizzes', {
-      method: 'POST',
-      data: payload,
-    }, true),
+  createQuiz: (payload: Record<string, unknown>) =>
+    apiFetch<ResponsePack<unknown>>(
+      "/quizzes",
+      {
+        method: "POST",
+        data: payload,
+      },
+      true
+    ),
   /**
    * Get quizzes created by a teacher
    */
   getTeacherQuizzes: (teacherId: string, params?: { page?: number; limit?: number }) =>
-    apiFetch<ResponsePack<{ items: any[]; meta?: any }>>(
-      '/quizzes',
+    apiFetch<ResponsePack<{ items: unknown[]; meta?: Record<string, unknown> }>>(
+      "/quizzes",
       {
-        method: 'GET',
+        method: "GET",
         params: { teacher_id: teacherId, ...(params || {}) },
       },
       true
@@ -94,21 +110,29 @@ export const QuizAPI = {
   /**
    * Update a quiz
    */
-  updateQuiz: (quizId: string, payload: any) =>
-    apiFetch<ResponsePack<any>>(`/quizzes/${quizId}`, {
-      method: 'PUT',
-      data: payload,
-    }, true),
+  updateQuiz: (quizId: string, payload: Record<string, unknown>) =>
+    apiFetch<ResponsePack<unknown>>(
+      `/quizzes/${quizId}`,
+      {
+        method: "PUT",
+        data: payload,
+      },
+      true
+    ),
 
   /**
    * Delete a quiz
    */
   deleteQuiz: (quizId: string) =>
-    apiFetch<ResponsePack<null>>(`/quizzes/${quizId}`, { method: 'DELETE' }, true),
+    apiFetch<ResponsePack<null>>(`/quizzes/${quizId}`, { method: "DELETE" }, true),
 
   /**
    * Get submissions for a quiz
    */
   getQuizSubmissions: (quizId: string) =>
-    apiFetch<ResponsePack<{ submissions: any[] }>>(`/quiz-submissions`, { method: 'GET', params: { quiz_id: quizId } }, true),
+    apiFetch<ResponsePack<{ submissions: unknown[] }>>(
+      `/quiz-submissions`,
+      { method: "GET", params: { quiz_id: quizId } },
+      true
+    ),
 }

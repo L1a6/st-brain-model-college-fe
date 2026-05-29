@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { useForm, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { X, CloudUpload, AlertCircleIcon } from "lucide-react"
+import { AlertCircleIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { FormField } from "@/components/ui/form-field"
 import {
@@ -40,7 +40,6 @@ interface PaymentSuccessData {
 }
 
 const AddPaymentForm = () => {
-  const [isDragging, setIsDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [successData, setSuccessData] = useState<PaymentSuccessData | null>(null)
@@ -158,42 +157,6 @@ const AddPaymentForm = () => {
         setShowSuccessModal(true)
       },
     })
-  }
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-  }
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-    const droppedFile = e.dataTransfer.files[0]
-    if (droppedFile) {
-      if (droppedFile.size > 5 * 1024 * 1024) {
-        toast.error("File size must be less than 5MB")
-        return
-      }
-      setFile(droppedFile)
-      setValue("receipt", droppedFile)
-    }
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0]
-    if (selectedFile) {
-      if (selectedFile.size > 5 * 1024 * 1024) {
-        toast.error("File size must be less than 5MB")
-        return
-      }
-      setFile(selectedFile)
-      setValue("receipt", selectedFile)
-    }
   }
 
   return (

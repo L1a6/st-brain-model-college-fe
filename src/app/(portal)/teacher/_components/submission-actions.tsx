@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { GradeEntry, GradeSubmission, Grade } from "@/types/result"
+import { GradeEntry, GradeSubmission } from "@/types/result"
 import { Button } from "@/components/ui/button"
 import {
   useSaveDraft,
@@ -56,100 +56,6 @@ export function SubmissionActions({
     }
 
     return !hasErrors
-  }
-
-  const handleSaveDraft = async () => {
-    try {
-      if (!academicSessionId) {
-        toast.error("Academic session ID is required")
-        return
-      }
-
-      // Validate all grades
-      if (!validateAllGrades(grades)) {
-        return
-      }
-
-      const isValidUUID = (id: string) => {
-        const uuidRegex =
-          /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-        return uuidRegex.test(id)
-      }
-
-      // Check for valid UUIDs
-      const invalidFields = []
-      if (!classId || !isValidUUID(classId)) invalidFields.push("class")
-      if (!subjectId || !isValidUUID(subjectId)) invalidFields.push("subject")
-      if (!termId || !isValidUUID(termId)) invalidFields.push("term")
-      if (!academicSessionId || !isValidUUID(academicSessionId))
-        invalidFields.push("academic session")
-
-      if (invalidFields.length > 0) {
-        toast.error(`Invalid ${invalidFields.join(", ")} ID(s)`)
-        return
-      }
-
-      // Filter out grades that have at least one score
-      const validGrades = grades.filter((grade) => {
-        const hasScore = grade.ca_score !== null || grade.exam_score !== null
-        if (!hasScore) return false
-
-        if (!grade.student_id || !isValidUUID(grade.student_id)) {
-          console.error("Grade has invalid student_id:", grade)
-          return false
-        }
-        return true
-      })
-
-      if (validGrades.length === 0) {
-        toast.error(
-          "No valid grades to save. Please enter CA or exam scores for at least one student."
-        )
-        return
-      }
-
-      const submissionData = {
-        class_id: classId,
-        subject_id: subjectId,
-        term_id: termId,
-        academic_session_id: academicSessionId,
-        grades: validGrades.map((grade) => ({
-          student_id: grade.student_id,
-          ca_score: grade.ca_score,
-          exam_score: grade.exam_score,
-          comment: grade.comment || null,
-        })),
-      }
-
-      if (existingSubmission?.id) {
-        // Update existing submission
-        await updateSubmissionMutation.mutateAsync({
-          id: existingSubmission.id,
-          data: {
-            grades: validGrades.map((grade) => ({
-              student_id: grade.student_id,
-              ca_score: grade.ca_score,
-              exam_score: grade.exam_score,
-              total_score: grade.total_score,
-              grade: grade.grade,
-              comment: grade.comment,
-              subject_id: subjectId,
-              class_id: classId,
-              term_id: termId,
-            })) as Grade[],
-          },
-        })
-      } else {
-        // Create new submission
-        await saveDraftMutation.mutateAsync(submissionData)
-      }
-
-      setSuccessMessage("Results saved as draft successfully!")
-      setSuccessModalOpen(true)
-    } catch (error: unknown) {
-      // Error is already handled by the mutation hook
-      console.error("Save draft error:", error)
-    }
   }
 
   const handleSubmitForApproval = async () => {
@@ -220,16 +126,6 @@ export function SubmissionActions({
   return (
     <>
       <div className="flex flex-col gap-4 border-t pt-6 sm:flex-row sm:justify-end">
-        {/* <Button
-          onClick={handleSaveDraft}
-          disabled={saveDraftMutation.isPending || updateSubmissionMutation.isPending}
-          variant="outline"
-        >
-          {saveDraftMutation.isPending || updateSubmissionMutation.isPending
-            ? "Saving..."
-            : "Save as Draft"}
-        </Button> */}
-
         <Button
           onClick={handleSubmitForApproval}
           disabled={submitMutation.isPending || !canSubmit}

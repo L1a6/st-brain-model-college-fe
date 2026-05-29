@@ -31,7 +31,9 @@ export async function POST(req: Request) {
     data = await backendResponse.json().catch(() => null)
   }
 
-  const response = NextResponse.json(data ?? { message: "Logout successful" }, { status: 200 })
+  const response = NextResponse.json(data ?? { message: "Logout successful" }, {
+    status: 200,
+  })
 
   response.cookies.delete("access_token")
   response.cookies.delete("refresh_token")

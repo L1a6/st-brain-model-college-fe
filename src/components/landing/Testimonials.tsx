@@ -41,23 +41,24 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-canvas-white py-14 lg:py-20 overflow-hidden">
+    <section className="bg-canvas-white overflow-hidden py-14 lg:py-20">
       <div className="container">
         <ScrollReveal>
-          <div className="grid grid-cols-1 lg:grid-cols-[0.96fr_1.04fr] gap-10 lg:gap-16 items-end mb-12 lg:mb-14">
+          <div className="mb-12 grid grid-cols-1 items-end gap-10 lg:mb-14 lg:grid-cols-[0.96fr_1.04fr] lg:gap-16">
             <div className="max-w-2xl">
               <span className="section-eyebrow mb-5">Testimonials</span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-[1.08] tracking-tight mb-4 max-w-xl">
+              <h2 className="font-display text-navy mb-4 max-w-xl text-3xl leading-[1.08] tracking-tight md:text-4xl lg:text-5xl">
                 Words from our
                 <span className="block text-[#2563EB]/80">community.</span>
               </h2>
-              <p className="text-ink-3 text-base lg:text-lg leading-relaxed max-w-xl">
-                Real voices from parents, teachers, and students sharing what life at St. Brain's feels like.
+              <p className="text-ink-3 max-w-xl text-base leading-relaxed lg:text-lg">
+                Real voices from parents, teachers, and students sharing what life at St.
+                Brain&apos;s feels like.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:gap-5 items-end lg:pt-4">
-              <div className="relative overflow-hidden rounded-[34px] aspect-4/5 border border-canvas-border bg-canvas-white">
+            <div className="grid grid-cols-2 items-end gap-4 sm:gap-5 lg:pt-4">
+              <div className="border-canvas-border bg-canvas-white relative aspect-4/5 overflow-hidden rounded-[34px] border">
                 <Image
                   src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80&auto=format&fit=crop&face"
                   alt="parent portrait"
@@ -66,7 +67,7 @@ export default function Testimonials() {
                   className="object-cover"
                 />
               </div>
-              <div className="relative overflow-hidden rounded-[34px] aspect-4/5 border border-canvas-border bg-canvas-white mt-8">
+              <div className="border-canvas-border bg-canvas-white relative mt-8 aspect-4/5 overflow-hidden rounded-[34px] border">
                 <Image
                   src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80&auto=format&fit=crop&face"
                   alt="teacher portrait"
@@ -78,39 +79,45 @@ export default function Testimonials() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-[30px] overflow-hidden border border-canvas-border bg-canvas-border">
+          <div className="border-canvas-border bg-canvas-border grid grid-cols-1 gap-0 overflow-hidden rounded-[30px] border lg:grid-cols-2">
             {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.name}
-                className={`group flex gap-5 lg:gap-7 p-6 lg:p-8 bg-canvas-white transition-all duration-300 hover:bg-[#F7FAFF] hover:shadow-[0_12px_28px_rgba(37,99,235,0.06)] ${
+                className={`group lg:bg-canvas-white flex gap-5 bg-[#F7FAFF] p-6 transition-all duration-300 hover:shadow-[0_12px_28px_rgba(37,99,235,0.06)] lg:gap-7 lg:p-8 lg:hover:bg-[#F7FAFF] ${
                   index % 2 === 0 ? "lg:border-r" : ""
-                } ${index < testimonials.length - 2 ? "border-b lg:border-b-0 border-canvas-border" : ""}`}
+                } ${index < testimonials.length - 2 ? "border-canvas-border border-b lg:border-b-0" : ""}`}
               >
                 <div className="shrink-0">
-                  <div className="relative w-28 lg:w-36 h-40 lg:h-52 overflow-hidden rounded-2xl ring-1 ring-black/5 bg-canvas-white">
-                    <Image src={testimonial.img} alt={testimonial.name} fill sizes="144px" className="object-cover object-top" />
+                  <div className="bg-canvas-white relative h-40 w-28 overflow-hidden rounded-2xl ring-1 ring-black/5 lg:h-52 lg:w-36">
+                    <Image
+                      src={testimonial.img}
+                      alt={testimonial.name}
+                      fill
+                      sizes="144px"
+                      className="object-cover object-top"
+                    />
                   </div>
                 </div>
 
                 <div className="flex min-w-0 flex-1 flex-col gap-3">
-                  <div className="text-[#2563EB]/80 text-3xl leading-none select-none transition-colors duration-300 group-hover:text-[#2563EB]">
+                  <div className="text-3xl leading-none text-[#2563EB]/80 transition-colors duration-300 select-none group-hover:text-[#2563EB]">
                     &ldquo;
                   </div>
 
                   <div>
-                    <h3 className="font-display text-base lg:text-[17px] font-semibold text-navy leading-snug tracking-tight mb-2">
+                    <h3 className="font-display text-navy mb-2 text-base leading-snug font-semibold tracking-tight lg:text-[17px]">
                       {testimonial.title}
                     </h3>
-                    <p className="text-ink-3 text-sm lg:text-[15px] leading-relaxed line-clamp-5">
+                    <p className="text-ink-3 line-clamp-5 text-sm leading-relaxed lg:text-[15px]">
                       {testimonial.quote}
                     </p>
                   </div>
 
-                  <div className="mt-auto pt-3 border-t border-canvas-border transition-colors duration-300 group-hover:border-[#D9E8FF]">
-                    <p className="font-display text-sm lg:text-[15px] font-semibold text-navy leading-none">
+                  <div className="border-canvas-border mt-auto border-t pt-3 transition-colors duration-300 group-hover:border-[#D9E8FF]">
+                    <p className="font-display text-navy text-sm leading-none font-semibold lg:text-[15px]">
                       {testimonial.name}
                     </p>
-                    <p className="text-xs uppercase tracking-[0.18em] text-[#2563EB] mt-1">
+                    <p className="mt-1 text-xs tracking-[0.18em] text-[#2563EB] uppercase">
                       {testimonial.role}
                     </p>
                   </div>

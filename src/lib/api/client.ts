@@ -9,7 +9,7 @@ const resolveApiBaseUrl = (): string => {
 
   if (configuredBaseUrl) {
     const isLocalhost = /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(
-      configuredBaseUrl,
+      configuredBaseUrl
     )
 
     if (!isLocalhost) {
@@ -62,10 +62,7 @@ const inferPrimaryRole = (email: string): string => {
 
 const buildMockUser = (primaryRole: string, email: string): MockUser => {
   const now = new Date().toISOString()
-  const orderedRoles = [
-    primaryRole,
-    ...ALL_ROLES.filter((role) => role !== primaryRole),
-  ]
+  const orderedRoles = [primaryRole, ...ALL_ROLES.filter((role) => role !== primaryRole)]
 
   return {
     id: "usr-mock-001",
@@ -183,7 +180,10 @@ const mockStudentResult = {
   updated_at: new Date().toISOString(),
 }
 
-const buildMockApiResponse = (path: string, config: AxiosRequestConfig): unknown | null => {
+const buildMockApiResponse = (
+  path: string,
+  config: AxiosRequestConfig
+): unknown | null => {
   const method = (config.method || "GET").toUpperCase()
   const normalizedPath = normalizePath(path)
 
@@ -327,7 +327,12 @@ const buildMockApiResponse = (path: string, config: AxiosRequestConfig): unknown
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             teacher_assignment_date: new Date().toISOString(),
-            subject: { id: "subj-math", createdAt: "", updatedAt: "", name: "Mathematics" },
+            subject: {
+              id: "subj-math",
+              createdAt: "",
+              updatedAt: "",
+              name: "Mathematics",
+            },
             teacher: { id: "TCH-0001", name: "Demo Teacher" },
           },
           {
