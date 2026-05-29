@@ -2,6 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { clearStoredAuthSession, getUserData, sendLogoutRequest } from "@/lib/api/auth"
+import { useAuthStore } from "@/store/auth-store"
 
 const USER_DATA_KEY = ["user"]
 
@@ -18,11 +19,13 @@ export function useGetUser() {
 
 export function useLogout() {
   const queryClient = useQueryClient()
+  const clearAuth = useAuthStore((state) => state.clearAuth)
 
   return useMutation({
     mutationFn: sendLogoutRequest,
     onSuccess: () => {
       clearStoredAuthSession()
+      clearAuth()
       queryClient.removeQueries({ queryKey: USER_DATA_KEY })
 
       if (typeof window !== "undefined") window.location.href = "/"
