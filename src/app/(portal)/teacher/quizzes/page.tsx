@@ -202,13 +202,7 @@ const TeacherQuizzesPage = () => {
   const loadQuizForEdit = async (quizId: string) => {
     try {
       const response = await QuizAPI.getQuiz(quizId)
-      let quiz: QuizItem
-      if (response && typeof response === "object" && "data" in (response as object)) {
-        quiz = ((response as { data?: QuizItem }).data ??
-          (response as QuizItem)) as QuizItem
-      } else {
-        quiz = response as QuizItem
-      }
+      const quiz = response.data as QuizItem
 
       setEditingQuizId(quizId)
       setForm({
