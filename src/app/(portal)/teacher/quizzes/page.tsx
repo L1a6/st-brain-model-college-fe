@@ -204,7 +204,8 @@ const TeacherQuizzesPage = () => {
       const response = await QuizAPI.getQuiz(quizId)
       let quiz: QuizItem
       if (response && typeof response === "object" && "data" in (response as object)) {
-        quiz = ((response as { data?: QuizItem }).data ?? (response as QuizItem)) as QuizItem
+        quiz = ((response as { data?: QuizItem }).data ??
+          (response as QuizItem)) as QuizItem
       } else {
         quiz = response as QuizItem
       }
@@ -220,13 +221,18 @@ const TeacherQuizzesPage = () => {
       setSelectedClass(quiz?.classId ?? quiz?.class_id ?? classes[0]?.id ?? "")
       setQuestions(
         Array.isArray(quiz?.questions) && quiz.questions.length > 0
-          ? quiz.questions.map((question: NonNullable<QuizItem["questions"]>[number]) => ({
-              text: question.text ?? "",
-              type: question.type === "short_answer" ? "short_answer" : "multiple_choice",
-              options: Array.isArray(question.options) ? question.options : ["", "", "", ""],
-              correctAnswer: question.correctAnswer ?? question.correct_answer ?? "",
-              points: Number(question.points) || 1,
-            }))
+          ? quiz.questions.map(
+              (question: NonNullable<QuizItem["questions"]>[number]) => ({
+                text: question.text ?? "",
+                type:
+                  question.type === "short_answer" ? "short_answer" : "multiple_choice",
+                options: Array.isArray(question.options)
+                  ? question.options
+                  : ["", "", "", ""],
+                correctAnswer: question.correctAnswer ?? question.correct_answer ?? "",
+                points: Number(question.points) || 1,
+              })
+            )
           : [emptyQ()]
       )
       setView("create")
