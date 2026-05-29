@@ -15,23 +15,22 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     steps:
-      - name: Install sshpass
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-
       - name: Deploy on server
-        run: |
-          sshpass -p '${{ secrets.PASSWORD }}' ssh -o StrictHostKeyChecking=no ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.DEV_SERVER_HOST }}
+          username: ${{ secrets.DEV_SERVER_USER }}
+          key: ${{ secrets.DEV_SERVER_SSH_KEY }}
+          script: |
             # 1. Go to the frontend directory
             cd open-school/staging/open-school-portal-FE
-            
+
             # 2. Extract the artifact
             tar -xzf /tmp/staging/open-school-portal-fe-artifact.tar.gz
-            
+
             # 3. Remove the artifact file
             rm -f /tmp/staging/open-school-portal-fe-artifact.tar.gz
-            
+
             # 4. Update packages/Dependencies
             corepack enable || true
             corepack prepare pnpm@9.15.4 --activate || true
@@ -40,4 +39,3 @@ jobs:
             # 5. Restart PM2 process using ecosystem config
             pm2 start ecosystem.config.cjs || pm2 restart osp-fe-staging --update-env
             pm2 save
-          '

@@ -62,9 +62,10 @@ jobs:
 
       - name: Copy Artifacts to Server
         if: ${{ github.event_name == 'push' }}
-        shell: bash
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y sshpass
-          sshpass -p "${{ secrets.PASSWORD }}" scp -o StrictHostKeyChecking=no open-school-portal-fe.tar.gz ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/tmp/prod/open-school-portal-fe-artifact.tar.gz
-          rm -f open-school-portal-fe.tar.gz
+        uses: appleboy/scp-action@v0.1.5
+        with:
+          host: ${{ secrets.PROD_SERVER_HOST }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_SSH_KEY }}
+          source: open-school-portal-fe.tar.gz
+          target: /tmp/prod/open-school-portal-fe-artifact.tar.gz
